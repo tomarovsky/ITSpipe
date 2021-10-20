@@ -1,0 +1,31 @@
+#---- Configuration files ----
+conda_config: "workflow/envs/conda.yaml"
+
+#---- Directory structure config ----
+data_input_dir: "data_input"
+samples_dir: "data_input/samples"
+data_output_dir: "data_output"
+log_dir: "logs"
+cluster_log_dir: "cluster_logs"
+benchmark_dir: "benchmarks"
+filtered_read_dir: "reads/filtered"
+alignment_dir: "alignment"
+
+
+#---- Tool threads ----
+trimmomatic_threads: 8
+
+#---- Tool memory ----
+trimmomatic_mem_mb: 16000
+
+#---- Tool time ----
+trimmomatic_time: 100:00:00
+
+#---- Tool paths ----
+trimmomatic_path:
+
+#---- Tool variables ----
+adapters: "resources/adapters/TruSeq2-PE.fa"
+
+
+
