@@ -1,0 +1,1 @@
+snakemake --use-conda
