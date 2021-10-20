@@ -1,0 +1,32 @@
+from pathlib import Path
+
+
+#---- setup config ----
+configfile: "config/default.yaml"
+
+#---- setup paths ----
+cluster_log_dir_path = Path(config["cluster_log_dir"])
+log_dir_path = Path(config["log_dir"])
+benchmark_dir_path = Path(config["benchmark_dir"])
+input_dir_path = Path(config["data_input_dir"])
+output_dir_path = Path(config["data_output_dir"])
+sample_dir_path = Path(config["samples_dir"])
+
+filtered_read_dir_path = output_dir_path / config["filtered_read_dir"]
+
+
+if "sample_id" not in config:
+    config["sample_id"] = [d.name[:-6] for d in sample_dir_path.iterdir() if d.is_dir()]
+
+localrules: all
+
+rule all:
+    input:
+        # Trimmomatic:
+        expand(filtered_read_dir_path / "{sample_id}/{sample_id}.trimmed_1.fastq.gz", sample_id=config["sample_id"]),
+        expand(filtered_read_dir_path / "{sample_id}/{sample_id}.trimmed_1.se.fastq.gz", sample_id=config["sample_id"]),
+        expand(iltered_read_dir_path / "{sample_id}/{sample_id}.trimmed_2.fastq.gz", sample_id=config["sample_id"]),
+        expand(filtered_read_dir_path / "{sample_id}/{sample_id}.trimmed_2.se.fastq.gz", sample_id=config["sample_id"]),
+
+
+
