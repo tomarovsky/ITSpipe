@@ -36,7 +36,7 @@ rule bowtie2_map:
     shell:
         """
         bowtie2 -p {params.bowtie2_threads} {input.reference} -1 <(gunzip -c {input.forward_reads}) -2 <(gunzip -c {input.reverse_reads}) \
-        --rg \'@RG\\tID:{wildcards.sample_id}\\tPU:x\\tSM:{wildcards.sample_id}\\tPL:Illumina\\tLB:x\' 2> {log.bwa} | \
+        --rg \'@RG\\tID:{wildcards.sample_id}\\tPU:x\\tSM:{wildcards.sample_id}\\tPL:Illumina\\tLB:x\' 2> {log.bowtie2} | \
         samtools fixmate -@ {params.fixmate_threads} -m - -  2> {log.fixmate}| \
         samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} 2> {log.sort}| \
         samtools markdup -@ {params.markdup_threads} - {output.bam} 2> {log.markdup}
