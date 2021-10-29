@@ -8,15 +8,22 @@ configfile: "config/default.yaml"
 cluster_log_dir_path = Path(config["cluster_log_dir"])
 log_dir_path = Path(config["log_dir"])
 benchmark_dir_path = Path(config["benchmark_dir"])
-input_dir_path = Path(config["data_input_dir"])
+samples_dir_path = Path(config["samples_dir"])
 output_dir_path = Path(config["data_output_dir"])
-sample_dir_path = Path(config["samples_dir"])
 
-filtered_read_dir_path = output_dir_path / config["filtered_read_dir"]
+filtered_reads_dir_path = output_dir_path / config["filtered_read_dir"]
+alignment_dir_path = Path(config["alignment_dir"])
 
+#---- setup filenames ----
+reference = Path(config["reference"])
+reference_dir_path = reference.parents[0]
+reference_filename = reference.name
+reference_basename = reference.stem
 
 if "sample_id" not in config:
     config["sample_id"] = [d.name[:-6] for d in sample_dir_path.iterdir() if d.is_dir()]
+
+
 
 localrules: all
 
@@ -28,5 +35,15 @@ rule all:
         expand(iltered_read_dir_path / "{sample_id}/{sample_id}.trimmed_2.fastq.gz", sample_id=config["sample_id"]),
         expand(filtered_read_dir_path / "{sample_id}/{sample_id}.trimmed_2.se.fastq.gz", sample_id=config["sample_id"]),
 
+        # Bowtie2:
+        expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
+        expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3)),
+        expand(alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam", sample_id=config["sample_id"])
 
+
+
+#---- load rules ----
+include: "rules/QCFiltering/Trimmomatic.smk"
+include: "rules/Alignment/Bowtie2.smk"
+include: "rules/Alignment/Mosdepth.smk"
 

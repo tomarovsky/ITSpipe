@@ -6,3 +6,9 @@ channels:
 dependencies:
   - python>=3.8
   - trimmomatic>=0.39
+  - bowtie2>=2.4.4
+  - samtools>=1.10
+  - mosdepth>=0.3.1
+  - numpy>=1.10
+  - pandas>=1.2
+  - matplotlib

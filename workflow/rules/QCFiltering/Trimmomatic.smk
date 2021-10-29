@@ -3,13 +3,13 @@ localrules: trimmomatic
 
 rule trimmomatic:
     input:
-        sample_dir_path / "{sample_id}/{sample_id}_1.fastq.gz",
-        sample_dir_path / "{sample_id}/{sample_id}_2.fastq.gz"
+        samples_dir_path / "{sample_id}/{sample_id}_1.fastq.gz",
+        samples_dir_path / "{sample_id}/{sample_id}_2.fastq.gz"
     output:
-        pe_forward=filtered_read_dir_path / "{sample_id}/{sample_id}.trimmed_1.fastq.gz",
-        se_forward=filtered_read_dir_path / "{sample_id}/{sample_id}.trimmed_1.se.fastq.gz",
-        pe_reverse=filtered_read_dir_path / "{sample_id}/{sample_id}.trimmed_2.fastq.gz",
-        se_reverse=filtered_read_dir_path / "{sample_id}/{sample_id}.trimmed_2.se.fastq.gz"
+        pe_forward=filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_1.fastq.gz",
+        se_forward=filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_1.se.fastq.gz",
+        pe_reverse=filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_2.fastq.gz",
+        se_reverse=filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_2.se.fastq.gz"
     params:
         adapters=config["trimmomatic_adapters"],
         illumina_clip="2:30:10:1",
