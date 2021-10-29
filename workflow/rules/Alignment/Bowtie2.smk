@@ -38,7 +38,7 @@ rule bowtie2_map:
         config["bowtie2_threads"] + config["sort_threads"] + config["fixmate_threads"] + config["markdup_threads"]
     shell:
         """
-        mkdir -r {params.outdir}; \
+        mkdir -p {params.outdir}; \
         bowtie2 -p {params.bowtie2_threads} {input.reference} -1 <(gunzip -c {input.forward_reads}) -2 <(gunzip -c {input.reverse_reads}) \
         --rg \'@RG\\tID:{wildcards.sample_id}\\tPU:x\\tSM:{wildcards.sample_id}\\tPL:Illumina\\tLB:x\' | \
         samtools fixmate -@ {params.fixmate_threads} -m - - | \
