@@ -46,7 +46,7 @@ rule bowtie2_index:
     input:
         reference = config["reference"]
     params:
-        basename = reference_basename
+        basename = reference_dir_path / reference_basename
     output:
         expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
         expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3))
