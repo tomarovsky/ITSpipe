@@ -67,4 +67,4 @@ rule bowtie2_index:
     threads:
         config["bowtie2_threads"]
     shell:
-        "bowtie2-build {input} {params.basename}"
+        "bowtie2-build {input} {params.basename} || true"
