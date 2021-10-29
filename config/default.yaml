@@ -22,10 +22,10 @@ markdup_threads: 4
 
 #---- Tool memory ----
 trimmomatic_mem_mb: 16000
-bowtie2_mem_mb: 40000
+bowtie2_mem_mb: 30000
 per_thread_sort_mem_gb: 10 # memory in gigabytes
-fixmate_mem_mb: 20000
-markdup_mem_mb: 20000
+fixmate_mem_mb: 10000
+markdup_mem_mb: 10000
 
 #---- Tool time ----
 trimmomatic_time: 100:00:00
