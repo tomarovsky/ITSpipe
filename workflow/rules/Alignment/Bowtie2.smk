@@ -14,7 +14,7 @@ rule bowtie2_map:
         sort_threads=config["sort_threads"],
         markdup_threads=config["markdup_threads"],
         bowtie2_threads=config["bowtie2_threads"],
-        per_thread_sort_mem="%sG" % config["per_thread_sort_mem_gb"],
+        per_thread_sort_mem="%sG" % config["per_thread_sort_mem"],
         tmp_prefix=alignment_dir_path / "{sample_id}/{sample_id}"
     log:
         bowtie2=log_dir_path / "{sample_id}/bowtie2.log",
@@ -29,7 +29,7 @@ rule bowtie2_map:
         "../../../%s" % config["conda_config"]
     resources:
         cpus=config["bowtie2_threads"] + config["sort_threads"] + config["fixmate_threads"] + config["markdup_threads"] + 1,
-        mem=config["per_thread_sort_mem_gb"] * config["sort_threads"] * 1024 + config["bowtie2_mem_mb"] + config["fixmate_mem_mb"] + config["markdup_mem_mb"],
+        mem=config["per_thread_sort_mem"] * config["sort_threads"] * 1024 + config["bowtie2_mem_mb"] + config["fixmate_mem_mb"] + config["markdup_mem_mb"],
         time=config["bowtie2_time"]
     threads:
         config["bowtie2_threads"] + config["sort_threads"] + config["fixmate_threads"] + config["markdup_threads"]

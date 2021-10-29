@@ -23,7 +23,7 @@ markdup_threads: 4
 #---- Tool memory ----
 trimmomatic_mem_mb: 16000
 bowtie2_mem_mb: 30000
-per_thread_sort_mem_gb: 10 # memory in gigabytes
+per_thread_sort_mem: 10 # memory in gigabytes
 fixmate_mem_mb: 10000
 markdup_mem_mb: 10000
 

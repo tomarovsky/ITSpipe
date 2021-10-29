@@ -1,6 +1,3 @@
-localrules: trimmomatic
-
-
 rule trimmomatic:
     input:
         samples_dir_path / "{sample_id}/{sample_id}_1.fastq.gz",
