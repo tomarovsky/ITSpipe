@@ -10,7 +10,7 @@ rule bowtie2_map:
         index1=expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
         index2=expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3))
     output:
-        outdir = directory(alignment_dir_path/"{sample_id}"),
+        outdir=directory(alignment_dir_path/"{sample_id}"),
         bam=alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam"
     params:
         fixmate_threads=config["fixmate_threads"],
@@ -38,7 +38,7 @@ rule bowtie2_map:
         config["bowtie2_threads"] + config["sort_threads"] + config["fixmate_threads"] + config["markdup_threads"]
     shell:
         """
-        mkdir -p {output.outdir}/; \
+        mkdir -p {output.outdir} ; \
         bowtie2 -p {params.bowtie2_threads} {input.reference} -1 <(gunzip -c {input.forward_reads}) -2 <(gunzip -c {input.reverse_reads}) \
         --rg \'@RG\\tID:{wildcards.sample_id}\\tPU:x\\tSM:{wildcards.sample_id}\\tPL:Illumina\\tLB:x\' | \
         samtools fixmate -@ {params.fixmate_threads} -m - - | \
