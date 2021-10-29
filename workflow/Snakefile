@@ -21,7 +21,7 @@ reference_dir_path = reference.parents[0]
 reference_basename = reference.stem
 
 if "sample_id" not in config:
-    config["sample_id"] = [d.name[:-6] for d in samples_dir_path.iterdir() if d.is_dir()]
+    config["sample_id"] = [d.name for d in samples_dir_path.iterdir() if d.is_dir()]
 
 
 
