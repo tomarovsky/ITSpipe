@@ -28,8 +28,8 @@ fixmate_mem_mb: 10000
 markdup_mem_mb: 10000
 
 #---- Tool time ----
-trimmomatic_time: 100:00:00
-bowtie2_time: 100:00:00
+trimmomatic_time: "100:00:00"
+bowtie2_time: "100:00:00"
 
 #---- Tool paths ----
 
