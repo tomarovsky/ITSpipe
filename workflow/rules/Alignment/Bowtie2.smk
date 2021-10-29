@@ -44,7 +44,7 @@ rule bowtie2_map:
         samtools markdup -@ {params.markdup_threads} - {output.bam} 2> {log.markdup}
         """
 
-rule bowtie2_index:
+checkpoint bowtie2_index:
     input:
         reference = config["reference"]
     params:
@@ -67,4 +67,4 @@ rule bowtie2_index:
     threads:
         config["bowtie2_threads"]
     shell:
-        "bowtie2-build {input} {params.basename} > {log.std} 2>&1 || true"
+        "bowtie2-build {input} {params.basename}"

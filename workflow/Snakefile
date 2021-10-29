@@ -17,7 +17,7 @@ alignment_dir_path = Path(config["alignment_dir"])
 #---- setup filenames ----
 reference = Path(config["reference"])
 reference_dir_path = reference.parents[0]
-# reference_filename = reference.name
+reference_filename = reference.name
 reference_basename = reference.stem
 
 if "sample_id" not in config:
