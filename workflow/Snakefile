@@ -45,5 +45,5 @@ rule all:
 #---- load rules ----
 include: "rules/QCFiltering/Trimmomatic.smk"
 include: "rules/Alignment/Bowtie2.smk"
-include: "rules/Alignment/Mosdepth.smk"
+# include: "rules/Alignment/Mosdepth.smk"
 
