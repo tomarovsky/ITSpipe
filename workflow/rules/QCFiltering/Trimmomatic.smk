@@ -11,7 +11,7 @@ rule trimmomatic:
         pe_reverse=filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_2.fastq.gz",
         se_reverse=filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_2.se.fastq.gz"
     params:
-        adapters=config["trimmomatic_adapters"],
+        adapters=config["adapters"],
         illumina_clip="2:30:10:1",
         window_size=8,
         window_quality=20,
