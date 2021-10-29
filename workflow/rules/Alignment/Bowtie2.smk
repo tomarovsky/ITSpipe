@@ -1,4 +1,4 @@
-localrules: bowtie2_index
+# localrules: bowtie2_index
 ruleorder: bowtie2_index > bowtie2_map
 
 
