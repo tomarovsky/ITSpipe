@@ -26,7 +26,7 @@ rule bowtie2_map:
     benchmark:
         benchmark_dir_path / "{sample_id}/bowtie2_map.benchmark.txt"
     conda:
-        config["conda_config"]
+        "../../../%s" % config["conda_config"]
     resources:
         cpus=config["bowtie2_threads"] + config["sort_threads"] + config["fixmate_threads"] + config["markdup_threads"] + 1,
         time=config["bowtie2_time"],
@@ -57,7 +57,7 @@ rule bowtie2_index:
     benchmark:
         benchmark_dir_path / "/bowtie2_index.benchmark.txt"
     conda:
-        config["conda_config"]
+        "../../../%s" % config["conda_config"]
     resources:
         cpus=config["bowtie2_threads"],
         time=config["bowtie2_time"],

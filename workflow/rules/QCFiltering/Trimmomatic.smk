@@ -23,7 +23,7 @@ rule trimmomatic:
     benchmark:
         benchmark_dir_path / "{sample_id}/trimmomatic.benchmark.txt"
     conda:
-        config["conda_config"]
+        "../../../%s" % config["conda_config"]
     resources:
         cpus=config["trimmomatic_threads"],
         time=config["trimmomatic_time"],
