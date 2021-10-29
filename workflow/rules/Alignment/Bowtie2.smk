@@ -6,7 +6,9 @@ rule bowtie2_map:
     input:
         forward_reads=rules.trimmomatic.output.pe_forward,
         reverse_reads=rules.trimmomatic.output.pe_reverse,
-        reference=config["reference"]
+        reference=config["reference"],
+        index1=expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
+        index2=expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3))
     output:
         bam=alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam"
     params:
