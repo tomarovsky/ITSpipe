@@ -9,7 +9,7 @@ log_dir: "logs"
 cluster_log_dir: "cluster_logs"
 benchmark_dir: "benchmarks"
 filtered_read_dir: "reads/filtered"
-alignment_dir: "alignment"
+alignment_dir: "data_output/alignment"
 
 
 #---- Tool threads ----

@@ -15,7 +15,8 @@ rule bowtie2_map:
         markdup_threads=config["markdup_threads"],
         bowtie2_threads=config["bowtie2_threads"],
         per_thread_sort_mem="%sG" % config["per_thread_sort_mem"],
-        tmp_prefix=alignment_dir_path / "{sample_id}/{sample_id}"
+        tmp_prefix=alignment_dir_path / "{sample_id}/{sample_id}",
+        outdir = alignment_dir_path / "{sample_id}"
     log:
         bowtie2=log_dir_path / "{sample_id}/bowtie2.log",
         fixmate=log_dir_path / "{sample_id}/fixmate.log",
@@ -35,6 +36,7 @@ rule bowtie2_map:
         config["bowtie2_threads"] + config["sort_threads"] + config["fixmate_threads"] + config["markdup_threads"]
     shell:
         """
+        mkdir -r {params.outdir}; \
         bowtie2 -p {params.bowtie2_threads} {input.reference} -1 <(gunzip -c {input.forward_reads}) -2 <(gunzip -c {input.reverse_reads}) \
         --rg \'@RG\\tID:{wildcards.sample_id}\\tPU:x\\tSM:{wildcards.sample_id}\\tPL:Illumina\\tLB:x\' 2> {log.bowtie2} | \
         samtools fixmate -@ {params.fixmate_threads} -m - - 2> {log.fixmate} | \
