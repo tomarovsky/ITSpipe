@@ -1,5 +1,5 @@
-# localrules: bowtie2_index
-# ruleorder: bowtie2_index > bowtie2_map
+localrules: bowtie2_index
+ruleorder: bowtie2_index > bowtie2_map
 
 
 rule bowtie2_map:
@@ -43,28 +43,28 @@ rule bowtie2_map:
         samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} 2> {log.sort} | \
         samtools markdup -@ {params.markdup_threads} - {output.bam} 2> {log.markdup}
         """
-#
-# rule bowtie2_index:
-#     input:
-#         reference = config["reference"]
-#     params:
-#         basename = reference_dir_path / reference_basename
-#     output:
-#         expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
-#         expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3))
-#     log:
-#         std=log_dir_path / "bowtie2_index.log",
-#         cluster_log=cluster_log_dir_path / "bowtie2_index.cluster.log",
-#         cluster_err=cluster_log_dir_path / "bowtie2_index.cluster.err"
-#     benchmark:
-#         benchmark_dir_path / "/bowtie2_index.benchmark.txt"
-#     conda:
-#         "../../../%s" % config["conda_config"]
-#     resources:
-#         cpus=config["bowtie2_threads"],
-#         time=config["bowtie2_time"],
-#         mem=config["bowtie2_mem_mb"]
-#     threads:
-#         config["bowtie2_threads"]
-#     shell:
-#         "bowtie2-build {input} {params.basename}"
+
+rule bowtie2_index:
+    input:
+        reference = config["reference"]
+    params:
+        basename = reference_dir_path / reference_basename
+    output:
+        expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
+        expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3))
+    log:
+        std=log_dir_path / "bowtie2_index.log",
+        cluster_log=cluster_log_dir_path / "bowtie2_index.cluster.log",
+        cluster_err=cluster_log_dir_path / "bowtie2_index.cluster.err"
+    benchmark:
+        benchmark_dir_path / "/bowtie2_index.benchmark.txt"
+    conda:
+        "../../../%s" % config["conda_config"]
+    resources:
+        cpus=config["bowtie2_threads"],
+        time=config["bowtie2_time"],
+        mem=config["bowtie2_mem_mb"]
+    threads:
+        config["bowtie2_threads"]
+    shell:
+        "bowtie2-build {input} {params.basename}"
