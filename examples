@@ -1,1 +1,2 @@
-snakemake --use-conda
+snakemake -s workflow/Snakefile --profile profile/slurm/ --configfile config/default.yaml \
+--config reference="data_input/reference/refenence.fasta"
