@@ -30,10 +30,10 @@ localrules: all
 rule all:
     input:
         # Trimmomatic:
-        expand(filtered_read_dir_path / "{sample_id}/{sample_id}.trimmed_1.fastq.gz", sample_id=config["sample_id"]),
-        expand(filtered_read_dir_path / "{sample_id}/{sample_id}.trimmed_1.se.fastq.gz", sample_id=config["sample_id"]),
-        expand(iltered_read_dir_path / "{sample_id}/{sample_id}.trimmed_2.fastq.gz", sample_id=config["sample_id"]),
-        expand(filtered_read_dir_path / "{sample_id}/{sample_id}.trimmed_2.se.fastq.gz", sample_id=config["sample_id"]),
+        expand(filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_1.fastq.gz", sample_id=config["sample_id"]),
+        expand(filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_1.se.fastq.gz", sample_id=config["sample_id"]),
+        expand(filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_2.fastq.gz", sample_id=config["sample_id"]),
+        expand(filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_2.se.fastq.gz", sample_id=config["sample_id"]),
 
         # Bowtie2:
         expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
