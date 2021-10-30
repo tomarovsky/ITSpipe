@@ -3,7 +3,8 @@ rule mosdepth:
         bam=alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam",
         bai=rules.index_bam.output
     output:
-        alignment_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz"
+        outdir = directory(alignment_dir_path / "{sample_id}"),
+        cov=alignment_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz"
     params:
         min_mapping_quality=config["mosdepth_min_mapping_quality"],
         output_pefix=alignment_dir_path / "{sample_id}/{sample_id}.coverage"
@@ -22,4 +23,5 @@ rule mosdepth:
     threads:
         config["mosdepth_threads"]
     shell:
+        "mkdir -p {output.outdir}; "
         "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_pefix} {input} > {log.std} 2>&1"
