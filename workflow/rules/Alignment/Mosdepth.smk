@@ -7,7 +7,7 @@ rule mosdepth:
         mosdepth_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz"
     params:
         min_mapping_quality=config["mosdepth_min_mapping_quality"],
-        output_pefix=mosdepth_dir_path / "{sample_id}/{sample_id}.coverage"
+        output_pefix=expand(mosdepth_dir_path / "{sample_id}/{sample_id}.coverage", sample_id=lambda wildcards: wildcards.sample_id)
     log:
         std=log_dir_path / "{sample_id}/mosdepth.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.mosdepth.cluster.log",
