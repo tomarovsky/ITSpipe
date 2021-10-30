@@ -36,8 +36,8 @@ rule all:
         expand(filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_2.se.fastq.gz", sample_id=config["sample_id"]),
 
         # Bowtie2:
-        # expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
-        # expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3)),
+        expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
+        expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3)),
         expand(alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam", sample_id=config["sample_id"])
 
 
