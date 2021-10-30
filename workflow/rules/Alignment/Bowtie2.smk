@@ -71,4 +71,4 @@ checkpoint bowtie2_index:
     threads:
         config["bowtie2_threads"]
     shell:
-        "bowtie2-build {input} {params.basename} 2> {log.std}"
+        "bowtie2-build {input} {params.basename} > {log.std} 2>&1 || true"
