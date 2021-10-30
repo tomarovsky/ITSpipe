@@ -1,13 +1,13 @@
 rule mosdepth:
     input:
-        bam=rules.bowtie2_map.output.bam,
+        rules.bowtie2_map.output.bam,
         # bam_clipped=rules.bamutil_clipoverlap.output.bam_clipped
         # bai=rules.index_bam.output
     output:
-        mosdepth_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz"
+        alignment_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz"
     params:
         min_mapping_quality=config["mosdepth_min_mapping_quality"],
-        output_pefix=mosdepth_dir_path / "{sample_id}/{sample_id}.coverage"
+        output_pefix=alignment_dir_path / "{sample_id}/{sample_id}.coverage"
     log:
         std=log_dir_path / "{sample_id}/mosdepth.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.mosdepth.cluster.log",
@@ -23,4 +23,4 @@ rule mosdepth:
     threads:
         config["mosdepth_threads"]
     shell:
-        "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_pefix} {input.bam} > {log.std} 2>&1"
+        "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_pefix} {input} > {log.std} 2>&1"
