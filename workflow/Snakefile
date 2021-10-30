@@ -43,7 +43,7 @@ rule all:
         expand(alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam", sample_id=config["sample_id"]),
 
         # Mosdepth:
-        expand(alignment_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
+        expand(mosdepth_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
 
 
 
