@@ -6,7 +6,7 @@ rule bowtie2_map:
     input:
         forward_reads=rules.trimmomatic.output.pe_forward,
         reverse_reads=rules.trimmomatic.output.pe_reverse,
-        reference=reference_dir_path / reference_filename,
+        reference=reference_dir_path / reference_basename,
         index1=expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
         index2=expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3))
     output:
