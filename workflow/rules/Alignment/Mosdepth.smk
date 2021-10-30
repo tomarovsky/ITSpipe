@@ -1,3 +1,5 @@
+ruleorder: bowtie2_map > mosdepth
+
 rule mosdepth:
     input:
         alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam",
