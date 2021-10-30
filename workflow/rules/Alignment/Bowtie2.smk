@@ -40,10 +40,10 @@ rule bowtie2_map:
         """
         mkdir -p {output.outdir} ; \
         bowtie2 -p {params.bowtie2_threads} -x {input.reference} -1 {input.forward_reads} -2 {input.reverse_reads} \
-        --rg \'@RG\\tID:{wildcards.sample_id}\\tPU:x\\tSM:{wildcards.sample_id}\\tPL:Illumina\\tLB:x\' | \
-        samtools fixmate -@ {params.fixmate_threads} -m - - | \
-        samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} | \
-        samtools markdup -@ {params.markdup_threads} - {output.bam}
+        --rg \'@RG\\tID:{wildcards.sample_id}\\tPU:x\\tSM:{wildcards.sample_id}\\tPL:Illumina\\tLB:x\' 2> {log.bowtie2} | \
+        samtools fixmate -@ {params.fixmate_threads} -m - - 2> {log.fixmate} | \
+        samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} 2> {log.sort} | \
+        samtools markdup -@ {params.markdup_threads} - {output.bam} 2> {log.markdup}
         """
 
 # """
