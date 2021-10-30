@@ -6,7 +6,7 @@ rule mosdepth:
         # bam_clipped=rules.bamutil_clipoverlap.output.bam_clipped
         # bai=rules.index_bam.output
     output:
-        mosdepth_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz"
+        mosdepth_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.coverage.per-base.bed.gz"
     params:
         min_mapping_quality=config["mosdepth_min_mapping_quality"],
         output_pefix=mosdepth_dir_path / "{sample_id}/{sample_id}.coverage"
@@ -25,4 +25,4 @@ rule mosdepth:
     threads:
         config["mosdepth_threads"]
     shell:
-        "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_pefix} {input} > {log.std} 2>&1"
+        "mosdepth -t {threads} --mapq {params.min_mapping_quality} {input} > {log.std} 2>&1"
