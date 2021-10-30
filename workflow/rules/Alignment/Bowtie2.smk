@@ -6,7 +6,7 @@ rule bowtie2_map:
     input:
         forward_reads=rules.trimmomatic.output.pe_forward,
         reverse_reads=rules.trimmomatic.output.pe_reverse,
-        reference=reference_dir_path / reference_basename,
+        reference=config["reference"],
         index1=expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
         index2=expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3))
     output:
@@ -18,7 +18,8 @@ rule bowtie2_map:
         markdup_threads=config["markdup_threads"],
         bowtie2_threads=config["bowtie2_threads"],
         per_thread_sort_mem="%sG" % config["per_thread_sort_mem"],
-        tmp_prefix=alignment_dir_path / "{sample_id}/{sample_id}"
+        tmp_prefix=alignment_dir_path / "{sample_id}/{sample_id}",
+        reference=reference_dir_path / reference_basename,
     log:
         bowtie2=log_dir_path / "{sample_id}/bowtie2.log",
         fixmate=log_dir_path / "{sample_id}/fixmate.log",
@@ -39,7 +40,7 @@ rule bowtie2_map:
     shell:
         """
         mkdir -p {output.outdir} ; \
-        bowtie2 -p {params.bowtie2_threads} -x {input.reference} -1 {input.forward_reads} -2 {input.reverse_reads} \
+        bowtie2 -p {params.bowtie2_threads} -x {params.reference} -1 {input.forward_reads} -2 {input.reverse_reads} \
         --rg \'@RG\\tID:{wildcards.sample_id}\\tPU:x\\tSM:{wildcards.sample_id}\\tPL:Illumina\\tLB:x\' 2> {log.bowtie2} | \
         samtools fixmate -@ {params.fixmate_threads} -m - - 2> {log.fixmate} | \
         samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} 2> {log.sort} | \
