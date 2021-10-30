@@ -2,7 +2,7 @@ ruleorder: bowtie2_map > mosdepth
 
 rule mosdepth:
     input:
-        mosdepth_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam",
+        alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam",
         # bam_clipped=rules.bamutil_clipoverlap.output.bam_clipped
         # bai=rules.index_bam.output
     output:
