@@ -10,7 +10,7 @@ cluster_log_dir: "cluster_logs"
 benchmark_dir: "benchmarks"
 filtered_read_dir: "reads/filtered"
 alignment_dir: "data_output/alignment"
-
+mosdepth_dir: "data_output/coverage"
 
 #---- Tool threads ----
 trimmomatic_threads: 8
@@ -19,6 +19,7 @@ sort_threads: 5
 fixmate_threads: 4
 markdup_threads: 4
 bamutil_clipoverlap_threads: 4
+mosdepth_threads: 4
 
 #---- Tool memory ----
 trimmomatic_mem_mb: 16000
@@ -27,11 +28,13 @@ per_thread_sort_mem: 10 # memory in gigabytes
 fixmate_mem_mb: 10000
 markdup_mem_mb: 10000
 bamutil_clipoverlap_mem_mb: 15000
+mosdepth_mem_mb: 20000
 
 #---- Tool time ----
 trimmomatic_time: "100:00:00"
 bowtie2_time: "100:00:00"
 bamutil_clipoverlap_time: "100:00:00"
+mosdepth_time: "100:00:00"
 
 #---- Tool paths ----
 
@@ -39,6 +42,7 @@ bamutil_clipoverlap_time: "100:00:00"
 #---- Tool variables ----
 adapters: "resources/adapters/TruSeq2-PE.fa"
 poolsize: 10000000
+mosdepth_min_mapping_quality: 20
 
 
 

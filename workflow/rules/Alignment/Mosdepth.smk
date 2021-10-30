@@ -1,6 +1,7 @@
 rule mosdepth:
     input:
         bam=rules.bowtie2_map.output.bam,
+        # bam_clipped=rules.bamutil_clipoverlap.output.bam_clipped
         # bai=rules.index_bam.output
     output:
         alignment_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz"

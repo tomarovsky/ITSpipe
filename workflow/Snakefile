@@ -13,6 +13,7 @@ output_dir_path = Path(config["data_output_dir"])
 
 filtered_reads_dir_path = output_dir_path / config["filtered_read_dir"]
 alignment_dir_path = Path(config["alignment_dir"])
+mosdepth_dir_path = Path(config["mosdepth_dir"])
 
 #---- setup filenames ----
 reference = Path(config["reference"])
@@ -41,6 +42,9 @@ rule all:
         # Bamutil:
         expand(alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam", sample_id=config["sample_id"]),
 
+        # Mosdepth:
+        expand(alignment_dir_path/ "{sample_id}/{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
+
 
 
 
@@ -48,5 +52,5 @@ rule all:
 include: "rules/QCFiltering/Trimmomatic.smk"
 include: "rules/Alignment/Bowtie2.smk"
 include: "rules/QCFiltering/Bamutil.smk"
-# include: "rules/Alignment/Mosdepth.smk"
+include: "rules/Alignment/Mosdepth.smk"
 

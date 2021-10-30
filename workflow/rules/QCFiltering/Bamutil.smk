@@ -2,7 +2,7 @@ rule bamutil_clipoverlap:
     input:
         rules.bowtie2_map.output.bam
     output:
-        alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam"
+        bam_clipped=alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam"
     params:
         poolsize=config["poolsize"]
     log:
