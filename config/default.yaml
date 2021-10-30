@@ -4,13 +4,13 @@ conda_config: "workflow/envs/conda.yaml"
 #---- Directory structure config ----
 reference: "data_input/reference"
 samples_dir: "data_input/samples"
-data_output_dir: "data_output"
+data_output_dir: "results"
 log_dir: "logs"
 cluster_log_dir: "cluster_logs"
 benchmark_dir: "benchmarks"
 filtered_read_dir: "reads/filtered"
-alignment_dir: "data_output/alignment"
-mosdepth_dir: "data_output/coverage"
+alignment_dir: "results/alignment"
+mosdepth_dir: "results/coverage"
 
 #---- Tool threads ----
 trimmomatic_threads: 8
