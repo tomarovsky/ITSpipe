@@ -47,7 +47,7 @@ rule bowtie2_map:
         """
 
 # """
-# mkdir -r {params.outdir}; \
+# mkdir -r {params.outdir}; \         mkdir -p {output.outdir} ; \
 # bowtie2 -p {params.bowtie2_threads} {input.reference} -1 <(gunzip -c {input.forward_reads}) -2 <(gunzip -c {input.reverse_reads}) \
 # --rg \'@RG\\tID:{wildcards.sample_id}\\tPU:x\\tSM:{wildcards.sample_id}\\tPL:Illumina\\tLB:x\' 2> {log.bowtie2} | \
 # samtools fixmate -@ {params.fixmate_threads} -m - - 2> {log.fixmate} | \
