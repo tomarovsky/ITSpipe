@@ -8,7 +8,7 @@ rule mosdepth:
         outdir_raw=directory(raw_coverage_dir_path / "{sample_id}"),
         outdir_clipped=directory(clipped_coverage_dir_path / "{sample_id}"),
         coverage_raw=raw_coverage_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz",
-        coverage_clipped=clipped_coverage_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz",
+        coverage_clipped=clipped_coverage_dir_path / "{sample_id}/{sample_id}.clipped.coverage.per-base.bed.gz",
     params:
         min_mapping_quality=config["mosdepth_min_mapping_quality"],
         output_raw_pefix=expand(raw_coverage_dir_path / "{sample_id}/{sample_id}.coverage", sample_id=config["sample_id"]),
