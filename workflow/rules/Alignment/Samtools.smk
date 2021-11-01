@@ -1,7 +1,7 @@
 rule index_bam:
     input:
-        bam_raw=rules.bowtie2_map.output.bam,
-        bam_clipped=rules.bamutil_clipoverlap.output.bam_clipped
+        bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam",
+        bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam"
     output:
         bai_raw=temp(alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam.bai"),
         bai_clipped=temp(alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam.bai")
