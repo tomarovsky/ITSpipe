@@ -18,7 +18,7 @@ rule bowtie2_map:
         markdup_threads=config["markdup_threads"],
         bowtie2_threads=config["bowtie2_threads"],
         per_thread_sort_mem="%sG" % config["per_thread_sort_mem"],
-        tmp_prefix=alignment_dir_path / "{sample_id}/{sample_id}",
+        tmp_prefix=raw_alignment_dir_path / "{sample_id}/{sample_id}",
         reference=reference_dir_path / reference_basename,
     log:
         bowtie2=log_dir_path / "{sample_id}/bowtie2.log",
