@@ -13,9 +13,9 @@ output_dir_path = Path(config["output_dir"])
 
 filtered_reads_dir_path = output_dir_path / config["filtered_read_dir"]
 raw_alignment_dir_path = output_dir_path / config["raw_alignment_dir"]
-raw_coverage_dir_path = output_dir_path / config["raw_coverage_dir"]
+# raw_coverage_dir_path = output_dir_path / config["raw_coverage_dir"]
 clipped_alignment_dir_path = output_dir_path / config["clipped_alignment_dir"]
-clipped_coverage_dir_path = output_dir_path / config["clipped_coverage_dir"]
+# clipped_coverage_dir_path = output_dir_path / config["clipped_coverage_dir"]
 
 #---- setup filenames ----
 reference = Path(config["reference"])
