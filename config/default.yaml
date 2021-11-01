@@ -12,7 +12,7 @@ filtered_read_dir: "reads/filtered"
 raw_alignment_dir: "alignment/raw"
 raw_coverage_dir: "alignment/raw/coverage"
 clipped_alignment_dir: "alignment/clipped"
-clipped_coverage_dir: "coverage"
+clipped_coverage_dir: "coverage"   # this directory will be next to the alignment BAM file
 
 #---- Tool threads ----
 trimmomatic_threads: 8
