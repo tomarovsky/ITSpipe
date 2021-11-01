@@ -1,13 +1,18 @@
 rule mosdepth:
     input:
-        bam=alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam",
-        bai=rules.index_bam.output
+        bam_raw=rules.bowtie2_map.output.bam,
+        bai_raw=rules.index_bam.output.bai_raw,
+        bam_clipped=rules.bamutil_clipoverlap.output.bam_clipped,
+        bai_clipped=rules.index_bam.output.bai_clipped
     output:
-        outdir=directory(mosdepth_dir_path / "{sample_id}"),
-        cov=mosdepth_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz"
+        outdir_raw=directory(raw_coverage_dir_path / "{sample_id}"),
+        outdir_clipped=directory(clipped_coverage_dir_path / "{sample_id}"),
+        coverage_raw=raw_coverage_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz",
+        coverage_clipped=clipped_coverage_dir_path / "{sample_id}/{sample_id}.coverage.per-base.bed.gz",
     params:
         min_mapping_quality=config["mosdepth_min_mapping_quality"],
-        output_pefix=expand(mosdepth_dir_path / "{sample_id}/{sample_id}.coverage", sample_id=config["sample_id"]),
+        output_raw_pefix=expand(raw_coverage_dir_path / "{sample_id}/{sample_id}.coverage", sample_id=config["sample_id"]),
+        output_clipped_pefix=expand(clipped_coverage_dir_path / "{sample_id}/{sample_id}.clipped.coverage",sample_id=config["sample_id"]),
     log:
         std=log_dir_path / "{sample_id}/mosdepth.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.mosdepth.cluster.log",
@@ -23,4 +28,5 @@ rule mosdepth:
     threads:
         config["mosdepth_threads"]
     shell:
-        "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_pefix} {input.bam} > {log.std} 2>&1"
+        "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_raw_pefix} {input.bam_raw} > {log.std} 2>&1"
+        "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_clipped_pefix} {input.bam_clipped} > {log.std} 2>&1"
