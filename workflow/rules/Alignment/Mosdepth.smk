@@ -5,8 +5,6 @@ rule mosdepth:
         bam_clipped=rules.bamutil_clipoverlap.output.bam_clipped,
         bai_clipped=rules.index_bam.output.bai_clipped
     output:
-        # outdir_raw=directory(raw_coverage_dir_path),
-        # outdir_clipped=directory(clipped_coverage_dir_path),
         coverage_raw=raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz",
         coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz"
     params:
