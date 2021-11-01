@@ -10,9 +10,9 @@ cluster_log_dir: "cluster_logs"
 benchmark_dir: "benchmarks"
 filtered_read_dir: "reads/filtered"
 raw_alignment_dir: "alignment/raw"
-raw_coverage_dir: "alignment/raw/coverage"
 clipped_alignment_dir: "alignment/clipped"
 clipped_coverage_dir: "coverage"   # this directory will be next to the alignment BAM file
+test: "alignment/raw/{sample_id}/coverage"
 
 #---- Tool threads ----
 trimmomatic_threads: 8
