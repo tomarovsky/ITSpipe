@@ -9,8 +9,10 @@ log_dir: "logs"
 cluster_log_dir: "cluster_logs"
 benchmark_dir: "benchmarks"
 filtered_read_dir: "reads/filtered"
-alignment_dir: "alignment"
-mosdepth_dir: "coverage"
+raw_alignment_dir: "alignment/raw"
+raw_coverage_dir: "alignment/raw/coverage"
+clipped_alignment_dir: "alignment/clipped"
+clipped_coverage_dir: "alignment/clipped/coverage"
 
 #---- Tool threads ----
 trimmomatic_threads: 8

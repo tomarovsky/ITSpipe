@@ -1,8 +1,10 @@
 rule index_bam:
     input:
-        rules.bowtie2_map.output.bam
+        bam_raw=rules.bowtie2_map.output.bam,
+        bam_clipped=rules.bamutil_clipoverlap.output.bam_clipped
     output:
-        temp(alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam.bai")
+        bai_raw=temp(alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam.bai"),
+        bai_clipped=temp(alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam.bai")
     log:
         std=log_dir_path / "{sample_id}/index.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.index.cluster.log",
@@ -18,4 +20,5 @@ rule index_bam:
     threads:
         config["index_threads"]
     shell:
-        "samtools index -@ {threads} {input} > {log.std} 2>&1"
+        "samtools index -@ {threads} {input.bam_raw} > {log.std} 2>&1; "
+        "samtools index -@ {threads} {input.bam_clipped} > {log.std} 2>&1; "

@@ -10,8 +10,8 @@ rule bowtie2_map:
         index1=expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
         index2=expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3))
     output:
-        outdir=directory(alignment_dir_path/"{sample_id}"),
-        bam=alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam"
+        outdir=directory(raw_alignment_dir_path/"{sample_id}"),
+        bam=raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam"
     params:
         fixmate_threads=config["fixmate_threads"],
         sort_threads=config["sort_threads"],
