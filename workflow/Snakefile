@@ -13,8 +13,9 @@ output_dir_path = Path(config["output_dir"])
 
 filtered_reads_dir_path = output_dir_path / config["filtered_read_dir"]
 raw_alignment_dir_path = output_dir_path / config["raw_alignment_dir"]
-raw_coverage_dir_path = output_dir_path / config["test"]
+raw_coverage_dir_path = output_dir_path / config["raw_coverage_dir"]
 clipped_alignment_dir_path = output_dir_path / config["clipped_alignment_dir"]
+clipped_coverage_dir_path = output_dir_path / config["clipped_coverage_dir"]
 
 #---- setup filenames ----
 reference = Path(config["reference"])
@@ -45,7 +46,7 @@ rule all:
 
         # Mosdepth:
         expand(raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
-        expand(clipped_alignment_dir_path / "{sample_id}" / config["clipped_coverage_dir"] / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
+        expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
 
 
 
