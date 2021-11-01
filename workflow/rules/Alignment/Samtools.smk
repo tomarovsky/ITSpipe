@@ -3,8 +3,8 @@ rule index_bam:
         bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam",
         bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam"
     output:
-        bai_raw=temp(alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam.bai"),
-        bai_clipped=temp(alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam.bai")
+        bai_raw=temp(raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam.bai"),
+        bai_clipped=temp(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam.bai")
     log:
         std=log_dir_path / "{sample_id}/index.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.index.cluster.log",
