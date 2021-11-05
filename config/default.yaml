@@ -11,8 +11,8 @@ benchmark_dir: "benchmarks"
 filtered_read_dir: "reads/filtered"
 raw_alignment_dir: "alignment/raw"
 clipped_alignment_dir: "alignment/clipped"
-raw_coverage_dir: "alignment/raw/coverage"
-clipped_coverage_dir: "alignment/clipped/coverage"
+raw_coverage_dir: "alignment/raw/{sample_id}/coverage"
+clipped_coverage_dir: "alignment/clipped/{sample_id}/coverage"
 
 #---- Tool threads ----
 trimmomatic_threads: 8
