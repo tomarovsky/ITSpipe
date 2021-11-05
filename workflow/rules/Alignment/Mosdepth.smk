@@ -1,9 +1,9 @@
 rule mosdepth:
     input:
-        bam_raw=rules.bowtie2_map.output.bam,
-        bai_raw=rules.index_bam.output.bai_raw,
-        bam_clipped=rules.bamutil_clipoverlap.output.bam_clipped,
-        bai_clipped=rules.index_bam.output.bai_clipped
+        bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam",
+        bai_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam.bai",
+        bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam",
+        bai_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam.bai"
     output:
         coverage_raw=raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz",
         coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz"
