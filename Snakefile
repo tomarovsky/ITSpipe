@@ -26,8 +26,6 @@ reference_basename = reference.stem
 if "sample_id" not in config:
     config["sample_id"] = [d.name for d in samples_dir_path.iterdir() if d.is_dir()]
 
-
-
 localrules: all
 
 rule all:
@@ -49,13 +47,10 @@ rule all:
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
 
 
-
-
-
 #---- load rules ----
-include: "rules/QCFiltering/Trimmomatic.smk"
-include: "rules/Alignment/Bowtie2.smk"
-include: "rules/Alignment/Samtools.smk"
-include: "rules/Alignment/Mosdepth.smk"
-include: "rules/QCFiltering/Bamutil.smk"
+include: "workflow/rules/QCFiltering/Trimmomatic.smk"
+include: "workflow/rules/Alignment/Bowtie2.smk"
+include: "workflow/rules/Alignment/Samtools.smk"
+include: "workflow/rules/Alignment/Mosdepth.smk"
+include: "workflow/rules/QCFiltering/Bamutil.smk"
 
