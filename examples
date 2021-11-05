@@ -1,3 +1,3 @@
 snakemake -s workflow/Snakefile --profile profile/slurm/ --configfile config/default.yaml \
---config reference="data_input/reference/refenence.fasta"
+--config reference="input_data/reference/refenence.fasta" \
 --printshellcmds --latency-wait 60
