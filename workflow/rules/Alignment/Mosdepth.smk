@@ -9,8 +9,8 @@ rule mosdepth:
         coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz"
     params:
         min_mapping_quality=config["mosdepth_min_mapping_quality"],
-        output_raw_pefix=raw_coverage_dir_path / "{wildcards.sample_id}.coverage",
-        output_clipped_pefix=clipped_coverage_dir_path / "{wildcards.sample_id}.clipped.coverage",
+        output_raw_pefix=raw_coverage_dir_path / "{sample_id}.coverage",
+        output_clipped_pefix=clipped_coverage_dir_path / "{sample_id}.clipped.coverage",
     log:
         std=log_dir_path / "{sample_id}/mosdepth.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.mosdepth.cluster.log",
