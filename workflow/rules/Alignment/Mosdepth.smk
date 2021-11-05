@@ -2,17 +2,17 @@ rule mosdepth:
     input:
         bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam",
         bai_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam.bai",
-        bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam",
-        bai_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam.bai"
+        # bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam",
+        # bai_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam.bai"
     output:
         coverage_raw=raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz",
-        coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz"
+        # coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz"
     params:
         min_mapping_quality=config["mosdepth_min_mapping_quality"],
         output_raw_path=raw_alignment_dir_path / "{sample_id}" / config["raw_coverage_dir"],
-        output_clipped_path=clipped_alignment_dir_path / "{sample_id}" / config["clipped_coverage_dir"],
+        # output_clipped_path=clipped_alignment_dir_path / "{sample_id}" / config["clipped_coverage_dir"],
         output_raw_pefix=raw_alignment_dir_path / "{sample_id}" / config["raw_coverage_dir"] / "{sample_id}.coverage",
-        output_clipped_pefix=clipped_alignment_dir_path / "{sample_id}" / config["clipped_coverage_dir"] / "{sample_id}.coverage",
+        # output_clipped_pefix=clipped_alignment_dir_path / "{sample_id}" / config["clipped_coverage_dir"] / "{sample_id}.coverage",
     log:
         std=log_dir_path / "{sample_id}/mosdepth.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.mosdepth.cluster.log",
@@ -28,7 +28,7 @@ rule mosdepth:
     threads:
         config["mosdepth_threads"]
     shell:
-        "mkdir -p {params.output_raw_path}; "
+        # "mkdir -p {params.output_raw_path}; "
         "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_raw_pefix} {input.bam_raw} > {log.std} 2>&1; "
-        "mkdir -p {params.output_clipped_path}; "
-        "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_clipped_pefix} {input.bam_clipped} > {log.std} 2>&1; "
+        # "mkdir -p {params.output_clipped_path}; "
+        # "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_clipped_pefix} {input.bam_clipped} > {log.std} 2>&1; "
