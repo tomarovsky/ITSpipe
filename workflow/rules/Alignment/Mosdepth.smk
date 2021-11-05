@@ -9,9 +9,10 @@ rule mosdepth:
         # coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz"
     params:
         min_mapping_quality=config["mosdepth_min_mapping_quality"],
-        output_raw_path=raw_alignment_dir_path / "{sample_id}" / config["raw_coverage_dir"],
+        output_raw_pefix=lambda wildcards, output: output[0][:-16],
+        # output_raw_path=raw_alignment_dir_path / "{sample_id}" / config["raw_coverage_dir"],
         # output_clipped_path=clipped_alignment_dir_path / "{sample_id}" / config["clipped_coverage_dir"],
-        output_raw_pefix=raw_alignment_dir_path / "{sample_id}" / config["raw_coverage_dir"] / "{sample_id}.coverage",
+        # output_raw_pefix=raw_alignment_dir_path / "{sample_id}" / config["raw_coverage_dir"] / "{sample_id}.coverage",
         # output_clipped_pefix=clipped_alignment_dir_path / "{sample_id}" / config["clipped_coverage_dir"] / "{sample_id}.coverage",
     log:
         std=log_dir_path / "{sample_id}/mosdepth.log",
