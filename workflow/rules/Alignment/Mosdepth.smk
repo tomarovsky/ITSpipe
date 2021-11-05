@@ -26,5 +26,5 @@ rule mosdepth:
     threads:
         config["mosdepth_threads"]
     shell:
-        "mosdepth -t {threads} --mapq {params.min_mapping_quality} ${params.output_raw_pefix} {input.bam_raw} > {log.std} 2>&1; "
-        "mosdepth -t {threads} --mapq {params.min_mapping_quality} ${params.output_clipped_pefix} {input.bam_clipped} > {log.std} 2>&1; "
+        "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_raw_pefix} {input.bam_raw} > {log.std} 2>&1; "
+        "mosdepth -t {threads} --mapq {params.min_mapping_quality} {params.output_clipped_pefix} {input.bam_clipped} > {log.std} 2>&1; "
