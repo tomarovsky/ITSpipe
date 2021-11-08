@@ -9,7 +9,6 @@ rule draw_coverage_raw:
         start_column_index=1,
         stop_column_index=2,
         coverage_column_index=3,
-        separator="\\t",
         min_x=None,
         max_x=None,
         min_y=None,
@@ -45,7 +44,7 @@ rule draw_coverage_raw:
         --start_column_index {params.start_column_index} \
         --stop_column_index {params.stop_column_index} \
         --coverage_column_index {params.coverage_column_index} \
-        --separator "{params.separator}" \
+        --separator "\t" \
         --extensions {params.extensions} \
         --min_x {params.min_x} \
         --max_x {params.max_x} \
@@ -74,7 +73,6 @@ rule draw_coverage_clipped:
         start_column_index=1,
         stop_column_index=2,
         coverage_column_index=3,
-        separator="\\t",
         min_x=None,
         max_x=None,
         min_y=None,
@@ -110,7 +108,7 @@ rule draw_coverage_clipped:
         --start_column_index {params.start_column_index} \
         --stop_column_index {params.stop_column_index} \
         --coverage_column_index {params.coverage_column_index} \
-        --separator "{params.separator}" \
+        --separator "\t" \
         --extensions {params.extensions} \
         --min_x {params.min_x} \
         --max_x {params.max_x} \
