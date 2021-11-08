@@ -59,7 +59,7 @@ if __name__ == '__main__':
     group_additional.add_argument('--stop_column_index', type=int, help="stop column index", default=2)
     group_additional.add_argument('--coverage_column_index', type=int, help="coverage column index", default=3)
     group_additional.add_argument('-s', '--separator', type=str, help="separator", default="\t")
-    group_additional.add_argument('-e', '--extensions', type=str, help="output files extensions", default=["png", "svg"])
+    group_additional.add_argument('-e', '--extensions', help="output files extensions", default=["png", "svg"])
     group_additional.add_argument('--min_x', help="min_x value", default=None)
     group_additional.add_argument('--max_x', help="max_x value", default=None)
     group_additional.add_argument('--min_y', help="min_y value", default=None)
