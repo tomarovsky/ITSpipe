@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 import numpy as np
 import matplotlib.pyplot as plt
+
 plt.ioff()
 from argparse import ArgumentParser
 
 
-def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index=2, coverage_column_index=3, separator="\t",
-              min_x=None, max_x=None, min_y=None, max_y=None, extensions=["png", "svg"], xlabel=None, ylabel=None,
-              title=None, width=6, height=6, markersize=2, type="plot", grid=False, close_plot=True):
-    df = np.loadtxt(input_file, comments="#", usecols=(start_column_index, stop_column_index, coverage_column_index), delimiter=separator, dtype="int")
+def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index=2, coverage_column_index=3,
+              separator="\t",min_x=None, max_x=None, min_y=None, max_y=None, extensions=["png", "svg"],
+              xlabel=None, ylabel=None,title=None, width=6, height=6, markersize=2, type="plot",
+              grid=False, close_plot=True):
+    df = np.loadtxt(input_file, comments="#", usecols=(start_column_index, stop_column_index, coverage_column_index),
+                    delimiter=separator, dtype="int")
     data = []
     for lst in range(len(df)):
         for n in range(df[lst][0], df[lst][1]):
@@ -37,12 +40,12 @@ def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index
 
 
 def main():
-    draw_plot(args.input_file, args.output_prefix, start_column_index=args.start_column_index, stop_column_index=args.stop_column_index,
-              coverage_column_index=args.coverage_column_index, separator=args.separator, extensions=args.extensions,
-              min_x=args.min_x, max_x=args.max_x, min_y=args.min_y, max_y=args.max_y,
-              xlabel=args.xlabel, ylabel=args.ylabel, title=args.title,
-              width=args.width, height=args.height, markersize=args.markersize,
-              type=args.type, grid=args.grid, close_plot=args.close_plot)
+    draw_plot(args.input_file, args.output_prefix, start_column_index=args.start_column_index,
+              stop_column_index=args.stop_column_index, coverage_column_index=args.coverage_column_index,
+              separator=args.separator, extensions=args.extensions, min_x=args.min_x, max_x=args.max_x,
+              min_y=args.min_y, max_y=args.max_y, xlabel=args.xlabel, ylabel=args.ylabel, title=args.title,
+              width=args.width, height=args.height, markersize=args.markersize, type=args.type, grid=args.grid,
+              close_plot=args.close_plot)
 
 
 if __name__ == '__main__':
