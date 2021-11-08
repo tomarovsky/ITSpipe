@@ -22,7 +22,8 @@ fixmate_threads: 4
 markdup_threads: 4
 bamutil_clipoverlap_threads: 4
 mosdepth_threads: 4
-index_threads: 4
+index_threads: 1
+visualization_threads: 1
 
 #---- Tool memory ----
 trimmomatic_mem_mb: 16000
@@ -33,6 +34,7 @@ markdup_mem_mb: 10000
 bamutil_clipoverlap_mem_mb: 15000
 mosdepth_mem_mb: 20000
 index_mem_mb: 10000
+visualization_mem_mb: 5000
 
 #---- Tool time ----
 trimmomatic_time: "100:00:00"
@@ -40,6 +42,7 @@ bowtie2_time: "100:00:00"
 bamutil_clipoverlap_time: "100:00:00"
 mosdepth_time: "100:00:00"
 index_time: "50:00:00"
+visualization_time: "25:00:00"
 
 #---- Tool paths ----
 
@@ -48,6 +51,6 @@ index_time: "50:00:00"
 adapters: "resources/adapters/TruSeq2-PE.fa"
 poolsize: 10000000
 mosdepth_min_mapping_quality: 20
-
+plot_extensions: "png,svg"
 
 
