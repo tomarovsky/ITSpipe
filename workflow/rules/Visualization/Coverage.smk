@@ -9,14 +9,10 @@ rule draw_coverage_raw:
         start_column_index=1,
         stop_column_index=2,
         coverage_column_index=3,
-        min_x=None,
-        max_x=None,
-        min_y=None,
-        max_y=None,
         extensions=config["plot_extensions"],
-        xlabel=None,
-        ylabel=None,
-        title="{sample_id} coverage plot",
+        xlabel="Reference",
+        ylabel="Coverage",
+        title="{sample_id}",
         width=6,
         height=6,
         markersize=2,
@@ -44,12 +40,8 @@ rule draw_coverage_raw:
         "--stop_column_index {params.stop_column_index} "
         "--coverage_column_index {params.coverage_column_index} "
         "--extensions {params.extensions} "
-        # "--min_x {params.min_x} "
-        # "--max_x {params.max_x} "
-        # "--min_y {params.min_y} "
-        # "--max_y {params.max_y} "
-        # "--xlabel {params.xlabel} "
-        # "--ylabel {params.ylabel} "
+        "--xlabel {params.xlabel} "
+        "--ylabel {params.ylabel} "
         "--title '{params.title}' "
         "--width {params.width} "
         "--height {params.height} "
@@ -70,14 +62,10 @@ rule draw_coverage_clipped:
         start_column_index=1,
         stop_column_index=2,
         coverage_column_index=3,
-        min_x=None,
-        max_x=None,
-        min_y=None,
-        max_y=None,
         extensions=config["plot_extensions"],
-        xlabel=None,
-        ylabel=None,
-        title="{sample_id} coverage plot",
+        xlabel="Reference",
+        ylabel="Coverage",
+        title="{sample_id}",
         width=6,
         height=6,
         markersize=2,
@@ -105,12 +93,8 @@ rule draw_coverage_clipped:
         "--stop_column_index {params.stop_column_index} "
         "--coverage_column_index {params.coverage_column_index} "
         "--extensions {params.extensions} "
-        # "--min_x {params.min_x} "
-        # "--max_x {params.max_x} "
-        # "--min_y {params.min_y} "
-        # "--max_y {params.max_y} "
-        # "--xlabel {params.xlabel} "
-        # "--ylabel {params.ylabel} "
+        "--xlabel {params.xlabel} "
+        "--ylabel {params.ylabel} "
         "--title '{params.title}' "
         "--width {params.width} "
         "--height {params.height} "
