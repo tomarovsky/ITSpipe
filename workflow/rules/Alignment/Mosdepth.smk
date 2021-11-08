@@ -12,11 +12,11 @@ rule mosdepth:
         output_raw_pefix=lambda wildcards, output: output["coverage_raw"][:-16],
         output_clipped_pefix=lambda wildcards, output: output["coverage_clipped"][:-16],
     log:
-        std=log_dir_path / "{sample_id}/mosdepth.log",
+        std=log_dir_path / "{sample_id}.mosdepth.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.mosdepth.cluster.log",
         cluster_err=cluster_log_dir_path / "{sample_id}.mosdepth.cluster.err"
     benchmark:
-         benchmark_dir_path / "{sample_id}/mosdepth.benchmark.txt"
+         benchmark_dir_path / "{sample_id}.mosdepth.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:

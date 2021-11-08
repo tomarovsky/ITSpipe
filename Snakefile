@@ -46,6 +46,11 @@ rule all:
         expand(raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
 
+        # Coverage visualization:
+        expand(raw_coverage_dir_path / "{sample_id}.png", sample_id=config["sample_id"]),
+        expand(raw_coverage_dir_path / "{sample_id}.svg", sample_id=config["sample_id"]),
+        expand(clipped_coverage_dir_path / "{sample_id}.clipped.png", sample_id=config["sample_id"]),
+        expand(clipped_coverage_dir_path / "{sample_id}.clipped.svg", sample_id=config["sample_id"]),
 
 #---- load rules ----
 include: "workflow/rules/QCFiltering/Trimmomatic.smk"
@@ -53,4 +58,5 @@ include: "workflow/rules/Alignment/Bowtie2.smk"
 include: "workflow/rules/Alignment/Samtools.smk"
 include: "workflow/rules/Alignment/Mosdepth.smk"
 include: "workflow/rules/QCFiltering/Bamutil.smk"
+include: "workflow/rules/Visualization/Coverage.smk"
 
