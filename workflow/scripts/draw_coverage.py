@@ -10,6 +10,7 @@ def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index
               separator="\t",min_x=None, max_x=None, min_y=None, max_y=None, extensions=["png", "svg"],
               xlabel=None, ylabel=None,title=None, width=6, height=6, markersize=2, type="plot",
               grid=False, close_plot=True):
+    print(args.extensions)
     df = np.loadtxt(input_file, comments="#", usecols=(start_column_index, stop_column_index, coverage_column_index),
                     delimiter=separator, dtype="int")
     data = []
