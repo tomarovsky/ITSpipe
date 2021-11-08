@@ -17,8 +17,7 @@ rule draw_coverage_raw:
         height=6,
         markersize=2,
         type="plot",
-        grid=False,
-        close_plot=True
+        grid=True
     log:
         std=log_dir_path / "{sample_id}.draw_coverage_raw.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.draw_coverage_raw.cluster.log",
@@ -47,8 +46,7 @@ rule draw_coverage_raw:
         "--height {params.height} "
         "--markersize {params.markersize} "
         "--type {params.type} "
-        "--grid {params.grid} "
-        "--close_plot {params.close_plot} > {log.std} 2>&1; "
+        "--grid {params.grid} > {log.std} 2>&1; "
 
 
 rule draw_coverage_clipped:
@@ -70,8 +68,7 @@ rule draw_coverage_clipped:
         height=6,
         markersize=2,
         type="plot",
-        grid=False,
-        close_plot=True
+        grid=True
     log:
         std=log_dir_path / "{sample_id}.draw_coverage_clipped.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.draw_coverage_clipped.cluster.log",
@@ -100,5 +97,4 @@ rule draw_coverage_clipped:
         "--height {params.height} "
         "--markersize {params.markersize} "
         "--type {params.type} "
-        "--grid {params.grid} "
-        "--close_plot {params.close_plot} > {log.std} 2>&1; "
+        "--grid {params.grid} > {log.std} 2>&1; "
