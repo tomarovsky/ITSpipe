@@ -51,6 +51,6 @@ visualization_time: "25:00:00"
 adapters: "resources/adapters/TruSeq2-PE.fa"
 poolsize: 10000000
 mosdepth_min_mapping_quality: 20
-plot_extensions: "png,svg"
+plot_extensions: ["png", "svg"]
 
 
