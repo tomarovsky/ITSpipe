@@ -48,10 +48,10 @@ rule all:
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
 
         # Coverage visualization:
-        expand(raw_coverage_dir_path / "{sample_id}.png", sample_id=config["sample_id"]),
-        expand(raw_coverage_dir_path / "{sample_id}.svg", sample_id=config["sample_id"]),
-        expand(clipped_coverage_dir_path / "{sample_id}.clipped.png", sample_id=config["sample_id"]),
-        expand(clipped_coverage_dir_path / "{sample_id}.clipped.svg", sample_id=config["sample_id"]),
+        expand(raw_coverage_dir_path / "{sample_id}.plot.png", sample_id=config["sample_id"]),
+        expand(raw_coverage_dir_path / "{sample_id}.plot.svg", sample_id=config["sample_id"]),
+        expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.png", sample_id=config["sample_id"]),
+        expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.svg", sample_id=config["sample_id"]),
 
 #---- load rules ----
 include: "workflow/rules/QCFiltering/Trimmomatic.smk"
