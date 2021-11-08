@@ -9,7 +9,7 @@ rule draw_coverage_raw:
         start_column_index=1,
         stop_column_index=2,
         coverage_column_index=3,
-        separator="\t",
+        separator="\\t",
         min_x=None,
         max_x=None,
         min_y=None,
