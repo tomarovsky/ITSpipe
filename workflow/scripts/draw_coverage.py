@@ -10,7 +10,8 @@ def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index
               separator="\t",min_x=None, max_x=None, min_y=None, max_y=None, extensions=["png", "svg"],
               xlabel=None, ylabel=None,title=None, width=6, height=6, markersize=2, type="plot",
               grid=False, close_plot=True):
-    print(args.extensions)
+    if args.extensions is not list:
+        extensions = args.extensions.strip().split(",")
     df = np.loadtxt(input_file, comments="#", usecols=(start_column_index, stop_column_index, coverage_column_index),
                     delimiter=separator, dtype="int")
     data = []
@@ -59,7 +60,7 @@ if __name__ == '__main__':
     group_additional.add_argument('--stop_column_index', type=int, help="stop column index", default=2)
     group_additional.add_argument('--coverage_column_index', type=int, help="coverage column index", default=3)
     group_additional.add_argument('-s', '--separator', type=str, help="separator", default="\t")
-    group_additional.add_argument('-e', '--extensions', help="output files extensions", default=["png", "svg"])
+    group_additional.add_argument('-e', '--extensions', type=str, help="output files extensions", default=["png", "svg"])
     group_additional.add_argument('--min_x', help="min_x value", default=None)
     group_additional.add_argument('--max_x', help="max_x value", default=None)
     group_additional.add_argument('--min_y', help="min_y value", default=None)
