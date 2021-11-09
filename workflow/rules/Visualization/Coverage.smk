@@ -10,12 +10,13 @@ rule draw_coverage_raw:
         stop_column_index=2,
         coverage_column_index=3,
         extensions=config["plot_extensions"],
-        xlabel="Reference",
+        xlabel="Position",
         ylabel="Coverage",
-        title="{sample_id}",
-        width=6,
+        title="Coverage of ribosomal cluster monomer by ITS lib {sample_id}",
+        width=12,
         height=6,
-        markersize=2,
+        markersize=8,
+        ylogbase=10,
         type="plot",
         grid=True
     log:
@@ -45,6 +46,7 @@ rule draw_coverage_raw:
         "--width {params.width} "
         "--height {params.height} "
         "--markersize {params.markersize} "
+        "--ylogbase {params.ylogbase} "
         "--type {params.type} "
         "--grid {params.grid} > {log.std} 2>&1; "
 
@@ -61,12 +63,13 @@ rule draw_coverage_clipped:
         stop_column_index=2,
         coverage_column_index=3,
         extensions=config["plot_extensions"],
-        xlabel="Reference",
+        xlabel="Position",
         ylabel="Coverage",
-        title="{sample_id}",
-        width=6,
+        title="Coverage of ribosomal cluster monomer by ITS lib {sample_id}",
+        width=12,
         height=6,
-        markersize=2,
+        markersize=8,
+        ylogbase=10,
         type="plot",
         grid=True
     log:
@@ -96,5 +99,6 @@ rule draw_coverage_clipped:
         "--width {params.width} "
         "--height {params.height} "
         "--markersize {params.markersize} "
+        "--ylogbase {params.ylogbase} "
         "--type {params.type} "
         "--grid {params.grid} > {log.std} 2>&1; "
