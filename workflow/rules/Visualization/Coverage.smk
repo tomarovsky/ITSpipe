@@ -13,6 +13,8 @@ rule draw_coverage_raw:
         xlabel="Position",
         ylabel="Coverage",
         title="Coverage of ribosomal cluster monomer by ITS lib {sample_id}",
+        min_x=0,
+        min_y=1,
         width=12,
         height=6,
         markersize=8,
@@ -43,6 +45,8 @@ rule draw_coverage_raw:
         "--xlabel {params.xlabel} "
         "--ylabel {params.ylabel} "
         "--title '{params.title}' "
+        "--min_x {params.min_x} "
+        "--min_y {params.min_y}"
         "--width {params.width} "
         "--height {params.height} "
         "--markersize {params.markersize} "
@@ -66,6 +70,8 @@ rule draw_coverage_clipped:
         xlabel="Position",
         ylabel="Coverage",
         title="Coverage of ribosomal cluster monomer by ITS lib {sample_id}",
+        min_x=0,
+        min_y=1,
         width=12,
         height=6,
         markersize=8,
@@ -96,6 +102,8 @@ rule draw_coverage_clipped:
         "--xlabel {params.xlabel} "
         "--ylabel {params.ylabel} "
         "--title '{params.title}' "
+        "--min_x {params.min_x} "
+        "--min_y {params.min_y}"
         "--width {params.width} "
         "--height {params.height} "
         "--markersize {params.markersize} "
