@@ -46,7 +46,7 @@ def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index
         plt.ylabel(ylabel)
     if title:
         plt.title(title)
-    if grid:
+    if grid and grid != "False":
         plt.grid()
     for ext in extensions:
         plt.savefig(f"{output_prefix}.{type}.{ext}")
