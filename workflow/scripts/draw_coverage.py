@@ -6,9 +6,22 @@ plt.ioff()
 from argparse import ArgumentParser
 
 
+def stats(in_file, out_file, lower_count=None, upper_count=None):
+    if (lower_count is not None) and (upper_count is not None):
+        if lower_count > upper_count:
+            raise ValueError("Upper limit for kmer counts is less than lower")
+
+    options = " -o %s" % out_file
+    options += " -L %i" % lower_count if lower_count is not None else ""
+    options += " -U %i" % upper_count if upper_count is not None else ""
+    options += " %s" % in_file
+
+    execute(options, cmd="jellyfish stats")
+
+
 def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index=2, coverage_column_index=3,
               separator="\t",min_x=None, max_x=None, min_y=None, max_y=None, extensions=["png", "svg"],
-              xlabel=None, ylabel=None,title=None, width=6, height=6, markersize=2, type="plot",
+              xlabel=None, ylabel=None,title=None, width=6, height=6, markersize=2, ylogbase=10, type="plot",
               grid=False, close_plot=True):
     if args.extensions is not list:
         extensions = args.extensions.strip().split(",")
@@ -37,6 +50,11 @@ def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index
         plt.grid()
     for ext in extensions:
         plt.savefig(f"{output_prefix}.{type}.{ext}")
+
+    plt.yscale("log")
+
+    for ext in extensions:
+        plt.savefig(f"{output_prefix}.{type}.{ylogbase}.{ext}")
     if close_plot:
         plt.close()
 
@@ -46,8 +64,8 @@ def main():
               stop_column_index=args.stop_column_index, coverage_column_index=args.coverage_column_index,
               separator=args.separator, extensions=args.extensions, min_x=args.min_x, max_x=args.max_x,
               min_y=args.min_y, max_y=args.max_y, xlabel=args.xlabel, ylabel=args.ylabel, title=args.title,
-              width=args.width, height=args.height, markersize=args.markersize, type=args.type, grid=args.grid,
-              close_plot=args.close_plot)
+              width=args.width, height=args.height, markersize=args.markersize, ylogbase=args.ylogbase,
+              type=args.type, grid=args.grid, close_plot=args.close_plot)
 
 
 if __name__ == '__main__':
@@ -71,6 +89,7 @@ if __name__ == '__main__':
     group_additional.add_argument('--width', type=int, help="xlabel", default=6)
     group_additional.add_argument('--height', type=int, help="ylabel", default=6)
     group_additional.add_argument('--markersize', type=int, help="markersize", default=2)
+    group_additional.add_argument('--ylogbase', type=int, help="ylogbase", default=10)
     group_additional.add_argument('--type', type=str, help="type", default="plot")
     group_additional.add_argument('--grid', type=bool, help="grid", default=False)
     group_additional.add_argument('--close_plot', type=bool, help="close plot", default=True)
