@@ -53,6 +53,10 @@ rule all:
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.png", sample_id=config["sample_id"]),
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.svg", sample_id=config["sample_id"]),
 
+        # Variant Call:
+
+
+
 #---- load rules ----
 include: "workflow/rules/QCFiltering/Trimmomatic.smk"
 include: "workflow/rules/Alignment/Bowtie2.smk"
