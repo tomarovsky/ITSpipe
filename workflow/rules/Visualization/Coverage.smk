@@ -3,13 +3,13 @@ rule draw_coverage_raw:
         coverage_raw=raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz"
     output:
         coverage_raw_png=raw_coverage_dir_path / "{sample_id}.plot.png",
-        coverage_raw_svg=raw_coverage_dir_path / "{sample_id}.plot.svg"
+        # coverage_raw_svg=raw_coverage_dir_path / "{sample_id}.plot.svg"
     params:
         output_raw_prefix=lambda wildcards, output: output["coverage_raw_png"][:-9],
         start_column_index=1,
         stop_column_index=2,
         coverage_column_index=3,
-        extensions=config["draw_coverage_extensions"],
+        extensions="png",
         xlabel="Position",
         ylabel="Coverage",
         title=config["draw_coverage_title"],
@@ -60,13 +60,13 @@ rule draw_coverage_clipped:
         coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz"
     output:
         coverage_clipped_png=clipped_coverage_dir_path / "{sample_id}.clipped.plot.png",
-        coverage_clipped_svg=clipped_coverage_dir_path / "{sample_id}.clipped.plot.svg"
+        # coverage_clipped_svg=clipped_coverage_dir_path / "{sample_id}.clipped.plot.svg"
     params:
         output_clipped_prefix=lambda wildcards, output: output["coverage_clipped_png"][:-9],
         start_column_index=1,
         stop_column_index=2,
         coverage_column_index=3,
-        extensions=config["draw_coverage_extensions"],
+        extensions="png",
         xlabel="Position",
         ylabel="Coverage",
         title=config["draw_coverage_title"],
