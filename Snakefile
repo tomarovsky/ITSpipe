@@ -1,5 +1,4 @@
 from pathlib import Path
-import os
 
 
 #---- setup config ----
@@ -52,6 +51,9 @@ rule all:
         expand(raw_coverage_dir_path / "{sample_id}.plot.svg", sample_id=config["sample_id"]),
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.png", sample_id=config["sample_id"]),
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.svg", sample_id=config["sample_id"]),
+
+        # Variant calling:
+
 
 #---- load rules ----
 include: "workflow/rules/QCFiltering/Trimmomatic.smk"
