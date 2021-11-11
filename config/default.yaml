@@ -23,6 +23,7 @@ markdup_threads: 4
 bamutil_clipoverlap_threads: 2
 mosdepth_threads: 4
 index_threads: 1
+view_threads: 4
 visualization_threads: 1
 
 #---- Tool memory ----
@@ -34,6 +35,7 @@ markdup_mem_mb: 10000
 bamutil_clipoverlap_mem_mb: 5000
 mosdepth_mem_mb: 20000
 index_mem_mb: 10000
+view_mem_mb: 10000
 visualization_mem_mb: 5000
 
 #---- Tool time ----
@@ -41,7 +43,8 @@ trimmomatic_time: "100:00:00"
 bowtie2_time: "100:00:00"
 bamutil_clipoverlap_time: "100:00:00"
 mosdepth_time: "100:00:00"
-index_time: "50:00:00"
+index_time: "10:00:00"
+view_time: "25:00:00"
 visualization_time: "25:00:00"
 
 #---- Tool paths ----
@@ -51,9 +54,10 @@ visualization_time: "25:00:00"
 adapters: "resources/adapters/TruSeq2-PE.fa"
 poolsize: 10000000
 mosdepth_min_mapping_quality: 20
+samtools_view_options: "--bam -q 20 -F 1024"
 
 
-#---- Coverage visualization params ----
+#---- Coverage visualization parameters ----
 draw_coverage_title: "Coverage of ribosomal cluster monomer by ITS lib {sample_id}"
 draw_coverage_plot_extensions: "png" # or "png,svg" and others
 draw_coverage_xlabel: "Position"
