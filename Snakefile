@@ -50,10 +50,12 @@ rule all:
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
 
         # Coverage visualization:
-        expand(raw_coverage_dir_path / "{sample_id}.plot.{ext}", sample_id=config["sample_id"], ext = config["draw_coverage_plot_extensions"]),
-        expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.{ext}", sample_id=config["sample_id"], ext = config["draw_coverage_plot_extensions"]),
+        expand(raw_coverage_dir_path / "{sample_id}.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
+        expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
 
         # Variant calling:
+        expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam", sample_id=config["sample_id"]),
+
 
 
 #---- load rules ----
