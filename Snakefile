@@ -25,6 +25,9 @@ reference_basename = reference.stem
 
 if "sample_id" not in config:
     config["sample_id"] = [d.name for d in samples_dir_path.iterdir() if d.is_dir()]
+if "draw_coverage_plot_extensions" in config:
+    config["draw_coverage_plot_extensions"] = [ext for ext in config["draw_coverage_plot_extensions"].strip().split(",")]
+
 
 localrules: all
 
@@ -47,10 +50,8 @@ rule all:
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
 
         # Coverage visualization:
-        expand(raw_coverage_dir_path / "{sample_id}.plot.png", sample_id=config["sample_id"]),
-        expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.png", sample_id=config["sample_id"]),
-        # expand(raw_coverage_dir_path / "{sample_id}.plot.svg", sample_id=config["sample_id"]),
-        # expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.svg", sample_id=config["sample_id"]),
+        expand(raw_coverage_dir_path / "{sample_id}.plot.{ext}", sample_id=config["sample_id"], ext = config["draw_coverage_plot_extensions"]),
+        expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.{ext}", sample_id=config["sample_id"], ext = config["draw_coverage_plot_extensions"]),
 
         # Variant calling:
 

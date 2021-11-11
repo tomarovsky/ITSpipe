@@ -2,29 +2,28 @@ rule draw_coverage_raw:
     input:
         coverage_raw=raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz"
     output:
-        coverage_raw_png=raw_coverage_dir_path / "{sample_id}.plot.png",
-        # coverage_raw_svg=raw_coverage_dir_path / "{sample_id}.plot.svg"
+        coverage_raw_plot=raw_coverage_dir_path / "{sample_id}.plot.{ext}",
     params:
-        output_raw_prefix=lambda wildcards, output: output["coverage_raw_png"][:-9],
+        output_raw_prefix=lambda wildcards, output: output["coverage_raw_plot"][:-9],
         start_column_index=1,
         stop_column_index=2,
         coverage_column_index=3,
-        extensions="png",
-        xlabel="Position",
-        ylabel="Coverage",
+        extension=lambda wildcards, output: output["coverage_raw_plot"][-3:],
+        xlabel=config["draw_coverage_xlabel"],
+        ylabel=config["draw_coverage_ylabel"],
         title=config["draw_coverage_title"],
-        width=12,
-        height=6,
-        markersize=8,
-        ylogbase=10,
-        type="plot",
-        grid=True
+        width=config["draw_coverage_width"],
+        height=config["draw_coverage_height"],
+        markersize=config["draw_coverage_markersize"],
+        ylogbase=config["draw_coverage_ylogbase"],
+        type=config["draw_coverage_type"],
+        grid=config["draw_coverage_grid"]
     log:
-        std=log_dir_path / "{sample_id}.draw_coverage_raw.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.draw_coverage_raw.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.draw_coverage_raw.cluster.err"
+        std=log_dir_path / "{sample_id}.draw_coverage_raw.{ext}.log",
+        cluster_log=cluster_log_dir_path / "{sample_id}.draw_coverage_raw.{ext}.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}.draw_coverage_raw.{ext}.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}.draw_coverage_raw.benchmark.txt"
+        benchmark_dir_path / "{sample_id}.draw_coverage_raw.{ext}.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -39,7 +38,7 @@ rule draw_coverage_raw:
         "--start_column_index {params.start_column_index} "
         "--stop_column_index {params.stop_column_index} "
         "--coverage_column_index {params.coverage_column_index} "
-        "--extensions '{params.extensions}' "
+        "--extensions '{params.extension}' "
         "--xlabel {params.xlabel} "
         "--ylabel {params.ylabel} "
         "--title '{params.title}' "
@@ -55,29 +54,28 @@ rule draw_coverage_clipped:
     input:
         coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz"
     output:
-        coverage_clipped_png=clipped_coverage_dir_path / "{sample_id}.clipped.plot.png",
-        # coverage_clipped_svg=clipped_coverage_dir_path / "{sample_id}.clipped.plot.svg"
+        coverage_clipped_plot=clipped_coverage_dir_path / "{sample_id}.clipped.plot.{ext}"
     params:
-        output_clipped_prefix=lambda wildcards, output: output["coverage_clipped_png"][:-9],
+        output_clipped_prefix=lambda wildcards, output: output["coverage_clipped_plot"][:-9],
         start_column_index=1,
         stop_column_index=2,
         coverage_column_index=3,
-        extensions="png",
-        xlabel="Position",
-        ylabel="Coverage",
+        extension=lambda wildcards, output: output["coverage_clipped_plot"][-3:],
+        xlabel=config["draw_coverage_xlabel"],
+        ylabel=config["draw_coverage_ylabel"],
         title=config["draw_coverage_title"],
-        width=12,
-        height=6,
-        markersize=8,
-        ylogbase=10,
-        type="plot",
-        grid=True
+        width=config["draw_coverage_width"],
+        height=config["draw_coverage_height"],
+        markersize=config["draw_coverage_markersize"],
+        ylogbase=config["draw_coverage_ylogbase"],
+        type=config["draw_coverage_type"],
+        grid=config["draw_coverage_grid"]
     log:
-        std=log_dir_path / "{sample_id}.draw_coverage_clipped.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.draw_coverage_clipped.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.draw_coverage_clipped.cluster.err"
+        std=log_dir_path / "{sample_id}.draw_coverage_clipped.{ext}.log",
+        cluster_log=cluster_log_dir_path / "{sample_id}.draw_coverage_clipped.{ext}.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}.draw_coverage_clipped.{ext}.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}.draw_coverage_clipped.benchmark.txt"
+        benchmark_dir_path / "{sample_id}.draw_coverage_clipped.{ext}.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -92,7 +90,7 @@ rule draw_coverage_clipped:
         "--start_column_index {params.start_column_index} "
         "--stop_column_index {params.stop_column_index} "
         "--coverage_column_index {params.coverage_column_index} "
-        "--extensions '{params.extensions}' "
+        "--extensions '{params.extension}' "
         "--xlabel {params.xlabel} "
         "--ylabel {params.ylabel} "
         "--title '{params.title}' "

@@ -23,8 +23,6 @@ def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index
               separator="\t",min_x=None, max_x=None, min_y=None, max_y=None, extensions=["png", "svg"],
               xlabel=None, ylabel=None,title=None, width=6, height=6, markersize=2, ylogbase=10, type="plot",
               grid=False, close_plot=True):
-    if args.extensions is not list:
-        extensions = args.extensions.strip().split(",")
     df = np.loadtxt(input_file, comments="#", usecols=(start_column_index, stop_column_index, coverage_column_index),
                     delimiter=separator, dtype="int")
     data = []
@@ -46,7 +44,7 @@ def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index
         plt.ylabel(ylabel)
     if title:
         plt.title(title)
-    if grid and grid != "False":
+    if grid or grid == "True":
         plt.grid()
     for ext in extensions:
         plt.savefig(f"{output_prefix}.{type}.{ext}")
