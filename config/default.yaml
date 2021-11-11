@@ -54,7 +54,7 @@ visualization_time: "25:00:00"
 adapters: "resources/adapters/TruSeq2-PE.fa"
 poolsize: 10000000
 mosdepth_min_mapping_quality: 20
-samtools_view_options: "--bam -q 20 -F 1024"
+samtools_view_options: "-b -q 20 -F 1024"
 
 
 #---- Coverage visualization parameters ----
