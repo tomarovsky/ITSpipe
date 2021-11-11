@@ -56,13 +56,13 @@ mosdepth_min_mapping_quality: 20
 #---- Coverage visualization params ----
 draw_coverage_title: "Coverage of ribosomal cluster monomer by ITS lib {sample_id}"
 draw_coverage_plot_extensions: "png,svg"
-draw_coverage_xlabel: "Position",
-draw_coverage_ylabel: "Coverage",
-draw_coverage_width: 12,
-draw_coverage_height: 6,
-draw_coverage_markersize: 8,
-draw_coverage_ylogbase: 10,
-draw_coverage_type: "plot", # or "scatter"
+draw_coverage_xlabel: "Position"
+draw_coverage_ylabel: "Coverage"
+draw_coverage_width: 12
+draw_coverage_height: 6
+draw_coverage_markersize: 8
+draw_coverage_ylogbase: 10
+draw_coverage_type: "plot" # or "scatter"
 draw_coverage_grid: "True"
 
 
