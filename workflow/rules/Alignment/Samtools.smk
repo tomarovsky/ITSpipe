@@ -59,7 +59,7 @@ rule view_bam_index:
         cluster_log=cluster_log_dir_path / "{sample_id}.view_bam_index.cluster.log",
         cluster_err=cluster_log_dir_path / "{sample_id}.view_bam_index.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}/view_bam_index.benchmark.txt"
+        benchmark_dir_path / "{sample_id}.view_bam_index.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -70,3 +70,26 @@ rule view_bam_index:
         config["index_threads"]
     shell:
         "samtools index -@ {threads} {input.view_bam} > {log.std} 2>&1; "
+
+
+rule faidx:
+    input:
+        reference
+    output:
+        temp(f"{reference}.fai")
+    log:
+        std=log_dir_path / "faidx.log",
+        cluster_log=cluster_log_dir_path / "faidx.cluster.log",
+        cluster_err=cluster_log_dir_path / "faidx.cluster.err"
+    benchmark:
+        benchmark_dir_path / "faidx.benchmark.txt"
+    conda:
+        "../../../%s" % config["conda_config"]
+    resources:
+        cpus=config["index_threads"],
+        time=config["index_time"],
+        mem=config["index_mem_mb"],
+    threads:
+        config["index_threads"]
+    shell:
+        "samtools faidx {input} > {log.std} 2>&1; "
