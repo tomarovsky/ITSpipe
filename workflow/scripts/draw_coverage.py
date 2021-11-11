@@ -46,6 +46,8 @@ def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index
         plt.title(title)
     if grid or grid == "True":
         plt.grid()
+    if extensions is not list:
+        extensions = [ext for ext in extensions.strip().split(",")]
     for ext in extensions:
         plt.savefig(f"{output_prefix}.{type}.{ext}")
 
