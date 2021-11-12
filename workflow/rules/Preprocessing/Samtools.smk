@@ -1,4 +1,4 @@
-rule bam_index:
+rule samtools_bam_index:
     input:
         bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam",
         bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam"
@@ -24,7 +24,7 @@ rule bam_index:
         "samtools index -@ {threads} {input.bam_clipped} > {log.std} 2>&1; "
 
 
-rule view:
+rule samtools_view:
     input:
         bam=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam"
     output:
@@ -49,7 +49,7 @@ rule view:
         "samtools view {params.options} -@ {threads} -o {output.view_bam} {input.bam} > {log.std} 2>&1; "
 
 
-rule view_bam_index:
+rule samtools_view_bam_index:
     input:
         view_bam=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam"
     output:
@@ -72,7 +72,7 @@ rule view_bam_index:
         "samtools index -@ {threads} {input.view_bam} > {log.std} 2>&1; "
 
 
-rule faidx:
+rule samtools_faidx:
     input:
         reference
     output:
