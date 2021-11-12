@@ -74,15 +74,15 @@ rule samtools_view_bam_index:
 
 rule samtools_faidx:
     input:
-        reference_dir_path / reference_filename
+        config["reference"]
     output:
-        temp(reference_dir_path / "{reference_filename}.fai")
+        temp("%s.fai" % config["reference"])
     log:
-        std=log_dir_path / "{reference_filename}.faidx.log",
-        cluster_log=cluster_log_dir_path / "{reference_filename}.faidx.cluster.log",
-        cluster_err=cluster_log_dir_path / "{reference_filename}.faidx.cluster.err"
+        std=log_dir_path / "faidx.log",
+        cluster_log=cluster_log_dir_path / "faidx.cluster.log",
+        cluster_err=cluster_log_dir_path / "faidx.cluster.err"
     benchmark:
-        benchmark_dir_path / "{reference_filename}.faidx.benchmark.txt"
+        benchmark_dir_path / "faidx.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
