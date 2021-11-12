@@ -56,4 +56,4 @@ rule bcftools_filter:
     threads:
         config["bcftools_filter_threads"]
     shell:
-        "bcftools filter -s {params.soft_filter} --exclude '{params.exclude}' > {output} 2> {log.std}; "
+        "bcftools filter -Oz -s {params.soft_filter} --exclude '{params.exclude}' > {output} 2> {log.std}; "
