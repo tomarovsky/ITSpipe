@@ -13,6 +13,7 @@ raw_alignment_dir: "alignment/raw"
 clipped_alignment_dir: "alignment/clipped"
 raw_coverage_dir: "alignment/raw/{sample_id}/coverage"
 clipped_coverage_dir: "alignment/clipped/{sample_id}/coverage"
+varcall_dir: "varcall"
 
 #---- Tool threads ----
 trimmomatic_threads: 8
@@ -25,6 +26,7 @@ mosdepth_threads: 4
 index_threads: 1
 view_threads: 4
 visualization_threads: 1
+bcftools_mpileup_threads: 8
 
 #---- Tool memory ----
 trimmomatic_mem_mb: 16000
@@ -37,6 +39,7 @@ mosdepth_mem_mb: 20000
 index_mem_mb: 10000
 view_mem_mb: 10000
 visualization_mem_mb: 5000
+bcftools_mpileup_mem_mb: 30000
 
 #---- Tool time ----
 trimmomatic_time: "100:00:00"
@@ -46,6 +49,7 @@ mosdepth_time: "100:00:00"
 index_time: "10:00:00"
 view_time: "25:00:00"
 visualization_time: "25:00:00"
+bcftools_mpileup_time: "100:00:00"
 
 #---- Tool paths ----
 

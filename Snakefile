@@ -16,6 +16,7 @@ raw_alignment_dir_path = output_dir_path / config["raw_alignment_dir"]
 raw_coverage_dir_path = output_dir_path / config["raw_coverage_dir"]
 clipped_alignment_dir_path = output_dir_path / config["clipped_alignment_dir"]
 clipped_coverage_dir_path = output_dir_path / config["clipped_coverage_dir"]
+varcall_dir_path = output_dir_path / config["varcall_dir"]
 
 #---- setup filenames ----
 reference = Path(config["reference"])
@@ -55,6 +56,8 @@ rule all:
 
         # Variant calling:
         expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam", sample_id=config["sample_id"]),
+        expand(varcall_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
+
 
 
 
@@ -65,4 +68,5 @@ include: "workflow/rules/Alignment/Bowtie2.smk"
 include: "workflow/rules/Alignment/Mosdepth.smk"
 include: "workflow/rules/QCFiltering/Bamutil.smk"
 include: "workflow/rules/Visualization/Coverage.smk"
+include: "workflow/rules/VariantCall/Bcftools.smk"
 
