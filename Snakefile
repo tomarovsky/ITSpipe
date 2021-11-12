@@ -65,9 +65,11 @@ rule all:
 #---- load rules ----
 include: "workflow/rules/QCFiltering/Trimmomatic.smk"
 include: "workflow/rules/Preprocessing/Samtools.smk"
+include: "workflow/rules/Preprocessing/Picard.smk"
 include: "workflow/rules/Alignment/Bowtie2.smk"
 include: "workflow/rules/Alignment/Mosdepth.smk"
 include: "workflow/rules/QCFiltering/Bamutil.smk"
 include: "workflow/rules/Visualization/Coverage.smk"
 include: "workflow/rules/VariantCall/Bcftools.smk"
+include: "workflow/rules/VariantCall/Gatk.smk"
 
