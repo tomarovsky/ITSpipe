@@ -4,7 +4,7 @@ rule bcftools_mpileup:
         samples=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam", sample_id=config["sample_id"]),
         indexes=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai", sample_id=config["sample_id"])
     output:
-        varcall_bcftools_mpileup_dir / "{reference_basename}.mpileup.vcf.gz"
+        varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz"
     params:
         adjustMQ=50,
         annotate_mpileup=config["bcftools_mpileup_annotate"],
