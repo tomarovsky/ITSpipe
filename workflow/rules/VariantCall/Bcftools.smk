@@ -22,4 +22,5 @@ rule bcftools_mpileup:
         config["bcftools_mpileup_threads"] #-d 250 -q 30 -Q 30
     shell:
         "bcftools mpileup --threads {threads} --adjust-MQ 50 -a AD,INFO/AD,ADF,INFO/ADF,ADR,INFO/ADR,DP,SP,SCR,INFO/SCR -Ou -f {input.ref} {input.samples} | "
-        "bcftools call -m -O z -v -f GQ,GP > {output}; "
+        "bcftools call -Ou -mv -f GQ,GP | "
+        "bcftools filter -s LowQual -e '%QUAL<20 || DP>100' > {output}; "
