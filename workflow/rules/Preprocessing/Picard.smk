@@ -1,4 +1,4 @@
-rule ref_dict:
+rule picard_dict:
     input:
         config["reference"]
     output:
