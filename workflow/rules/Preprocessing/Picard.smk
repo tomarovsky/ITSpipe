@@ -18,4 +18,4 @@ rule picard_dict:
     threads:
         config["dict_threads"]
     shell:
-         "picard CreateSequenceDictionary -R {input} > {log.std} 2>&1"
+         "picard CreateSequenceDictionary R={input} O={output} > {log.std} 2>&1"
