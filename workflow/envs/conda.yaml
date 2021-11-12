@@ -8,6 +8,7 @@ dependencies:
   - trimmomatic>=0.39
   - bowtie2>=2.4.4
   - samtools>=1.10
+  - bcftools>=1.14
   - bamutil>=1.0.15
   - mosdepth>=0.3.1
   - numpy>=1.10
