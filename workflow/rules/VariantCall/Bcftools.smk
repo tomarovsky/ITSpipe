@@ -2,7 +2,7 @@ rule bcftools_mpileup:
     input:
         ref=reference,
         samples=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam", sample_id=config["sample_id"]),
-        indexes=expand(raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai", sample_id=config["sample_id"])
+        indexes=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai", sample_id=config["sample_id"])
     output:
         varcall_dir_path / "{reference_basename}.mpileup.vcf.gz"
     log:
