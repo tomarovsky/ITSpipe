@@ -3,7 +3,6 @@ rule gatk_mutect2:
         reference=reference,
         dict=rules.picard_dict.output,
         samples=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam", sample_id=config["sample_id"]),
-        indexes=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai", sample_id=config["sample_id"])
     output:
         varcall_gatk_dir_path / "{reference_basename}.mutect2.vcf.gz"
     params:
