@@ -1,10 +1,10 @@
 rule bcftools_mpileup:
     input:
-        ref=reference,
+        reference=reference,
         samples=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam", sample_id=config["sample_id"]),
         indexes=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai", sample_id=config["sample_id"])
     output:
-        bcftools_mpileup_varcall_dir_path / "{reference_basename}.mpileup.vcf.gz"
+        varcall_bcftools_mpileup_dir / "{reference_basename}.mpileup.vcf.gz"
     params:
         adjustMQ=50,
         annotate_mpileup=config["bcftools_mpileup_annotate"],
@@ -29,7 +29,7 @@ rule bcftools_mpileup:
         config["bcftools_mpileup_threads"]
     shell:
         "bcftools mpileup --threads {threads} -d {params.max_depth} -q {params.min_MQ} -Q {params.min_BQ} "
-        "--adjust-MQ {params.adjustMQ} --annotate {params.annotate_mpileup} -Ou -f {input.ref} {input.samples} 2> {log.mpileup}| "
+        "--adjust-MQ {params.adjustMQ} --annotate {params.annotate_mpileup} -Ou -f {input.reference} {input.samples} 2> {log.mpileup}| "
         "bcftools call -Oz -mv --annotate {params.annotate_call} > {output} 2> {log.call}"
 
 
@@ -37,7 +37,7 @@ rule bcftools_filter:
     input:
         rules.bcftools_mpileup.output
     output:
-        bcftools_mpileup_varcall_dir_path / "{reference_basename}.mpileup.filt.vcf.gz"
+        varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz"
     params:
         soft_filter=config["bcftools_filter_soft_filter"],
         exclude=config["bcftools_filter_exclude"],
