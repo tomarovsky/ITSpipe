@@ -5,6 +5,7 @@ rule bcftools_mpileup:
         indexes=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai", sample_id=config["sample_id"])
     output:
         varcall_dir_path / "{reference_basename}.mpileup.vcf.gz"
+    # params:
     log:
         mpileup=log_dir_path / "{reference_basename}.mpileup.log",
         call=log_dir_path / "{reference_basename}.call.log",
@@ -22,5 +23,9 @@ rule bcftools_mpileup:
         config["bcftools_mpileup_threads"] #-d 250 -q 30 -Q 30
     shell:
         "bcftools mpileup --threads {threads} --adjust-MQ 50 -a AD,INFO/AD,ADF,INFO/ADF,ADR,INFO/ADR,DP,SP,SCR,INFO/SCR -Ou -f {input.ref} {input.samples} | "
-        "bcftools call -Ou -mv --annotate GQ,GP | "
-        "bcftools filter -s LowQual --exclude 'QUAL < 20.0 || (FORMAT/SP > 60.0 | FORMAT/DP < 5.0 | FORMAT/GQ < 20.0)' > {output}; "
+        "bcftools call -Oz -mv --annotate GQ,GP > {output} "
+
+
+
+# rule bcftools_filter:
+# "bcftools filter -s LowQual --exclude 'QUAL < 20.0 || (FORMAT/SP > 60.0 | FORMAT/DP < 5.0 | FORMAT/GQ < 20.0)' > {output}; "
