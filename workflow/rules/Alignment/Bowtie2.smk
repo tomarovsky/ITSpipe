@@ -21,14 +21,14 @@ rule bowtie2_map:
         tmp_prefix=raw_alignment_dir_path / "{sample_id}/{sample_id}",
         reference=reference_dir_path / reference_basename,
     log:
-        bowtie2=log_dir_path / "{sample_id}/bowtie2.log",
-        fixmate=log_dir_path / "{sample_id}/fixmate.log",
-        sort=log_dir_path / "{sample_id}/sort.log",
-        markdup=log_dir_path / "{sample_id}/markdup.log",
+        bowtie2=log_dir_path / "{sample_id}.bowtie2.log",
+        fixmate=log_dir_path / "{sample_id}.fixmate.log",
+        sort=log_dir_path / "{sample_id}.sort.log",
+        markdup=log_dir_path / "{sample_id}.markdup.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.bowtie2_map.cluster.log",
         cluster_err=cluster_log_dir_path / "{sample_id}.bowtie2_map.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}/bowtie2_map.benchmark.txt"
+        benchmark_dir_path / "{sample_id}.bowtie2_map.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
