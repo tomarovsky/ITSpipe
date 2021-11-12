@@ -19,7 +19,7 @@ rule bcftools_mpileup:
         mem=config["bcftools_mpileup_mem_mb"],
         time=config["bcftools_mpileup_time"]
     threads:
-        config["bcftools_mpileup_threads"]
+        config["bcftools_mpileup_threads"] #-d 250 -q 30 -Q 30
     shell:
-        "bcftools mpileup -d 250 -q 30 -Q 30 --adjust-MQ 50 -a AD,INFO/AD,ADF,INFO/ADF,ADR,INFO/ADR,DP,SP,SCR,INFO/SCR -Ou -f {input.ref} {input.samples} | "
-        "bcftools call -m  -O z  -v -f GQ,GP > {output}; "
+        "bcftools mpileup --threads {threads} --adjust-MQ 50 -a AD,INFO/AD,ADF,INFO/ADF,ADR,INFO/ADR,DP,SP,SCR,INFO/SCR -Ou -f {input.ref} {input.samples} | "
+        "bcftools call -m -O z -v -f GQ,GP > {output}; "
