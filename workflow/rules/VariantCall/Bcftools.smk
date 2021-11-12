@@ -21,5 +21,5 @@ rule bcftools_mpileup:
     threads:
         config["bcftools_mpileup_threads"]
     shell:
-        "bcftools mpileup -d 250 -q 30 -Q 30 --adjust-MQ 50 -a AD,INFO/AD,ADF,INFO/ADF,ADR,INFO/ADR,DP,SP,SCR,INFO/SCR -Ou -f {input.ref} -r {input.samples} | "
+        "bcftools mpileup -d 250 -q 30 -Q 30 --adjust-MQ 50 -a AD,INFO/AD,ADF,INFO/ADF,ADR,INFO/ADR,DP,SP,SCR,INFO/SCR -Ou -f {input.ref} {input.samples} | "
         "bcftools call -m  -O z  -v -f GQ,GP > {output}; "
