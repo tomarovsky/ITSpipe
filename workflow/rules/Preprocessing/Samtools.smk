@@ -53,7 +53,7 @@ rule samtools_view_bam_index:
     input:
         view_bam=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam"
     output:
-        view_bam_bai=temp(raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai")
+        view_bam_bai=temp(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai")
     log:
         std=log_dir_path / "{sample_id}.view_bam_index.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.view_bam_index.cluster.log",
