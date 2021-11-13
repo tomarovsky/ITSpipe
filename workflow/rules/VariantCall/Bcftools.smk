@@ -39,12 +39,6 @@ rule bcftools_call:
         varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz"
     params:
         annotate_call=config["bcftools_call_annotate"],
-    log:
-        call=log_dir_path / "{reference_basename}.bcftools_call.log",
-        cluster_log=cluster_log_dir_path / "{reference_basename}.bcftools_mpileup.cluster.log",
-        cluster_err=cluster_log_dir_path / "{reference_basename}.bcftools_mpileup.cluster.err"
-    benchmark:
-        benchmark_dir_path / "{reference_basename}.bcftools_mpileup.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -54,7 +48,7 @@ rule bcftools_call:
     threads:
         config["bcftools_mpileup_threads"]
     shell:
-        "cat {input} | bcftools call -Oz -mv --annotate {params.annotate_call} -o {output} 2> {log.call}"
+        "bcftools call -Oz -mv --annotate {params.annotate_call} -o {output} {input} 2> {log.call}"
 
 
 rule bcftools_filter:
