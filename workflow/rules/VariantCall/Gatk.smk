@@ -29,6 +29,4 @@ rule gatk_mutect2:
     threads:
         config["gatk_mutect2_threads"]
     shell:
-        "gatk --java-options '-Xmx{resources.mem}m' Mutect2 "
-        "-R {input.reference} -I test.lst "
-        "-O {output}"
+        "gatk --java-options '-Xmx{resources.mem}m' Mutect2 -R {input.reference} -I test.lst -O {output}"
