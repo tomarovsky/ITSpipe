@@ -34,7 +34,7 @@ rule bcftools_mpileup:
 
 rule bcftools_call:
     input:
-        varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.bcf"
+        rules.bcftools_mpileup.output
     output:
         varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz"
     params:
