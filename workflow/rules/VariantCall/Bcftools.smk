@@ -48,7 +48,7 @@ rule bcftools_call:
     threads:
         config["bcftools_mpileup_threads"]
     shell:
-        "bcftools call -Oz -mv --annotate {params.annotate_call} -o {output} {input} 2> {log.call}"
+        "bcftools call -Oz -mv --annotate {params.annotate_call} -o {output} {input}"
 
 
 rule bcftools_filter:
