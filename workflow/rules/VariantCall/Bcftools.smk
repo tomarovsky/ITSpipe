@@ -8,17 +8,17 @@ rule bcftools_mpileup:
     params:
         adjustMQ=50,
         annotate_mpileup=config["bcftools_mpileup_annotate"],
-        annotate_call=config["bcftools_call_annotate"],
+        # annotate_call=config["bcftools_call_annotate"],
         max_depth=config["bcftools_mpileup_max_depth"],
         min_MQ=config["bcftools_mpileup_min_MQ"],
         min_BQ=config["bcftools_mpileup_min_BQ"]
-    log:
-        mpileup=log_dir_path / "{reference_basename}.bcftools_mpileup.log",
-        call=log_dir_path / "{reference_basename}.bcftools_call.log",
-        cluster_log=cluster_log_dir_path / "{reference_basename}.bcftools_mpileup.cluster.log",
-        cluster_err=cluster_log_dir_path / "{reference_basename}.bcftools_mpileup.cluster.err"
-    benchmark:
-        benchmark_dir_path / "{reference_basename}.bcftools_mpileup.benchmark.txt"
+    # log:
+    #     mpileup=log_dir_path / "{reference_basename}.bcftools_mpileup.log",
+    #     call=log_dir_path / "{reference_basename}.bcftools_call.log",
+    #     cluster_log=cluster_log_dir_path / "{reference_basename}.bcftools_mpileup.cluster.log",
+    #     cluster_err=cluster_log_dir_path / "{reference_basename}.bcftools_mpileup.cluster.err"
+    # benchmark:
+    #     benchmark_dir_path / "{reference_basename}.bcftools_mpileup.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -29,7 +29,7 @@ rule bcftools_mpileup:
         config["bcftools_mpileup_threads"]
     shell:
         "bcftools mpileup --threads {threads} -d {params.max_depth} -q {params.min_MQ} -Q {params.min_BQ} "
-        "--adjust-MQ {params.adjustMQ} --annotate {params.annotate_mpileup} -Ou -f {input.reference} {input.samples} -o {output}  2> {log.mpileup}"
+        "--adjust-MQ {params.adjustMQ} --annotate {params.annotate_mpileup} -Ou -f {input.reference} {input.samples} -o {output}"
 
 
 rule bcftools_call:
