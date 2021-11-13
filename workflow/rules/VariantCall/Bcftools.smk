@@ -59,7 +59,7 @@ rule bcftools_call:
 
 rule bcftools_filter:
     input:
-        rules.bcftools_mpileup.output
+        rules.bcftools_call.output
     output:
         varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz"
     params:
