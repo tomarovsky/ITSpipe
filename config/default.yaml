@@ -61,9 +61,6 @@ bcftools_filter_time: "50:00:00"
 dict_time: "10:00:00"
 gatk_mutect2_time: "100:00:00"
 
-#---- Tool paths ----
-
-
 #---- Tool variables ----
 adapters: "resources/adapters/TruSeq2-PE.fa"
 poolsize: 10000000
@@ -76,7 +73,7 @@ bcftools_mpileup_min_MQ: 30
 bcftools_mpileup_min_BQ: 30
 bcftools_filter_soft_filter: "LowQual"
 bcftools_filter_exclude: "QUAL < 20.0 || (FORMAT/SP > 60.0 | FORMAT/DP < 5.0 | FORMAT/GQ < 20.0)"
-
+gatk_mutect2_options: "--genotype-germline-sites"
 
 #---- Coverage visualization parameters ----
 draw_coverage_title: "Coverage of ribosomal cluster monomer by ITS lib {sample_id}"
@@ -89,5 +86,3 @@ draw_coverage_markersize: 8
 draw_coverage_ylogbase: 10
 draw_coverage_type: "plot" # or "scatter"
 draw_coverage_grid: "True"
-
-
