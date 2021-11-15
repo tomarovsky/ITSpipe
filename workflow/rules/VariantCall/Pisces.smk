@@ -22,7 +22,7 @@ rule pisces_somatic:
     threads:
         config["pisces_somatic_threads"]
     shell:
-        "dotnet Pisces.dll -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
+        "pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
 
 
 
