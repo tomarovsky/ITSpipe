@@ -18,6 +18,7 @@ clipped_alignment_dir_path = output_dir_path / config["clipped_alignment_dir"]
 clipped_coverage_dir_path = output_dir_path / config["clipped_coverage_dir"]
 varcall_bcftools_mpileup_dir_path = output_dir_path / config["varcall_bcftools_mpileup_dir"]
 varcall_gatk_dir_path = output_dir_path / config["varcall_gatk_dir"]
+varcall_pisces_dir_path = output_dir_path / config["varcall_pisces_dir"]
 
 #---- setup filenames ----
 reference = Path(config["reference"])
@@ -60,6 +61,7 @@ rule all:
         expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
         expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz", reference_basename = reference_basename),
         expand(varcall_gatk_dir_path / "{sample_id}.mutect2.vcf.gz", sample_id=config["sample_id"]),
+        expand(directory(varcall_pisces_dir_path / "{sample_id}"), sample_id=config["sample_id"])
 
 
 #---- load rules ----

@@ -15,6 +15,7 @@ raw_coverage_dir: "alignment/raw/{sample_id}/coverage"
 clipped_coverage_dir: "alignment/clipped/{sample_id}/coverage"
 varcall_bcftools_mpileup_dir: "varcall/bcftools_mpileup"
 varcall_gatk_dir: "varcall/gatk"
+varcall_pisces_dir: "varcall/pisces"
 
 #---- Tool threads ----
 trimmomatic_threads: 8
@@ -31,6 +32,7 @@ bcftools_mpileup_threads: 6
 bcftools_filter_threads: 4
 dict_threads: 1
 gatk_mutect2_threads: 6
+pisces_somatic_threads: 6
 
 #---- Tool memory ----
 trimmomatic_mem_mb: 16000
@@ -47,6 +49,7 @@ bcftools_mpileup_mem_mb: 30000
 bcftools_filter_mem_mb: 15000
 dict_mem_mb: 15000
 gatk_mutect2_mem_mb: 30000
+pisces_somatic_mem_mb: 30000
 
 #---- Tool time ----
 trimmomatic_time: "100:00:00"
@@ -60,6 +63,7 @@ bcftools_mpileup_time: "100:00:00"
 bcftools_filter_time: "50:00:00"
 dict_time: "10:00:00"
 gatk_mutect2_time: "100:00:00"
+pisces_somatic_time: "100:00:00"
 
 #---- Tool variables ----
 adapters: "resources/adapters/TruSeq2-PE.fa"
@@ -74,6 +78,7 @@ bcftools_mpileup_min_BQ: 30
 bcftools_filter_soft_filter: "LowQual"
 bcftools_filter_exclude: "QUAL < 20.0 || (FORMAT/SP > 60.0 | FORMAT/DP < 5.0 | FORMAT/GQ < 20.0)"
 gatk_mutect2_options: "--genotype-germline-sites"
+pisces_somatic_options: "-CallMNVs false -gVCF false"
 
 #---- Coverage visualization parameters ----
 draw_coverage_title: "Coverage of ribosomal cluster monomer by ITS lib {sample_id}"
