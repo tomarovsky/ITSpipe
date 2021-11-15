@@ -22,7 +22,7 @@ rule pisces_somatic:
     threads:
         config["pisces_somatic_threads"]
     shell:
-        "pisces -bam {input.sample} -g {input.ref_dir}/test/acipenser_baerii.ITS {params.options} -OutFolder {output}"
+        "pisces -bam {input.sample} -g {input.ref_dir}/test/acipenser_baerii.ITS.fasta {params.options} -OutFolder {output}"
 
 # dotnet Pisces.dll -bam /my/path/to/TestData/example_S1.bam -g /my/path/to/WholeGenomeFasta
 # Somatic: -bam {Bam} -CallMNVs false -g {genome folder} -gVCF false -i {intervalfile} -OutFolder {outfolder}
