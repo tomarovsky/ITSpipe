@@ -24,6 +24,6 @@ rule pisces_somatic:
     shell:
         "pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
 
-# dotnet Pisces.dll -bam /my/path/to/TestData/example_S1.bam -g /my/path/to/WholeGenomeFasta
+
 # Somatic: -bam {Bam} -CallMNVs false -g {genome folder} -gVCF false -i {intervalfile} -OutFolder {outfolder}
 # Germline: -bam {Bam} -CallMNVs false -crushvcf true -g {genomefolder} -gVCF false -i {intervalfile} -ploidy diploid -OutFolder {outfolder}
