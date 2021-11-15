@@ -14,7 +14,7 @@ dependencies:
   - gatk4=4.2.0.0
   - picard=2.18
   - pisces>=5.2.9
-  - dotnet-sdk=2.0.0
+  - dotnet-sdk>=6.0
   - numpy>=1.10
   - pandas>=1.2
   - matplotlib
