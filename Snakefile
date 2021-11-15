@@ -74,4 +74,4 @@ include: "workflow/rules/QCFiltering/Bamutil.smk"
 include: "workflow/rules/Visualization/Coverage.smk"
 include: "workflow/rules/VariantCall/Bcftools.smk"
 include: "workflow/rules/VariantCall/Gatk.smk"
-
+include: "workflow/rules/VariantCall/Pisces.smk"
