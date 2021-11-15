@@ -6,13 +6,13 @@ rule gatk_mutect2:
         sample=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam",
         index=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai"
     output:
-        varcall_gatk_dir_path / "{sample_id}.{reference_basename}.mutect2.vcf.gz"
+        varcall_gatk_dir_path / "{sample_id}.mutect2.vcf.gz"
     log:
-        std=log_dir_path / "{sample_id}.{reference_basename}.gatk_mutect2.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.{reference_basename}.gatk_mutect2.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.{reference_basename}.gatk_mutect2.cluster.err"
+        std=log_dir_path / "{sample_id}.gatk_mutect2.log",
+        cluster_log=cluster_log_dir_path / "{sample_id}.gatk_mutect2.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}.gatk_mutect2.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}.{reference_basename}.gatk_mutect2.benchmark.txt"
+        benchmark_dir_path / "{sample_id}.gatk_mutect2.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
