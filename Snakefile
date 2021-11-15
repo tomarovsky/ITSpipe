@@ -59,7 +59,7 @@ rule all:
         expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam", sample_id=config["sample_id"]),
         expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
         expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz", reference_basename = reference_basename),
-        expand(varcall_gatk_dir_path / "{reference_basename}.mutect2.vcf.gz", reference_basename = reference_basename),
+        expand(varcall_gatk_dir_path / "{sample_id}.{reference_basename}.mutect2.vcf.gz", sample_id=config["sample_id"], reference_basename = reference_basename),
 
 
 #---- load rules ----
