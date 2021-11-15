@@ -7,6 +7,8 @@ rule gatk_mutect2:
         index=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai"
     output:
         varcall_gatk_dir_path / "{sample_id}.mutect2.vcf.gz"
+    params:
+        options=config["gatk_mutect2_options"]
     log:
         std=log_dir_path / "{sample_id}.gatk_mutect2.log",
         cluster_log=cluster_log_dir_path / "{sample_id}.gatk_mutect2.cluster.log",
@@ -22,4 +24,4 @@ rule gatk_mutect2:
     threads:
         config["gatk_mutect2_threads"]
     shell:
-        "gatk --java-options '-Xmx{resources.mem}m' Mutect2 -R {input.reference} -I {input.sample} -O {output}"
+        "gatk --java-options '-Xmx{resources.mem}m' Mutect2 {params.options} -R {input.reference} -I {input.sample} -O {output}"
