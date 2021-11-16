@@ -15,8 +15,8 @@ rule trimmomatic:
         minlength=50
     log:
         std=log_dir_path / "{sample_id}/trimmomatic.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.trimmomatic.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.trimmomatic.cluster.err"
+        cluster_log=cluster_log_dir_path / "{sample_id}/trimmomatic.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}/trimmomatic.cluster.err"
     benchmark:
         benchmark_dir_path / "{sample_id}/trimmomatic.benchmark.txt"
     conda:

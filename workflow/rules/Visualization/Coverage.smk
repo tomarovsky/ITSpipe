@@ -19,11 +19,11 @@ rule draw_coverage_raw:
         type=config["draw_coverage_type"],
         grid=config["draw_coverage_grid"]
     log:
-        std=log_dir_path / "{sample_id}.draw_coverage_raw.{ext}.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.draw_coverage_raw.{ext}.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.draw_coverage_raw.{ext}.cluster.err"
+        std=log_dir_path / "{sample_id}/draw_coverage_raw.{ext}.log",
+        cluster_log=cluster_log_dir_path / "{sample_id}/draw_coverage_raw.{ext}.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}/draw_coverage_raw.{ext}.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}.draw_coverage_raw.{ext}.benchmark.txt"
+        benchmark_dir_path / "{sample_id}/draw_coverage_raw.{ext}.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -71,11 +71,11 @@ rule draw_coverage_clipped:
         type=config["draw_coverage_type"],
         grid=config["draw_coverage_grid"]
     log:
-        std=log_dir_path / "{sample_id}.draw_coverage_clipped.{ext}.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.draw_coverage_clipped.{ext}.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.draw_coverage_clipped.{ext}.cluster.err"
+        std=log_dir_path / "{sample_id}/draw_coverage_clipped.{ext}.log",
+        cluster_log=cluster_log_dir_path / "{sample_id}/draw_coverage_clipped.{ext}.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}/draw_coverage_clipped.{ext}.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}.draw_coverage_clipped.{ext}.benchmark.txt"
+        benchmark_dir_path / "{sample_id}/draw_coverage_clipped.{ext}.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:

@@ -8,11 +8,11 @@ rule pisces_somatic:
     params:
         options=config["pisces_somatic_options"]
     log:
-        std=log_dir_path / "{sample_id}.pisces_somatic.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.pisces_somatic.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.pisces_somatic.cluster.err"
+        std=log_dir_path / "{sample_id}/pisces_somatic.log",
+        cluster_log=cluster_log_dir_path / "{sample_id}/pisces_somatic.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}/pisces_somatic.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}.pisces_somatic.benchmark.txt"
+        benchmark_dir_path / "{sample_id}/pisces_somatic.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -35,11 +35,11 @@ rule pisces_germline:
     params:
         options = config["pisces_somatic_options"]
     log:
-        std = log_dir_path / "{sample_id}.pisces_germline.log",
-        cluster_log = cluster_log_dir_path / "{sample_id}.pisces_germline.cluster.log",
-        cluster_err = cluster_log_dir_path / "{sample_id}.pisces_germline.cluster.err"
+        std = log_dir_path / "{sample_id}/pisces_germline.log",
+        cluster_log = cluster_log_dir_path / "{sample_id}/pisces_germline.cluster.log",
+        cluster_err = cluster_log_dir_path / "{sample_id}/pisces_germline.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}.pisces_germline.benchmark.txt"
+        benchmark_dir_path / "{sample_id}/pisces_germline.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:

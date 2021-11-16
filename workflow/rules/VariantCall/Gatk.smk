@@ -12,11 +12,11 @@ rule gatk_mutect2:
     params:
         options=config["gatk_mutect2_options"]
     log:
-        std=log_dir_path / "{sample_id}.gatk_mutect2.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.gatk_mutect2.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.gatk_mutect2.cluster.err"
+        std=log_dir_path / "{sample_id}/gatk_mutect2.log",
+        cluster_log=cluster_log_dir_path / "{sample_id}/gatk_mutect2.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}/gatk_mutect2.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}.gatk_mutect2.benchmark.txt"
+        benchmark_dir_path / "{sample_id}/gatk_mutect2.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:

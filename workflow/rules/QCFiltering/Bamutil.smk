@@ -7,8 +7,8 @@ rule bamutil_clipoverlap:
         poolsize=config["poolsize"]
     log:
         std=log_dir_path / "{sample_id}/bamutil_clipoverlap.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.bamutil_clipoverlap.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.bamutil_clipoverlap.cluster.err"
+        cluster_log=cluster_log_dir_path / "{sample_id}/bamutil_clipoverlap.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}/bamutil_clipoverlap.cluster.err"
     benchmark:
          benchmark_dir_path / "{sample_id}/bamutil_clipoverlap.benchmark.txt"
     conda:

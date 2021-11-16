@@ -6,11 +6,11 @@ rule samtools_bam_index:
         bai_raw=temp(raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam.bai"),
         bai_clipped=temp(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam.bai")
     log:
-        std=log_dir_path / "{sample_id}.bam_index.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.bam_index.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.bam_index.cluster.err"
+        std=log_dir_path / "{sample_id}/bam_index.log",
+        cluster_log=cluster_log_dir_path / "{sample_id}/bam_index.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}/bam_index.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}.bam_index.benchmark.txt"
+        benchmark_dir_path / "{sample_id}/bam_index.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -32,11 +32,11 @@ rule samtools_view:
     params:
         options=config["samtools_view_options"]
     log:
-        std=log_dir_path / "{sample_id}.view.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.view.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.view.cluster.err"
+        std=log_dir_path / "{sample_id}/view.log",
+        cluster_log=cluster_log_dir_path / "{sample_id}/view.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}/view.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}.view.benchmark.txt"
+        benchmark_dir_path / "{sample_id}/view.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -55,11 +55,11 @@ rule samtools_view_bam_index:
     output:
         view_bam_bai=temp(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai")
     log:
-        std=log_dir_path / "{sample_id}.view_bam_index.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}.view_bam_index.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}.view_bam_index.cluster.err"
+        std=log_dir_path / "{sample_id}/view_bam_index.log",
+        cluster_log=cluster_log_dir_path / "{sample_id}/view_bam_index.cluster.log",
+        cluster_err=cluster_log_dir_path / "{sample_id}/view_bam_index.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}.view_bam_index.benchmark.txt"
+        benchmark_dir_path / "{sample_id}/view_bam_index.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
