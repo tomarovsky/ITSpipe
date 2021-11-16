@@ -28,7 +28,8 @@ mosdepth_threads: 4
 index_threads: 1
 view_threads: 4
 visualization_threads: 1
-bcftools_mpileup_threads: 6
+bcftools_mpileup_threads: 4
+bcftools_call_threads: 4
 bcftools_filter_threads: 4
 dict_threads: 1
 gatk_mutect2_threads: 6
@@ -46,6 +47,7 @@ index_mem_mb: 10000
 view_mem_mb: 10000
 visualization_mem_mb: 5000
 bcftools_mpileup_mem_mb: 30000
+bcftools_call_mem_mb: 30000
 bcftools_filter_mem_mb: 15000
 dict_mem_mb: 15000
 gatk_mutect2_mem_mb: 30000
@@ -60,6 +62,7 @@ index_time: "10:00:00"
 view_time: "25:00:00"
 visualization_time: "25:00:00"
 bcftools_mpileup_time: "100:00:00"
+bcftools_call_time: "100:00:00"
 bcftools_filter_time: "50:00:00"
 dict_time: "10:00:00"
 gatk_mutect2_time: "100:00:00"
