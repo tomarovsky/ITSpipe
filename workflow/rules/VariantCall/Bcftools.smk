@@ -53,12 +53,12 @@ rule bcftools_mpileup:
     #     benchmark_dir_path / "{reference_basename}.bcftools_mpileup.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
-    resources:
-        cpus=config["bcftools_mpileup_threads"],
-        mem=config["bcftools_mpileup_mem_mb"],
-        time=config["bcftools_mpileup_time"]
-    threads:
-        config["bcftools_mpileup_threads"]
+    # resources:
+    #     cpus=config["bcftools_mpileup_threads"],
+    #     mem=config["bcftools_mpileup_mem_mb"],
+    #     time=config["bcftools_mpileup_time"]
+    # threads:
+    #     config["bcftools_mpileup_threads"]
     shell:
         "bcftools mpileup --threads {threads} -d {params.max_depth} -q {params.min_MQ} -Q {params.min_BQ} "
         "--adjust-MQ {params.adjustMQ} --annotate {params.annotate_mpileup} -Ou -f {input.reference} {input.samples} -o {output}"
