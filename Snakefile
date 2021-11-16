@@ -61,7 +61,8 @@ rule all:
         expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
         expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz", reference_basename = reference_basename),
         expand(varcall_gatk_dir_path / "{sample_id}.mutect2.vcf.gz", sample_id=config["sample_id"]),
-        expand(varcall_pisces_dir_path / "{sample_id}", sample_id=config["sample_id"])
+        expand(varcall_pisces_dir_path / "somatic/{sample_id}", sample_id=config["sample_id"]),
+        expand(varcall_pisces_dir_path / "germline/{sample_id}", sample_id=config["sample_id"])
 
 
 #---- load rules ----

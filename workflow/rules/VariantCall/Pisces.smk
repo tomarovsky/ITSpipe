@@ -4,7 +4,7 @@ rule pisces_somatic:
         sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam",
         index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai"
     output:
-        directory(varcall_pisces_dir_path / "{sample_id}")
+        directory(varcall_pisces_dir_path / "somatic/{sample_id}")
     params:
         options=config["pisces_somatic_options"]
     log:
@@ -25,5 +25,28 @@ rule pisces_somatic:
         "pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
 
 
-# Somatic: -bam {Bam} -CallMNVs false -g {genome folder} -gVCF false -i {intervalfile} -OutFolder {outfolder}
-# Germline: -bam {Bam} -CallMNVs false -crushvcf true -g {genomefolder} -gVCF false -i {intervalfile} -ploidy diploid -OutFolder {outfolder}
+rule pisces_germline:
+    input:
+        ref_dir = reference_dir_path,
+        sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam",
+        index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai"
+    output:
+        directory(varcall_pisces_dir_path / "germline/{sample_id}")
+    params:
+        options = config["pisces_somatic_options"]
+    log:
+        std = log_dir_path / "{sample_id}.pisces_germline.log",
+        cluster_log = cluster_log_dir_path / "{sample_id}.pisces_germline.cluster.log",
+        cluster_err = cluster_log_dir_path / "{sample_id}.pisces_germline.cluster.err"
+    benchmark:
+        benchmark_dir_path / "{sample_id}.pisces_germline.benchmark.txt"
+    conda:
+        "../../../%s" % config["conda_config"]
+    resources:
+        cpus = config["pisces_germline_threads"],
+        mem = config["pisces_germline_mem_mb"],
+        time = config["pisces_germline_time"]
+    threads:
+        config["pisces_germline_threads"]
+    shell:
+        "pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
