@@ -79,12 +79,12 @@ rule bcftools_call:
     #     benchmark_dir_path / "{reference_basename}.bcftools_call.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
-    # resources:
-    #     cpus=config["bcftools_call_threads"],
-    #     mem=config["bcftools_call_mem_mb"],
-    #     time=config["bcftools_call_time"]
-    # threads:
-    #     config["bcftools_call_threads"]
+    resources:
+        cpus=config["bcftools_call_threads"],
+        mem=config["bcftools_call_mem_mb"],
+        time=config["bcftools_call_time"]
+    threads:
+        config["bcftools_call_threads"]
     shell:
         "cat {input} | bcftools call -Oz -mv --annotate {params.annotate_call} > {output}"
 
