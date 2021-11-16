@@ -45,12 +45,12 @@ rule bcftools_mpileup:
         max_depth=config["bcftools_mpileup_max_depth"],
         min_MQ=config["bcftools_mpileup_min_MQ"],
         min_BQ=config["bcftools_mpileup_min_BQ"]
-    log:
-        std=log_dir_path / "{reference_basename}.bcftools_mpileup.log",
-        cluster_log=cluster_log_dir_path / "{reference_basename}.bcftools_mpileup.cluster.log",
-        cluster_err=cluster_log_dir_path / "{reference_basename}.bcftools_mpileup.cluster.err"
-    benchmark:
-        benchmark_dir_path / "{reference_basename}.bcftools_mpileup.benchmark.txt"
+    # log:
+    #     std=log_dir_path / "{reference_basename}.bcftools_mpileup.log",
+    #     cluster_log=cluster_log_dir_path / "{reference_basename}.bcftools_mpileup.cluster.log",
+    #     cluster_err=cluster_log_dir_path / "{reference_basename}.bcftools_mpileup.cluster.err"
+    # benchmark:
+    #     benchmark_dir_path / "{reference_basename}.bcftools_mpileup.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -63,6 +63,7 @@ rule bcftools_mpileup:
         "bcftools mpileup --threads {threads} -d {params.max_depth} -q {params.min_MQ} -Q {params.min_BQ} "
         "--adjust-MQ {params.adjustMQ} --annotate {params.annotate_mpileup} -Ou -f {input.reference} {input.samples} -o {output}"
 
+
 rule bcftools_call:
     input:
         rules.bcftools_mpileup.output
@@ -70,12 +71,12 @@ rule bcftools_call:
         varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz"
     params:
         annotate_call=config["bcftools_call_annotate"],
-    log:
-        std=log_dir_path / "{reference_basename}.bcftools_call.log",
-        cluster_log=cluster_log_dir_path / "{reference_basename}.bcftools_call.cluster.log",
-        cluster_err=cluster_log_dir_path / "{reference_basename}.bcftools_call.cluster.err"
-    benchmark:
-        benchmark_dir_path / "{reference_basename}.bcftools_call.benchmark.txt"
+    # log:
+    #     std=log_dir_path / "{reference_basename}.bcftools_call.log",
+    #     cluster_log=cluster_log_dir_path / "{reference_basename}.bcftools_call.cluster.log",
+    #     cluster_err=cluster_log_dir_path / "{reference_basename}.bcftools_call.cluster.err"
+    # benchmark:
+    #     benchmark_dir_path / "{reference_basename}.bcftools_call.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -86,6 +87,7 @@ rule bcftools_call:
         config["bcftools_call_threads"]
     shell:
         "cat {input} | bcftools call -Oz -mv --annotate {params.annotate_call} > {output}"
+
 
 rule bcftools_filter:
     input:
