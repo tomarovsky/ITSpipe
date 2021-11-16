@@ -45,6 +45,8 @@ rule bcftools_mpileup:
         max_depth=config["bcftools_mpileup_max_depth"],
         min_MQ=config["bcftools_mpileup_min_MQ"],
         min_BQ=config["bcftools_mpileup_min_BQ"]
+    benchmark:
+        benchmark_dir_path / "{reference_basename}.bcftools_mpileup.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     shell:
@@ -58,6 +60,8 @@ rule bcftools_call:
         varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz"
     params:
         annotate_call=config["bcftools_call_annotate"],
+    benchmark:
+        benchmark_dir_path / "{reference_basename}.bcftools_call.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     shell:
