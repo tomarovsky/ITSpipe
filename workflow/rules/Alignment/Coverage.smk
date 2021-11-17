@@ -1,16 +1,16 @@
 rule mosdepth:
     input:
-        bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam",
-        bai_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam.bai",
-        bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam",
-        bai_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam.bai"
+        bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.bam",
+        bai_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.bam.bai",
+        bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam",
+        bai_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
         coverage_raw=raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz",
         coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz"
     params:
         min_mapping_quality=config["mosdepth_min_mapping_quality"],
-        output_raw_pefix=lambda wildcards, output: output["coverage_raw"][:-16],
-        output_clipped_pefix=lambda wildcards, output: output["coverage_clipped"][:-16],
+        output_raw_pefix=lambda wildcards, output: output["coverage_raw"][:-3],
+        output_clipped_pefix=lambda wildcards, output: output["coverage_clipped"][:-3],
     log:
         std=log_dir_path / "{sample_id}/mosdepth.log",
         cluster_log=cluster_log_dir_path / "{sample_id}/mosdepth.cluster.log",

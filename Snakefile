@@ -43,10 +43,10 @@ rule all:
         expand(filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_2.se.fastq.gz", sample_id=config["sample_id"]),
 
         # Bowtie2:
-        expand(raw_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.bam", sample_id=config["sample_id"]),
+        expand(raw_alignment_dir_path / "{sample_id}/{sample_id}.bam", sample_id=config["sample_id"]),
 
         # Bamutil:
-        expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.bam", sample_id=config["sample_id"]),
+        expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam", sample_id=config["sample_id"]),
 
         # Mosdepth:
         expand(raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
@@ -57,9 +57,9 @@ rule all:
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
 
         # Variant calling:
-        expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam", sample_id=config["sample_id"]),
-        # expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
-        # expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz", reference_basename = reference_basename),
+        # expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam", sample_id=config["sample_id"]),
+        expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
+        expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz", reference_basename = reference_basename),
         # expand(varcall_gatk_dir_path / "{sample_id}.mutect2.vcf.gz", sample_id=config["sample_id"]),
         # expand(varcall_pisces_dir_path / "somatic/{sample_id}", sample_id=config["sample_id"]),
         # expand(varcall_pisces_dir_path / "germline/{sample_id}", sample_id=config["sample_id"])
@@ -67,10 +67,9 @@ rule all:
 
 #---- load rules ----
 include: "workflow/rules/QCFiltering/Trimmomatic.smk"
-include: "workflow/rules/Preprocessing/Samtools.smk"
-include: "workflow/rules/Preprocessing/Picard.smk"
-include: "workflow/rules/Alignment/Bowtie2.smk"
-include: "workflow/rules/Alignment/Mosdepth.smk"
+include: "workflow/rules/Preprocessing/Indexes.smk"
+include: "workflow/rules/Alignment/Alignment.smk"
+include: "workflow/rules/Alignment/Coverage.smk"
 include: "workflow/rules/QCFiltering/Bamutil.smk"
 include: "workflow/rules/Visualization/Coverage.smk"
 include: "workflow/rules/VariantCall/Bcftools.smk"
