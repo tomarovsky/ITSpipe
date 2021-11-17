@@ -13,7 +13,7 @@ dependencies:
   - mosdepth>=0.3.1
   - gatk4=4.2.0.0
   - picard=2.18
-  - pisces==5.3
+  - pisces>=5.2
   - dotnet==2.1.818
   - numpy>=1.10
   - pandas>=1.2
