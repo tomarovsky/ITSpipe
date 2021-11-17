@@ -46,7 +46,7 @@ rule bowtie2_map:
         "--rg-id '{wildcards.sample_id}' --rg 'ID:{wildcards.sample_id}' --rg 'SM:{wildcards.sample_id}' --rg 'PL:Illumina' --rg 'PU:x' --rg 'LB:x' 2> {log.bowtie2} | "
         "samtools fixmate -@ {params.fixmate_threads} -m - - 2> {log.fixmate} | "
         "samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} 2> {log.sort} | "
-        # "samtools markdup -@ {params.markdup_threads} - {output.bam} 2> {log.markdup} "
+        # "samtools markdup -@ {params.markdup_threads} - 2> {log.markdup} | "
         "samtools view {params.view} -@ {params.view_threads} -o {output.bam} - 2> {log.view}; "
 
 
