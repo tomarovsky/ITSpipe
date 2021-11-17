@@ -20,7 +20,7 @@ rule bowtie2_map:
         view_threads=config["view_threads"],
         per_thread_sort_mem="%sG" % config["per_thread_sort_mem"],
         view=config["samtools_view_options"],
-        tmp_prefix=lambda wildcards, output: output["coverage_raw"][:-4],
+        tmp_prefix=lambda wildcards, output: output["bam"][:-4],
         reference=reference_dir_path / reference_basename,
     log:
         bowtie2=log_dir_path / "{sample_id}/bowtie2.log",
