@@ -3,8 +3,8 @@ rule gatk_mutect2:
         reference=reference,
         dict=rules.picard_dict.output,
         fai=rules.samtools_faidx.output,
-        sample=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam",
-        index=clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai"
+        sample=clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam",
+        index=clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
         vcf=varcall_gatk_dir_path / "{sample_id}.mutect2.vcf.gz",
         stats=varcall_gatk_dir_path / "{sample_id}.mutect2.vcf.gz.stats",

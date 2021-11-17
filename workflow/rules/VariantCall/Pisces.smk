@@ -1,8 +1,8 @@
 rule pisces_somatic:
     input:
         ref_dir = reference_dir_path,
-        sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam",
-        index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai"
+        sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam",
+        index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
         directory(varcall_pisces_dir_path / "somatic/{sample_id}")
     params:
@@ -29,8 +29,8 @@ rule pisces_somatic:
 rule pisces_germline:
     input:
         ref_dir = reference_dir_path,
-        sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam",
-        index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.sorted.mkdup.clipped.view.bam.bai"
+        sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam",
+        index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
         directory(varcall_pisces_dir_path / "germline/{sample_id}")
     params:
