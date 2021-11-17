@@ -20,7 +20,7 @@ rule bowtie2_map:
         view_threads=config["view_threads"],
         per_thread_sort_mem="%sG" % config["per_thread_sort_mem"],
         view=config["samtools_view_options"],
-        tmp_prefix=raw_alignment_dir_path / "{sample_id}/{sample_id}",
+        tmp_prefix=lambda wildcards, output: output["coverage_raw"][:-4],
         reference=reference_dir_path / reference_basename,
     log:
         bowtie2=log_dir_path / "{sample_id}/bowtie2.log",
@@ -45,7 +45,7 @@ rule bowtie2_map:
         "bowtie2 -p {params.bowtie2_threads} -x {params.reference} -1 {input.forward_reads} -2 {input.reverse_reads} "
         "--rg-id '{wildcards.sample_id}' --rg 'ID:{wildcards.sample_id}' --rg 'SM:{wildcards.sample_id}' --rg 'PL:Illumina' --rg 'PU:x' --rg 'LB:x' 2> {log.bowtie2} | "
         "samtools fixmate -@ {params.fixmate_threads} -m - - 2> {log.fixmate} | "
-        "samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} 2> {log.sort} | "
+        "samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} - 2> {log.sort} | "
         # "samtools markdup -@ {params.markdup_threads} - 2> {log.markdup} | "
         "samtools view {params.view} -@ {params.view_threads} -o {output.bam} - 2> {log.view}; "
 
