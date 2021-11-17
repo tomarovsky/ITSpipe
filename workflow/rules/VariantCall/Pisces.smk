@@ -23,7 +23,7 @@ rule pisces_somatic:
     threads:
         config["pisces_somatic_threads"]
     shell:
-        "{params.pisces_tool_path}/pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
+        "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
 
 
 rule pisces_germline:
@@ -51,4 +51,4 @@ rule pisces_germline:
     threads:
         config["pisces_germline_threads"]
     shell:
-        "{params.pisces_tool_path}/pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
+        "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
