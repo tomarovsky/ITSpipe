@@ -87,6 +87,9 @@ gatk_mutect2_options: "--genotype-germline-sites"
 pisces_somatic_options: "-CallMNVs false -gVCF false"
 pisces_germline_options: "-CallMNVs false -crushvcf true -gVCF false -ploidy diploid"
 
+#---- Tool paths ----
+pisces_tool_path:
+
 #---- Coverage visualization parameters ----
 draw_coverage_title: "Coverage of ribosomal cluster monomer by ITS lib {sample_id}"
 draw_coverage_plot_extensions: "png" # or "png,svg" and others

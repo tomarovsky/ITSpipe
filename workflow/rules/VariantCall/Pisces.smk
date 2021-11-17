@@ -6,6 +6,7 @@ rule pisces_somatic:
     output:
         directory(varcall_pisces_dir_path / "somatic/{sample_id}")
     params:
+        pisces_tool_path=config["pisces_tool_path"],
         options=config["pisces_somatic_options"]
     log:
         std=log_dir_path / "{sample_id}/pisces_somatic.log",
@@ -22,7 +23,7 @@ rule pisces_somatic:
     threads:
         config["pisces_somatic_threads"]
     shell:
-        "pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
+        "{params.pisces_tool_path}/pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
 
 
 rule pisces_germline:
@@ -33,6 +34,7 @@ rule pisces_germline:
     output:
         directory(varcall_pisces_dir_path / "germline/{sample_id}")
     params:
+        pisces_tool_path = config["pisces_tool_path"],
         options = config["pisces_somatic_options"]
     log:
         std = log_dir_path / "{sample_id}/pisces_germline.log",
@@ -49,4 +51,4 @@ rule pisces_germline:
     threads:
         config["pisces_germline_threads"]
     shell:
-        "pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
+        "{params.pisces_tool_path}/pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
