@@ -47,7 +47,7 @@ rule bowtie2_map:
         "samtools fixmate -@ {params.fixmate_threads} -m - - 2> {log.fixmate} | "
         "samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} 2> {log.sort} | "
         # "samtools markdup -@ {params.markdup_threads} - {output.bam} 2> {log.markdup} "
-        "samtools view {params.view} -@ {params.view_threads} -o {output.bam} - 2> {log.std}; "
+        "samtools view {params.view} -@ {params.view_threads} -o {output.bam} - 2> {log.view}; "
 
 
 rule bowtie2_index:
