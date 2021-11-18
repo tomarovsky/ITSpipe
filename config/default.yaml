@@ -19,10 +19,10 @@ varcall_pisces_dir: "varcall/pisces"
 
 #---- Tool threads ----
 trimmomatic_threads: 8
-bowtie2_threads: 8
-sort_threads: 5
-fixmate_threads: 4
-markdup_threads: 4
+bowtie2_threads: 6
+sort_threads: 4
+fixmate_threads: 2
+markdup_threads: 2
 bamutil_clipoverlap_threads: 2
 mosdepth_threads: 4
 index_threads: 1
