@@ -23,7 +23,7 @@ bowtie2_threads: 6
 sort_threads: 4
 fixmate_threads: 2
 markdup_threads: 2
-bamutil_clipoverlap_threads: 2
+bamutil_clipoverlap_threads: 4
 mosdepth_threads: 4
 index_threads: 1
 view_threads: 2
@@ -42,7 +42,7 @@ bowtie2_mem_mb: 30000
 per_thread_sort_mem: 10 # memory in gigabytes
 fixmate_mem_mb: 5000
 markdup_mem_mb: 5000
-bamutil_clipoverlap_mem_mb: 5000
+bamutil_clipoverlap_mem_mb: 15000
 mosdepth_mem_mb: 20000
 index_mem_mb: 5000
 view_mem_mb: 5000
