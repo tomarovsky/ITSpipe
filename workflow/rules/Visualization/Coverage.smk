@@ -7,9 +7,6 @@ rule draw_coverage_raw:
     params:
         tool=config["draw_coverage_tool"],
         output_raw_prefix=lambda wildcards, output: output["coverage_raw_plot"][:-9],
-        start_column_index=1,
-        stop_column_index=2,
-        coverage_column_index=3,
         extension=lambda wildcards, output: output["coverage_raw_plot"][-3:],
         xlabel=config["draw_coverage_xlabel"],
         ylabel=config["draw_coverage_ylabel"],
@@ -59,9 +56,6 @@ rule draw_coverage_clipped:
     params:
         tool = config["draw_coverage_tool"],
         output_clipped_prefix=lambda wildcards, output: output["coverage_clipped_plot"][:-9],
-        start_column_index=1,
-        stop_column_index=2,
-        coverage_column_index=3,
         extension=lambda wildcards, output: output["coverage_clipped_plot"][-3:],
         xlabel=config["draw_coverage_xlabel"],
         ylabel=config["draw_coverage_ylabel"],

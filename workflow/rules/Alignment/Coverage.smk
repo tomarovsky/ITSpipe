@@ -56,5 +56,5 @@ rule genomecov:
     threads:
         config["bedtools_genomecov_threads"]
     shell:
-        "bedtools genomecov -ibam {input.bam_raw} {params.options} | gzip > {output.coverage_raw}  > {log.std} 2>&1; "
-        "bedtools genomecov -ibam {input.bam_clipped} {params.options} | gzip > {output.coverage_clipped}  > {log.std} 2>&1; "
+        "bedtools genomecov -ibam {input.bam_raw} {params.options} | gzip > {output.coverage_raw} 2> {log.std}; "
+        "bedtools genomecov -ibam {input.bam_clipped} {params.options} | gzip > {output.coverage_clipped} 2> {log.std}; "
