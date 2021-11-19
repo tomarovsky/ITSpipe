@@ -25,6 +25,7 @@ fixmate_threads: 2
 markdup_threads: 2
 bamutil_clipoverlap_threads: 4
 mosdepth_threads: 4
+bedtools_genomecov_threads: 4
 index_threads: 1
 view_threads: 2
 visualization_threads: 1
@@ -44,6 +45,7 @@ fixmate_mem_mb: 5000
 markdup_mem_mb: 5000
 bamutil_clipoverlap_mem_mb: 15000
 mosdepth_mem_mb: 20000
+bedtools_genomecov_mem_mb: 20000
 index_mem_mb: 5000
 view_mem_mb: 5000
 visualization_mem_mb: 5000
@@ -60,6 +62,7 @@ trimmomatic_time: "100:00:00"
 bowtie2_time: "100:00:00"
 bamutil_clipoverlap_time: "100:00:00"
 mosdepth_time: "100:00:00"
+bedtools_genomecov_time: "100:00:00"
 index_time: "10:00:00"
 view_time: "25:00:00"
 visualization_time: "25:00:00"
@@ -75,6 +78,7 @@ pisces_germline_time: "100:00:00"
 adapters: "resources/adapters/TruSeq2-PE.fa"
 poolsize: 10000000
 mosdepth_min_mapping_quality: 0
+bedtools_genomecov_options: "-d"
 samtools_view_options: "-b -q 20 -F 1024"
 bcftools_mpileup_annotate: "AD,INFO/AD,ADF,INFO/ADF,ADR,INFO/ADR,DP,SP,SCR,INFO/SCR"
 bcftools_call_annotate: "GQ,GP"
@@ -91,6 +95,7 @@ pisces_germline_options: "-CallMNVs false -crushvcf true -gVCF false -ploidy dip
 pisces_tool_path:
 
 #---- Coverage visualization parameters ----
+draw_coverage_tool: "genomecov" # 'genomecov' or 'mosdepth'
 draw_coverage_title: "Coverage of ribosomal cluster monomer by ITS lib {sample_id}"
 draw_coverage_plot_extensions: "png" # or "png,svg" and others
 draw_coverage_xlabel: "Position"

@@ -49,8 +49,12 @@ rule all:
         expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam", sample_id=config["sample_id"]),
 
         # Mosdepth:
-        expand(raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
-        expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
+        # expand(raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
+        # expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
+
+        # Genomecov:
+        expand(raw_coverage_dir_path / "{sample_id}.genomecov.tab.gz", sample_id=config["sample_id"]),
+        expand(clipped_coverage_dir_path / "{sample_id}.clipped.genomecov.tab.gz", sample_id=config["sample_id"]),
 
         # Coverage visualization:
         expand(raw_coverage_dir_path / "{sample_id}.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
