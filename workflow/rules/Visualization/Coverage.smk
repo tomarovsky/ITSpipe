@@ -34,7 +34,7 @@ rule draw_coverage_raw:
     shell:
         "python3 workflow/scripts/draw_coverage.py --input-file {input.coverage_raw} "
         "--output-prefix {params.output_raw_prefix} "
-        "--tool '{params.tool}' "
+        "--tool '{params.tool}'"
         "--extensions '{params.extension}' "
         "--xlabel {params.xlabel} "
         "--ylabel {params.ylabel} "
@@ -83,7 +83,7 @@ rule draw_coverage_clipped:
     shell:
         "python3 workflow/scripts/draw_coverage.py --input-file {input.coverage_clipped} "
         "--output-prefix {params.output_clipped_prefix} "
-        "--tool '{params.tool}' "
+        "--tool '{params.tool}'"
         "--extensions '{params.extension}' "
         "--xlabel {params.xlabel} "
         "--ylabel {params.ylabel} "
