@@ -4,6 +4,7 @@ rule draw_coverage_raw:
     output:
         coverage_raw_plot=raw_coverage_dir_path / "{sample_id}.plot.{ext}",
     params:
+        tool=config["draw_coverage_tool"],
         output_raw_prefix=lambda wildcards, output: output["coverage_raw_plot"][:-9],
         start_column_index=1,
         stop_column_index=2,
@@ -35,9 +36,7 @@ rule draw_coverage_raw:
     shell:
         "python3 workflow/scripts/draw_coverage.py --input-file {input.coverage_raw} "
         "--output-prefix {params.output_raw_prefix} "
-        "--start_column_index {params.start_column_index} "
-        "--stop_column_index {params.stop_column_index} "
-        "--coverage_column_index {params.coverage_column_index} "
+        "--tool '{params.tool}'"
         "--extensions '{params.extension}' "
         "--xlabel {params.xlabel} "
         "--ylabel {params.ylabel} "
@@ -56,6 +55,7 @@ rule draw_coverage_clipped:
     output:
         coverage_clipped_plot=clipped_coverage_dir_path / "{sample_id}.clipped.plot.{ext}"
     params:
+        tool = config["draw_coverage_tool"],
         output_clipped_prefix=lambda wildcards, output: output["coverage_clipped_plot"][:-9],
         start_column_index=1,
         stop_column_index=2,
@@ -87,9 +87,7 @@ rule draw_coverage_clipped:
     shell:
         "python3 workflow/scripts/draw_coverage.py --input-file {input.coverage_clipped} "
         "--output-prefix {params.output_clipped_prefix} "
-        "--start_column_index {params.start_column_index} "
-        "--stop_column_index {params.stop_column_index} "
-        "--coverage_column_index {params.coverage_column_index} "
+        "--tool '{params.tool}'"
         "--extensions '{params.extension}' "
         "--xlabel {params.xlabel} "
         "--ylabel {params.ylabel} "

@@ -5,31 +5,34 @@ import matplotlib.pyplot as plt
 plt.ioff()
 from argparse import ArgumentParser
 
+#
+# def stats(in_file, out_file, lower_count=None, upper_count=None):
+#     if (lower_count is not None) and (upper_count is not None):
+#         if lower_count > upper_count:
+#             raise ValueError("Upper limit for kmer counts is less than lower")
+#
+#     options = " -o %s" % out_file
+#     options += " -L %i" % lower_count if lower_count is not None else ""
+#     options += " -U %i" % upper_count if upper_count is not None else ""
+#     options += " %s" % in_file
+#
+#     execute(options, cmd="jellyfish stats")
 
-def stats(in_file, out_file, lower_count=None, upper_count=None):
-    if (lower_count is not None) and (upper_count is not None):
-        if lower_count > upper_count:
-            raise ValueError("Upper limit for kmer counts is less than lower")
 
-    options = " -o %s" % out_file
-    options += " -L %i" % lower_count if lower_count is not None else ""
-    options += " -U %i" % upper_count if upper_count is not None else ""
-    options += " %s" % in_file
+def draw_plot(input_file, output_prefix, tool, separator="\t", min_x=None, max_x=None, min_y=None,
+              max_y=None, extensions=["png", "svg"], xlabel=None, ylabel=None,title=None, width=6, height=6,
+              markersize=2, ylogbase=10, type="plot", grid=False, close_plot=True):
 
-    execute(options, cmd="jellyfish stats")
+    if tool.lower() == "genomecov":
+        data = np.loadtxt(input_file, comments="#", usecols=(1, 2), delimiter=separator)
+    elif tool.lower() == "mosdepth":
+        df = np.loadtxt(input_file, comments="#", usecols=(1, 2, 3), delimiter=separator, dtype="int")
+        data = []
+        for lst in range(len(df)):
+            for n in range(df[lst][0], df[lst][1]):
+                data.append([n, df[lst][2]])
+        data = np.array(data)
 
-
-def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index=2, coverage_column_index=3,
-              separator="\t",min_x=None, max_x=None, min_y=None, max_y=None, extensions=["png", "svg"],
-              xlabel=None, ylabel=None,title=None, width=6, height=6, markersize=2, ylogbase=10, type="plot",
-              grid=False, close_plot=True):
-    df = np.loadtxt(input_file, comments="#", usecols=(start_column_index, stop_column_index, coverage_column_index),
-                    delimiter=separator, dtype="int")
-    data = []
-    for lst in range(len(df)):
-        for n in range(df[lst][0], df[lst][1]):
-            data.append([n, df[lst][2]])
-    data = np.array(data)
     plt.figure(1, figsize=(width, height), dpi=300)
     plt.subplot(1, 1, 1)
     if type == "plot":
@@ -60,9 +63,7 @@ def draw_plot(input_file, output_prefix, start_column_index=1, stop_column_index
 
 
 def main():
-    draw_plot(args.input_file, args.output_prefix, start_column_index=args.start_column_index,
-              stop_column_index=args.stop_column_index, coverage_column_index=args.coverage_column_index,
-              separator=args.separator, extensions=args.extensions, min_x=args.min_x, max_x=args.max_x,
+    draw_plot(args.input_file, args.output_prefix, args.tool, separator=args.separator, extensions=args.extensions, min_x=args.min_x, max_x=args.max_x,
               min_y=args.min_y, max_y=args.max_y, xlabel=args.xlabel, ylabel=args.ylabel, title=args.title,
               width=args.width, height=args.height, markersize=args.markersize, ylogbase=args.ylogbase,
               type=args.type, grid=args.grid, close_plot=args.close_plot)
@@ -74,9 +75,7 @@ if __name__ == '__main__':
     group_required.add_argument('-i', '--input-file', type=str, help="mosdepth.bed.gz file")
     group_required.add_argument('-o', '--output-prefix', type=str, help="output prefix")
     group_additional = parser.add_argument_group('Additional options')
-    group_additional.add_argument('--start_column_index', type=int, help="start column index", default=1)
-    group_additional.add_argument('--stop_column_index', type=int, help="stop column index", default=2)
-    group_additional.add_argument('--coverage_column_index', type=int, help="coverage column index", default=3)
+    group_additional.add_argument('-t', '--tool', type=str, help="tool: 'genomecov' or 'mosdepth'", default="genomecov")
     group_additional.add_argument('-s', '--separator', type=str, help="separator", default="\t")
     group_additional.add_argument('-e', '--extensions', type=str, help="output files extensions", default=["png", "svg"])
     group_additional.add_argument('--min_x', help="min_x value", default=None)
