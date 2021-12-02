@@ -18,7 +18,9 @@ varcall_gatk_dir: "varcall/gatk"
 varcall_pisces_dir: "varcall/pisces"
 
 #---- Result file names ----
-merged_vcf_prefix: "gatk.merged"
+gatk_merged_vcf_prefix: "gatk.merged"
+pisces_somatic_merged_vcf_prefix: "pisces.somatic.merged"
+pisces_germline_merged_vcf_prefix: "pisces.germline.merged"
 
 #---- Tool threads ----
 trimmomatic_threads: 8

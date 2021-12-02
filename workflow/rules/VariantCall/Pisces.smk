@@ -52,3 +52,29 @@ rule pisces_germline:
         config["pisces_germline_threads"]
     shell:
         "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output}"
+
+
+rule bcftools_merge_pisces_vcfs:
+    input:
+        somatic=expand(varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf", sample_id=config["sample_id"]),
+        germline=expand(varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf", sample_id=config["sample_id"]),
+    output:
+        somatic=varcall_gatk_dir_path / pisces_somatic_merged_vcf_filename,
+        germline=varcall_gatk_dir_path / pisces_germline_merged_vcf_filename
+    log:
+        std=log_dir_path / "bcftools_merge_pisces_vcfs.log",
+        cluster_log=cluster_log_dir_path / "bcftools_merge_pisces_vcfs.cluster.log",
+        cluster_err=cluster_log_dir_path / "bcftools_merge_pisces_vcfs.cluster.err"
+    benchmark:
+        benchmark_dir_path / "bcftools_merge_pisces_vcfs.benchmark.txt"
+    conda:
+        "../../../%s" % config["conda_config"]
+    resources:
+        cpus=config["bcftools_merge_threads"],
+        mem=config["bcftools_merge_mem_mb"],
+        time=config["bcftools_merge_time"]
+    threads:
+        config["bcftools_merge_threads"]
+    shell:
+        "bcftools merge {input.somatic} | gzip -c > {output.somatic} 2> {log.std}; "
+        "bcftools merge {input.germline} | gzip -c > {output.germline} 2> {log.std}; "
