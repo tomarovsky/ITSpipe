@@ -30,17 +30,17 @@ rule gatk_mutect2:
         "-O {output.vcf} 1> {log.std} 2>&1 "
 
 
-rule bcftools_merge:
+rule bcftools_merge_gatk_vcfs:
     input:
         expand(varcall_gatk_dir_path / "{sample_id}/{sample_id}.mutect2.vcf.gz", sample_id=config["sample_id"])
     output:
-        varcall_gatk_dir_path / merged_vcf_filename
+        varcall_gatk_dir_path / gatk_merged_vcf_filename
     log:
-        std=log_dir_path / "bcftools_merge.log",
-        cluster_log=cluster_log_dir_path / "bcftools_merge.cluster.log",
-        cluster_err=cluster_log_dir_path / "bcftools_merge.cluster.err"
+        std=log_dir_path / "bcftools_merge_gatk_vcfs.log",
+        cluster_log=cluster_log_dir_path / "bcftools_merge_gatk_vcfs.cluster.log",
+        cluster_err=cluster_log_dir_path / "bcftools_merge_gatk_vcfs.cluster.err"
     benchmark:
-        benchmark_dir_path / "bcftools_merge.benchmark.txt"
+        benchmark_dir_path / "bcftools_merge_gatk_vcfs.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
@@ -50,4 +50,4 @@ rule bcftools_merge:
     threads:
         config["bcftools_merge_threads"]
     shell:
-        "bcftools merge {input} | gzip -c > {output}"
+        "bcftools merge {input} | gzip -c > {output} 2> {log.std}"
