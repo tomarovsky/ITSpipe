@@ -17,6 +17,9 @@ varcall_bcftools_mpileup_dir: "varcall/bcftools_mpileup"
 varcall_gatk_dir: "varcall/gatk"
 varcall_pisces_dir: "varcall/pisces"
 
+#---- Result file names ----
+gatk_mergedvcf_prefix: "gatk.merged"
+
 #---- Tool threads ----
 trimmomatic_threads: 8
 bowtie2_threads: 6

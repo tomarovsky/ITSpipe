@@ -34,7 +34,7 @@ rule gatk_mergevcfs:
     input:
         expand(varcall_gatk_dir_path / "{sample_id}/{sample_id}.mutect2.vcf.gz", sample_id=config["sample_id"])
     output:
-        varcall_gatk_dir_path / "merged.vcf"
+        varcall_gatk_dir_path / "%s.vcf" % config["gatk_mergedvcf_prefix"]
     log:
         std=log_dir_path / "gatk_mergevcfs.log",
         cluster_log=cluster_log_dir_path / "gatk_mergevcfs.cluster.log",
