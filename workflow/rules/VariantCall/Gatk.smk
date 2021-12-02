@@ -30,24 +30,24 @@ rule gatk_mutect2:
         "-O {output.vcf} 1> {log.std} 2>&1 "
 
 
-rule bcftools_mergevcf:
+rule bcftools_merge:
     input:
         expand(varcall_gatk_dir_path / "{sample_id}/{sample_id}.mutect2.vcf.gz", sample_id=config["sample_id"])
     output:
-        varcall_gatk_dir_path / gatk_mergedvcf_filename
+        varcall_gatk_dir_path / merged_vcf_filename
     log:
-        std=log_dir_path / "gatk_mergevcfs.log",
-        cluster_log=cluster_log_dir_path / "gatk_mergevcfs.cluster.log",
-        cluster_err=cluster_log_dir_path / "gatk_mergevcfs.cluster.err"
+        std=log_dir_path / "bcftools_merge.log",
+        cluster_log=cluster_log_dir_path / "bcftools_merge.cluster.log",
+        cluster_err=cluster_log_dir_path / "bcftools_merge.cluster.err"
     benchmark:
-        benchmark_dir_path / "gatk_mergevcfs.benchmark.txt"
+        benchmark_dir_path / "bcftools_merge.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
-        cpus=config["gatk_mergevcfs_threads"],
-        mem=config["gatk_mergevcfs_mem_mb"],
-        time=config["gatk_mergevcfs_time"]
+        cpus=config["bcftools_merge_threads"],
+        mem=config["bcftools_merge_mem_mb"],
+        time=config["bcftools_merge_time"]
     threads:
-        config["gatk_mergevcfs_threads"]
+        config["bcftools_merge_threads"]
     shell:
         "bcftools merge {input} | gzip -c > {output}"
