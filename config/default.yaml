@@ -34,6 +34,7 @@ bcftools_call_threads: 4
 bcftools_filter_threads: 4
 dict_threads: 1
 gatk_mutect2_threads: 6
+gatk_mergevcfs_threads: 1
 pisces_somatic_threads: 6
 pisces_germline_threads: 6
 
@@ -54,6 +55,7 @@ bcftools_call_mem_mb: 30000
 bcftools_filter_mem_mb: 15000
 dict_mem_mb: 5000
 gatk_mutect2_mem_mb: 30000
+gatk_mergevcfs_mem_mb: 15000
 pisces_somatic_mem_mb: 30000
 pisces_germline_mem_mb: 30000
 
@@ -71,6 +73,7 @@ bcftools_call_time: "100:00:00"
 bcftools_filter_time: "50:00:00"
 dict_time: "10:00:00"
 gatk_mutect2_time: "100:00:00"
+gatk_mergevcfs_time: "25:00:00"
 pisces_somatic_time: "100:00:00"
 pisces_germline_time: "100:00:00"
 
