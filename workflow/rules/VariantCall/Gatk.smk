@@ -50,4 +50,4 @@ rule bcftools_mergevcf:
     threads:
         config["gatk_mergevcfs_threads"]
     shell:
-        "bcftools merge {input} > {output}"
+        "bcftools merge {input} | gzip -c > {output}"
