@@ -4,11 +4,8 @@ rule pisces_somatic:
         sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam",
         index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
-        vcf=varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf.gz",
-        txtlogs=varcall_pisces_dir_path / "somatic/{sample_id}/PiscesLogs/PiscesLog.txt",
-        jsonlogs=varcall_pisces_dir_path / "somatic/{sample_id}/PiscesLogs/PiscesOptions.used.json"
+        directory(varcall_pisces_dir_path / "somatic/{sample_id}")
     params:
-        outdir=varcall_pisces_dir_path / "somatic/{sample_id}",
         pisces_tool_path=config["pisces_tool_path"],
         options=config["pisces_somatic_options"]
     log:
@@ -26,8 +23,8 @@ rule pisces_somatic:
     threads:
         config["pisces_somatic_threads"]
     shell:
-        "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {params.outdir} > {log.std} 2>&1; "
-        "gzip {params.outdir}/*.vcf "
+        "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output} > {log.std} 2>&1; "
+        "gzip {output}/*.vcf "
 
 
 rule pisces_germline:
@@ -61,8 +58,8 @@ rule pisces_germline:
 
 rule bcftools_merge_pisces_vcfs:
     input:
-        somatic=expand(varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf", sample_id=config["sample_id"]),
-        germline=expand(varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf", sample_id=config["sample_id"]),
+        somatic=expand(varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf.gz", sample_id=config["sample_id"]),
+        germline=expand(varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf.gz", sample_id=config["sample_id"]),
     output:
         somatic=varcall_pisces_dir_path / pisces_somatic_merged_vcf_filename,
         germline=varcall_pisces_dir_path / pisces_germline_merged_vcf_filename
