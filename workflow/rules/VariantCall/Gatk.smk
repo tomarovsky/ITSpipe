@@ -30,7 +30,7 @@ rule gatk_mutect2:
         "-O {output.vcf} 1> {log.std} 2>&1 "
 
 
-rule gatk_mergevcfs:
+rule bcftools_mergevcf:
     input:
         expand(varcall_gatk_dir_path / "{sample_id}/{sample_id}.mutect2.vcf.gz", sample_id=config["sample_id"])
     output:
@@ -50,6 +50,4 @@ rule gatk_mergevcfs:
     threads:
         config["gatk_mergevcfs_threads"]
     shell:
-        "for FILE in {input}; do echo $FILE >> tmp.list; done; "
-        "gatk --java-options '-Xmx{resources.mem}m' MergeVcfs -I tmp.list -O {output} 1> {log.std} 2>&1; "
-        "rm tmp.list "
+        "bcftools merge {input} > {output}"
