@@ -25,6 +25,7 @@ reference = Path(config["reference"])
 reference_dir_path = reference.parents[0]
 reference_filename = reference.name
 reference_basename = reference.stem
+gatk_mergedvcf_filename = "%s.%s.vcf" % reference_filename, config["gatk_mergedvcf_prefix"]
 
 if "sample_id" not in config:
     config["sample_id"] = [d.name for d in samples_dir_path.iterdir() if d.is_dir()]
@@ -66,7 +67,7 @@ rule all:
         expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz", reference_basename = reference_basename),
         # GATK:
         expand(varcall_gatk_dir_path / "{sample_id}/{sample_id}.mutect2.vcf.gz", sample_id=config["sample_id"]),
-        varcall_gatk_dir_path / "%s.vcf" % config["gatk_mergedvcf_prefix"],
+        varcall_gatk_dir_path / gatk_mergedvcf_filename,
         # Pisces:
         expand(varcall_pisces_dir_path / "somatic/{sample_id}", sample_id=config["sample_id"]),
         expand(varcall_pisces_dir_path / "germline/{sample_id}", sample_id=config["sample_id"])
