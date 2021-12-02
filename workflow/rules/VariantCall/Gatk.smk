@@ -36,11 +36,11 @@ rule gatk_mergevcfs:
     output:
         varcall_gatk_dir_path / "merged.vcf"
     log:
-        std=log_dir_path / "{sample_id}/gatk_mergevcfs.log",
-        cluster_log=cluster_log_dir_path / "{sample_id}/gatk_mergevcfs.cluster.log",
-        cluster_err=cluster_log_dir_path / "{sample_id}/gatk_mergevcfs.cluster.err"
+        std=log_dir_path / "gatk_mergevcfs.log",
+        cluster_log=cluster_log_dir_path / "gatk_mergevcfs.cluster.log",
+        cluster_err=cluster_log_dir_path / "gatk_mergevcfs.cluster.err"
     benchmark:
-        benchmark_dir_path / "{sample_id}/gatk_mergevcfs.benchmark.txt"
+        benchmark_dir_path / "gatk_mergevcfs.benchmark.txt"
     conda:
         "../../../%s" % config["conda_config"]
     resources:
