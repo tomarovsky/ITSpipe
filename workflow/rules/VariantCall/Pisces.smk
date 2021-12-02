@@ -59,8 +59,8 @@ rule bcftools_merge_pisces_vcfs:
         somatic=expand(varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf", sample_id=config["sample_id"]),
         germline=expand(varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf", sample_id=config["sample_id"]),
     output:
-        somatic=varcall_gatk_dir_path / pisces_somatic_merged_vcf_filename,
-        germline=varcall_gatk_dir_path / pisces_germline_merged_vcf_filename
+        somatic=varcall_pisces_dir_path / "somatic" / pisces_somatic_merged_vcf_filename,
+        germline=varcall_pisces_dir_path / "germline" / pisces_germline_merged_vcf_filename
     log:
         std=log_dir_path / "bcftools_merge_pisces_vcfs.log",
         cluster_log=cluster_log_dir_path / "bcftools_merge_pisces_vcfs.cluster.log",

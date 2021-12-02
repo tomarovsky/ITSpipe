@@ -74,8 +74,8 @@ rule all:
         # Pisces:
         expand(varcall_pisces_dir_path / "somatic/{sample_id}", sample_id=config["sample_id"]),
         expand(varcall_pisces_dir_path / "germline/{sample_id}", sample_id=config["sample_id"]),
-        varcall_gatk_dir_path / pisces_somatic_merged_vcf_filename,
-        varcall_gatk_dir_path / pisces_germline_merged_vcf_filename
+        varcall_pisces_dir_path / "somatic" / pisces_somatic_merged_vcf_filename,
+        varcall_pisces_dir_path / "germline" / pisces_germline_merged_vcf_filename
 
 
 #---- load rules ----
