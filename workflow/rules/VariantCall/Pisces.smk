@@ -4,8 +4,8 @@ rule pisces_somatic:
         sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam",
         index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
-        outdir=directory(varcall_pisces_dir_path / "somatic/{sample_id}"),
-        vcf=varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf.gz"
+        vcf=varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf.gz",
+        outdir=directory(varcall_pisces_dir_path / "somatic/{sample_id}")
     params:
         pisces_tool_path=config["pisces_tool_path"],
         options=config["pisces_somatic_options"]
@@ -34,8 +34,8 @@ rule pisces_germline:
         sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam",
         index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
-        outdir=directory(varcall_pisces_dir_path / "germline/{sample_id}"),
-        vcf=varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf.gz"
+        vcf = varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf.gz",
+        outdir=directory(varcall_pisces_dir_path / "germline/{sample_id}")
     params:
         pisces_tool_path = config["pisces_tool_path"],
         options = config["pisces_somatic_options"]
