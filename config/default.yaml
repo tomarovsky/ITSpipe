@@ -87,7 +87,7 @@ bcftools_mpileup_min_MQ: 30
 bcftools_mpileup_min_BQ: 30
 bcftools_filter_soft_filter: "LowQual"
 bcftools_filter_exclude: "QUAL < 20.0 || (FORMAT/SP > 60.0 | FORMAT/DP < 5.0 | FORMAT/GQ < 20.0)"
-gatk_mutect2_options: "--genotype-germline-sites"
+gatk_mutect2_options: "--genotype-germline-sites --emit-ref-confidence GVCF" # or BP_RESOLUTION
 pisces_somatic_options: "-CallMNVs false -gVCF false"
 pisces_germline_options: "-CallMNVs false -crushvcf true -gVCF false -ploidy diploid"
 
