@@ -25,7 +25,7 @@ rule pisces_somatic:
         config["pisces_somatic_threads"]
     shell:
         "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output} > {log.std} 2>&1; "
-        "gzip {output}/*.vcf "
+        "gzip {output.outdir}/*.vcf "
 
 
 rule pisces_germline:
@@ -34,7 +34,7 @@ rule pisces_germline:
         sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam",
         index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
-        directory(varcall_pisces_dir_path / "germline/{sample_id}"),
+        outdir=directory(varcall_pisces_dir_path / "germline/{sample_id}"),
         vcf=varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf.gz"
     params:
         pisces_tool_path = config["pisces_tool_path"],
@@ -54,8 +54,8 @@ rule pisces_germline:
     threads:
         config["pisces_germline_threads"]
     shell:
-        "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output} > {log.std} 2>&1; "
-        "gzip {output}/*.vcf "
+        "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output.outdir} > {log.std} 2>&1; "
+        "gzip {output.outdir}/*.vcf "
 
 
 rule bcftools_merge_pisces_vcfs:
