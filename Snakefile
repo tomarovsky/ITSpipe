@@ -25,7 +25,7 @@ reference = Path(config["reference"])
 reference_dir_path = reference.parents[0]
 reference_filename = reference.name
 reference_basename = reference.stem
-gatk_mergedvcf_filename = "%s.%s.vcf" % reference_filename, config["gatk_mergedvcf_prefix"]
+gatk_mergedvcf_filename = "%s.%s.vcf" % (reference_filename, config["gatk_mergedvcf_prefix"])
 
 if "sample_id" not in config:
     config["sample_id"] = [d.name for d in samples_dir_path.iterdir() if d.is_dir()]
