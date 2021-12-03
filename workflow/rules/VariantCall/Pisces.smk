@@ -4,9 +4,10 @@ rule pisces_somatic:
         sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam",
         index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
-        vcf=varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf.gz",
+        vcfgz=varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf.gz",
         outdir=directory(varcall_pisces_dir_path / "somatic/{sample_id}")
     params:
+        vcf=lambda wildcards, output: output["vcfgz"][:-3],
         pisces_tool_path=config["pisces_tool_path"],
         options=config["pisces_somatic_options"]
     log:
@@ -25,8 +26,8 @@ rule pisces_somatic:
         config["pisces_somatic_threads"]
     shell:
         "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output} > {log.std} 2>&1; "
-        "bcftools view {output.outdir}/*.vcf -Oz -o {output.vcf}; ;"
-        "rm {output.outdir}/*.vcf "
+        "bcftools view {params.vcf} -Oz -o {output.vcfgz}; "
+        "rm {params.vcf} "
 
 
 rule pisces_germline:
@@ -35,9 +36,10 @@ rule pisces_germline:
         sample = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam",
         index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
-        vcf = varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf.gz",
+        vcfgz = varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf.gz",
         outdir=directory(varcall_pisces_dir_path / "germline/{sample_id}")
     params:
+        vcf = lambda wildcards, output: output["vcfgz"][:-3],
         pisces_tool_path = config["pisces_tool_path"],
         options = config["pisces_somatic_options"]
     log:
@@ -56,8 +58,8 @@ rule pisces_germline:
         config["pisces_germline_threads"]
     shell:
         "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output.outdir} > {log.std} 2>&1; "
-        "bcftools view {output.outdir}/*.vcf -Oz -o {output.vcf}; "
-        "rm {output.outdir}/*.vcf "
+        "bcftools view {params.vcf} -Oz -o {output.vcfgz}; "
+        "rm {params.vcf} "
 
 
 rule bcftools_merge_pisces_vcfs:
