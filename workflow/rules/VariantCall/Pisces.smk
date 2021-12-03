@@ -25,7 +25,7 @@ rule pisces_somatic:
     threads:
         config["pisces_somatic_threads"]
     shell:
-        "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output} > {log.std} 2>&1; "
+        "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output.outdir} > {log.std} 2>&1; "
         "bcftools view {params.vcf} -Oz -o {output.vcfgz}; "
         "rm {params.vcf} "
 
