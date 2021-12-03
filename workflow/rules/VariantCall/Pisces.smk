@@ -5,6 +5,7 @@ rule pisces_somatic:
         index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
         vcfgz=varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf.gz",
+        vcfcsi=varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf.gz.csi",
         outdir=directory(varcall_pisces_dir_path / "somatic/{sample_id}")
     params:
         vcf=lambda wildcards, output: output["vcfgz"][:-3],
@@ -27,6 +28,7 @@ rule pisces_somatic:
     shell:
         "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output.outdir} > {log.std} 2>&1; "
         "bcftools view {params.vcf} -Oz -o {output.vcfgz}; "
+        "bcftools index {output.vcfgz}; "
         "rm {params.vcf} "
 
 
@@ -37,6 +39,7 @@ rule pisces_germline:
         index = clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     output:
         vcfgz = varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf.gz",
+        vcfcsi=varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf.gz.csi",
         outdir=directory(varcall_pisces_dir_path / "germline/{sample_id}")
     params:
         vcf = lambda wildcards, output: output["vcfgz"][:-3],
@@ -59,6 +62,7 @@ rule pisces_germline:
     shell:
         "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output.outdir} > {log.std} 2>&1; "
         "bcftools view {params.vcf} -Oz -o {output.vcfgz}; "
+        "bcftools index {output.vcfgz}; "
         "rm {params.vcf} "
 
 
