@@ -25,7 +25,7 @@ rule pisces_somatic:
         config["pisces_somatic_threads"]
     shell:
         "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output} > {log.std} 2>&1; "
-        "gzip {output.outdir}/*.vcf "
+        "bcftools view {output.outdir}/*.vcf -Oz -o {output.vcf} "
 
 
 rule pisces_germline:
@@ -55,7 +55,7 @@ rule pisces_germline:
         config["pisces_germline_threads"]
     shell:
         "{params.pisces_tool_path}/Pisces -bam {input.sample} -g {input.ref_dir} {params.options} -OutFolder {output.outdir} > {log.std} 2>&1; "
-        "gzip {output.outdir}/*.vcf "
+        "bcftools view {output.outdir}/*.vcf -Oz -o {output.vcf} "
 
 
 rule bcftools_merge_pisces_vcfs:
