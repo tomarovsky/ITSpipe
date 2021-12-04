@@ -49,8 +49,9 @@ def draw_plot(input_file, output_prefix, tool, separator="\t", min_x=None, max_x
         plt.title(title)
     if grid or grid == "True":
         plt.grid()
+    print(extensions)
     if extensions is not list:
-        extensions = [ext for ext in str(extensions).split(",")]
+        extensions = [ext for ext in extensions.split(",")]
     for ext in extensions:
         plt.savefig(f"{output_prefix}.{type}.{ext}")
 
