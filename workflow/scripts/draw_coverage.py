@@ -49,9 +49,8 @@ def draw_plot(input_file, output_prefix, tool, separator="\t", min_x=None, max_x
         plt.title(title)
     if grid or grid == "True":
         plt.grid()
-    print(extensions)
-    if extensions is not list:
-        extensions = [ext for ext in extensions.split(",")]
+    # if extensions is not list:
+    #     extensions = [ext for ext in extensions.split(",")]
     for ext in extensions:
         plt.savefig(f"{output_prefix}.{type}.{ext}")
 
@@ -78,7 +77,7 @@ if __name__ == '__main__':
     group_additional = parser.add_argument_group('Additional options')
     group_additional.add_argument('-t', '--tool', type=str, help="tool: 'genomecov' or 'mosdepth'", default="genomecov")
     group_additional.add_argument('-s', '--separator', type=str, help="separator", default="\t")
-    group_additional.add_argument('-e', '--extensions', help="output files extensions", default=["png", "svg"])
+    group_additional.add_argument('-e', '--extensions', type=list, nargs='+', help="output files extensions", default=["png", "svg"])
     group_additional.add_argument('--min_x', help="min_x value", default=None)
     group_additional.add_argument('--max_x', help="max_x value", default=None)
     group_additional.add_argument('--min_y', help="min_y value", default=None)
