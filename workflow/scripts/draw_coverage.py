@@ -5,19 +5,6 @@ import matplotlib.pyplot as plt
 plt.ioff()
 from argparse import ArgumentParser
 
-#
-# def stats(in_file, out_file, lower_count=None, upper_count=None):
-#     if (lower_count is not None) and (upper_count is not None):
-#         if lower_count > upper_count:
-#             raise ValueError("Upper limit for kmer counts is less than lower")
-#
-#     options = " -o %s" % out_file
-#     options += " -L %i" % lower_count if lower_count is not None else ""
-#     options += " -U %i" % upper_count if upper_count is not None else ""
-#     options += " %s" % in_file
-#
-#     execute(options, cmd="jellyfish stats")
-
 
 def draw_plot(input_file, output_prefix, tool, separator="\t", min_x=None, max_x=None, min_y=None,
               max_y=None, extensions=["png", "svg"], xlabel=None, ylabel=None,title=None, width=6, height=6,
@@ -77,7 +64,7 @@ if __name__ == '__main__':
     group_additional = parser.add_argument_group('Additional options')
     group_additional.add_argument('-t', '--tool', type=str, help="tool: 'genomecov' or 'mosdepth'", default="genomecov")
     group_additional.add_argument('-s', '--separator', type=str, help="separator", default="\t")
-    group_additional.add_argument('-e', '--extensions', type=list, nargs='+', help="output files extensions", default=["png", "svg"])
+    group_additional.add_argument('-e', '--extensions', type=lambda s: [str(ext) for ext in s.split(',')], help="output files extensions", default=["png", "svg"])
     group_additional.add_argument('--min_x', help="min_x value", default=None)
     group_additional.add_argument('--max_x', help="max_x value", default=None)
     group_additional.add_argument('--min_y', help="min_y value", default=None)
