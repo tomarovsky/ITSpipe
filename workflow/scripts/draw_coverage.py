@@ -36,8 +36,6 @@ def draw_plot(input_file, output_prefix, tool, separator="\t", min_x=None, max_x
         plt.title(title)
     if grid or grid == "True":
         plt.grid()
-    # if extensions is not list:
-    #     extensions = [ext for ext in extensions.split(",")]
     for ext in extensions:
         plt.savefig(f"{output_prefix}.{type}.{ext}")
 
@@ -50,9 +48,9 @@ def draw_plot(input_file, output_prefix, tool, separator="\t", min_x=None, max_x
 
 
 def main():
-    draw_plot(args.input_file, args.output_prefix, args.tool, separator=args.separator, extensions=args.extensions, min_x=args.min_x, max_x=args.max_x,
-              min_y=args.min_y, max_y=args.max_y, xlabel=args.xlabel, ylabel=args.ylabel, title=args.title,
-              width=args.width, height=args.height, markersize=args.markersize, ylogbase=args.ylogbase,
+    draw_plot(args.input_file, args.output_prefix, args.tool, separator=args.separator, extensions=args.extensions,
+              min_x=args.min_x, max_x=args.max_x, min_y=args.min_y, max_y=args.max_y, xlabel=args.xlabel, ylabel=args.ylabel,
+              title=args.title, width=args.width, height=args.height, markersize=args.markersize, ylogbase=args.ylogbase,
               type=args.type, grid=args.grid, close_plot=args.close_plot)
 
 
@@ -64,7 +62,7 @@ if __name__ == '__main__':
     group_additional = parser.add_argument_group('Additional options')
     group_additional.add_argument('-t', '--tool', type=str, help="tool: 'genomecov' or 'mosdepth'", default="genomecov")
     group_additional.add_argument('-s', '--separator', type=str, help="separator", default="\t")
-    group_additional.add_argument('-e', '--extensions', type=lambda s: [str(ext) for ext in s.split(',')], help="output files extensions", default=["png", "svg"])
+    group_additional.add_argument('-e', '--extensions', type=lambda s: [str(ext) for ext in s.split(',')], default=["png", "svg"], help="output files extensions")
     group_additional.add_argument('--min_x', help="min_x value", default=None)
     group_additional.add_argument('--max_x', help="max_x value", default=None)
     group_additional.add_argument('--min_y', help="min_y value", default=None)
