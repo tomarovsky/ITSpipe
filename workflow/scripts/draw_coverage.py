@@ -50,7 +50,7 @@ def draw_plot(input_file, output_prefix, tool, separator="\t", min_x=None, max_x
     if grid or grid == "True":
         plt.grid()
     if extensions is not list:
-        extensions = [ext for ext in extensions.split(",")]
+        extensions = [ext for ext in str(extensions).split(",")]
     for ext in extensions:
         plt.savefig(f"{output_prefix}.{type}.{ext}")
 
