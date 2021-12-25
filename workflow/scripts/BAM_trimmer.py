@@ -39,7 +39,7 @@ def main():
 if __name__ == '__main__':
     parser = ArgumentParser(description="Script for trimming the BAM file from the high coverage area")
     group_required = parser.add_argument_group('Required options')
-    group_required.add_argument('-i', '--input-file', type=str, help="input BAM file")
+    group_required.add_argument('-i', '--input', type=str, help="input BAM file")
     group_required.add_argument('-o', '--output', type=str, help="output BAM file")
     group_required.add_argument('-p', '--pattern', type=str, help="sequence with high coverage")
     group_required.add_argument('-s', '--reference_start', type=int, help="0-based leftmost coordinate")
