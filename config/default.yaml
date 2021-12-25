@@ -92,7 +92,7 @@ mosdepth_min_mapping_quality: 0
 bam_trimmer_pattern: "CGCG"
 bam_trimmer_reference_start: 2181
 bedtools_genomecov_options: "-d"
-samtools_view_options: "-b -q 20 -F 1024"
+samtools_view_options: "-b"   # -q 20 -F 1024
 bcftools_mpileup_annotate: "AD,INFO/AD,ADF,INFO/ADF,ADR,INFO/ADR,DP,SP,SCR,INFO/SCR"
 bcftools_call_annotate: "GQ,GP"
 bcftools_mpileup_max_depth: 250
