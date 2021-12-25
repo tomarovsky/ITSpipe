@@ -52,17 +52,20 @@ rule all:
         # Bamutil:
         expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam", sample_id=config["sample_id"]),
 
+        # BAM_trimmer:
+        expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.trim.bam", sample_id=config["sample_id"]),
+
         # Mosdepth:
         # expand(raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
         # expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
 
         # Genomecov:
         expand(raw_coverage_dir_path / "{sample_id}.genomecov.tab.gz", sample_id=config["sample_id"]),
-        expand(clipped_coverage_dir_path / "{sample_id}.clipped.genomecov.tab.gz", sample_id=config["sample_id"]),
+        expand(clipped_coverage_dir_path / "{sample_id}.clipped.trim.genomecov.tab.gz", sample_id=config["sample_id"]),
 
         # Coverage visualization:
         expand(raw_coverage_dir_path / "{sample_id}.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
-        expand(clipped_coverage_dir_path / "{sample_id}.clipped.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
+        expand(clipped_coverage_dir_path / "{sample_id}.clipped.trim.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
 
         # Variant calling:
         # Bcftools:
@@ -84,6 +87,7 @@ include: "workflow/rules/Preprocessing/Indexes.smk"
 include: "workflow/rules/Alignment/Alignment.smk"
 include: "workflow/rules/Alignment/Coverage.smk"
 include: "workflow/rules/QCFiltering/Bamutil.smk"
+include: "workflow/rules/QCFiltering/BAM_trimmer.smk"
 include: "workflow/rules/Visualization/Coverage.smk"
 include: "workflow/rules/VariantCall/Bcftools.smk"
 include: "workflow/rules/VariantCall/Gatk.smk"

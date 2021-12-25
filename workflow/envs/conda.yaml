@@ -19,3 +19,4 @@ dependencies:
   - numpy>=1.10
   - pandas>=1.2
   - matplotlib
+  - pysam

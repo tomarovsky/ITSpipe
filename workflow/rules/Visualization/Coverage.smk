@@ -1,6 +1,5 @@
 rule draw_coverage_raw:
     input:
-        # coverage_raw=raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz"
         coverage_raw=raw_coverage_dir_path / "{sample_id}.genomecov.tab.gz",
     output:
         coverage_raw_plot=raw_coverage_dir_path / "{sample_id}.plot.{ext}",
@@ -49,10 +48,9 @@ rule draw_coverage_raw:
 
 rule draw_coverage_clipped:
     input:
-        # coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz"
-        coverage_clipped = clipped_coverage_dir_path / "{sample_id}.clipped.genomecov.tab.gz"
+        coverage_clipped = clipped_coverage_dir_path / "{sample_id}.clipped.trim.genomecov.tab.gz"
     output:
-        coverage_clipped_plot=clipped_coverage_dir_path / "{sample_id}.clipped.plot.{ext}"
+        coverage_clipped_plot=clipped_coverage_dir_path / "{sample_id}.clipped.trim.plot.{ext}"
     params:
         tool = config["draw_coverage_tool"],
         output_clipped_prefix=lambda wildcards, output: output["coverage_clipped_plot"][:-9],
