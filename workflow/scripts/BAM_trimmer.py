@@ -29,7 +29,7 @@ def main():
         if line.query_sequence.startswith(args.pattern) and line.reference_start == args.reference_start:
             line.template_length = line.template_length - pattern_len
             q = line.query_qualities
-            line.query_sequence = line.query_sequence[pattern_len:]    # from the beginning of the sequence
+            line.query_sequence = line.query_sequence[pattern_len:]    # from the start of the sequence
             line.query_qualities = q[pattern_len:]
             line.cigarstring = cigar_left_trimmer(line.cigarstring, pattern_len)
             line.reference_start = line.reference_start + pattern_len
