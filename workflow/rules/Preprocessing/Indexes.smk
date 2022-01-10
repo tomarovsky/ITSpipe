@@ -1,3 +1,29 @@
+rule bowtie2_index:
+    input:
+        reference = config["reference"]
+    params:
+        basename = reference_dir_path / reference_basename
+    output:
+        index1=expand(reference_dir_path / "{basename}.{index}.bt2", basename = reference_basename, index = range(1, 5)),
+        index2=expand(reference_dir_path / "{basename}.rev.{index}.bt2", basename = reference_basename, index = range(1, 3))
+    log:
+        std=log_dir_path / "bowtie2_index.log",
+        cluster_log=cluster_log_dir_path / "bowtie2_index.cluster.log",
+        cluster_err=cluster_log_dir_path / "bowtie2_index.cluster.err"
+    benchmark:
+        benchmark_dir_path / "/bowtie2_index.benchmark.txt"
+    conda:
+        "../../../%s" % config["conda_config"]
+    resources:
+        cpus=config["bowtie2_threads"],
+        time=config["bowtie2_time"],
+        mem=config["bowtie2_mem_mb"]
+    threads:
+        config["bowtie2_threads"]
+    shell:
+        "bowtie2-build {input} {params.basename} > {log.std} 2>&1 || true"
+
+
 rule samtools_bam_index:
     input:
         bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.bam",
