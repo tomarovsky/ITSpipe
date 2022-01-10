@@ -1,5 +1,3 @@
-from Snakefile import raw_alignment_dir_path
-
 localrules: bowtie2_index
 ruleorder: bowtie2_index > bowtie2_map
 
