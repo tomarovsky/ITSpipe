@@ -24,8 +24,7 @@ def main():
     outfile = open(args.output, 'a')
     pattern_len = len(args.pattern)
 
-    for line in infile[:4]: # write header
-        outfile.write("%s\n" % line)
+    outfile.write("".join(infile[:4])) # write header
 
     for line in infile[4:]:
         line = line.strip().split("\t")
