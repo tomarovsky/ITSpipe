@@ -62,26 +62,26 @@ rule all:
         # expand(raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
         # expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
 
-        # Genomecov:
-        expand(raw_coverage_dir_path / "{sample_id}.genomecov.tab.gz", sample_id=config["sample_id"]),
-        expand(clipped_coverage_dir_path / "{sample_id}.clipped.trim.genomecov.tab.gz", sample_id=config["sample_id"]),
-
-        # Coverage visualization:
-        expand(raw_coverage_dir_path / "{sample_id}.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
-        expand(clipped_coverage_dir_path / "{sample_id}.clipped.trim.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
-
-        # Variant calling:
-        # Bcftools:
-        expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
-        expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz", reference_basename = reference_basename),
-        # GATK:
-        expand(varcall_gatk_dir_path / "{sample_id}/{sample_id}.mutect2.vcf.gz", sample_id=config["sample_id"]),
-        varcall_gatk_dir_path / gatk_merged_vcf_filename,
-        # Pisces:
-        expand(varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf.gz", sample_id=config["sample_id"]),
-        expand(varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf.gz", sample_id=config["sample_id"]),
-        varcall_pisces_dir_path / pisces_somatic_merged_vcf_filename,
-        varcall_pisces_dir_path / pisces_germline_merged_vcf_filename
+        # # Genomecov:
+        # expand(raw_coverage_dir_path / "{sample_id}.genomecov.tab.gz", sample_id=config["sample_id"]),
+        # expand(clipped_coverage_dir_path / "{sample_id}.clipped.trim.genomecov.tab.gz", sample_id=config["sample_id"]),
+        #
+        # # Coverage visualization:
+        # expand(raw_coverage_dir_path / "{sample_id}.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
+        # expand(clipped_coverage_dir_path / "{sample_id}.clipped.trim.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
+        #
+        # # Variant calling:
+        # # Bcftools:
+        # expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
+        # expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz", reference_basename = reference_basename),
+        # # GATK:
+        # expand(varcall_gatk_dir_path / "{sample_id}/{sample_id}.mutect2.vcf.gz", sample_id=config["sample_id"]),
+        # varcall_gatk_dir_path / gatk_merged_vcf_filename,
+        # # Pisces:
+        # expand(varcall_pisces_dir_path / "somatic/{sample_id}/{sample_id}.clipped.vcf.gz", sample_id=config["sample_id"]),
+        # expand(varcall_pisces_dir_path / "germline/{sample_id}/{sample_id}.clipped.vcf.gz", sample_id=config["sample_id"]),
+        # varcall_pisces_dir_path / pisces_somatic_merged_vcf_filename,
+        # varcall_pisces_dir_path / pisces_germline_merged_vcf_filename
 
 
 #---- load rules ----

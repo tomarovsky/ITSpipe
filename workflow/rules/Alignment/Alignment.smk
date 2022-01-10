@@ -13,8 +13,6 @@ rule bowtie2_map:
         outdir=directory(raw_alignment_dir_path/"{sample_id}"),
         sam=raw_alignment_dir_path / "{sample_id}/{sample_id}.sam"
     params:
-        # bowtie2_threads=config["bowtie2_threads"],
-        # tmp_prefix=lambda wildcards, output: output["sam"][:-4],
         reference=reference_dir_path / reference_basename
     log:
         bowtie2=log_dir_path / "{sample_id}/bowtie2.log",
@@ -29,7 +27,7 @@ rule bowtie2_map:
         mem=config["bowtie2_mem_mb"],
         time=config["bowtie2_time"]
     threads:
-        config["bowtie2_threads"] # + config["sort_threads"] + config["fixmate_threads"] + config["markdup_threads"]
+        config["bowtie2_threads"]
     shell:
         "mkdir -p {output.outdir} ; "
         "bowtie2 -p {threads} -x {params.reference} -1 {input.forward_reads} -2 {input.reverse_reads} "
@@ -39,7 +37,7 @@ rule bowtie2_map:
 
 rule sam_trimmer:
     input:
-        raw_alignment_dir_path / "{sample_id}/{sample_id}.sam"
+        rules.bowtie2_map.output.sam
     output:
         raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sam"
     params:
