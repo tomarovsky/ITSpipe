@@ -38,7 +38,7 @@ def main():
             cigar = cigar_left_trimmer(cigar, pattern_len)
             pos = str(pos + pattern_len)
             reverse = True
-            prev_tlen = pos
+            prev_tlen = int(pos)
         elif reverse and tlen == 0 - prev_tlen:
             tlen = str(tlen + pattern_len)
             seq = seq[pattern_len:]
