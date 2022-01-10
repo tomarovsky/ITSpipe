@@ -63,13 +63,13 @@ rule all:
         # expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
 
         # Genomecov:
-        expand(raw_coverage_dir_path / "{sample_id}.genomecov.tab.gz", sample_id=config["sample_id"]),
-        expand(clipped_coverage_dir_path / "{sample_id}.clipped.trim.genomecov.tab.gz", sample_id=config["sample_id"]),
-        #
-        # # Coverage visualization:
-        # expand(raw_coverage_dir_path / "{sample_id}.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
-        # expand(clipped_coverage_dir_path / "{sample_id}.clipped.trim.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
-        #
+        expand(coverage_raw=raw_coverage_dir_path / "{sample_id}.trim.sort.genomecov.tab.gz", sample_id=config["sample_id"]),
+        expand(coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.genomecov.tab.gz", sample_id=config["sample_id"]),
+
+        # Coverage visualization:
+        expand(raw_coverage_dir_path / "{sample_id}.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
+        expand(clipped_coverage_dir_path / "{sample_id}.clipped.trim.plot.{ext}", sample_id=config["sample_id"], ext=config["draw_coverage_plot_extensions"]),
+
         # # Variant calling:
         # # Bcftools:
         # expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
