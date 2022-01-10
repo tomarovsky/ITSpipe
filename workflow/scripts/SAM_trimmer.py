@@ -1,6 +1,5 @@
 #!/usr/bin/env python3
 import re
-import pysam
 from argparse import ArgumentParser
 
 
@@ -21,10 +20,14 @@ def cigar_left_trimmer(cigar_line, pattern_len):
     return trimmed_cigar
 
 def main():
-    infile = pysam.AlignmentFile(args.input, 'rb')
-    outfile = pysam.AlignmentFile(args.output, 'wb', template=infile)
+    infile = open(args.input, 'r').readlines()
+    outfile = open(args.output, 'a')
     pattern_len = len(args.pattern)
-    for line in infile:
+
+    for line in infile[:4]: # write header
+        outfile.write("%s\n" % line)
+
+    for line in infile[4:]:
         line = line.strip().split("\t")
         qname, flag, rname, pos, mapq, cigar, rnext, pnext, tlen, seq, qual = line[:11]
         bitwise_flags = '\t'.join(line[11:])
