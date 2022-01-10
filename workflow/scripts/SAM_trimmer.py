@@ -29,20 +29,21 @@ def main():
         line = line.strip().split("\t")
         qname, flag, rname, pos, mapq, cigar, rnext, pnext, tlen, seq, qual = line[:11]
         bitwise_flags = '\t'.join(line[11:])
-        if seq.startswith(args.pattern) and pos == args.reference_start and int(tlen) >= 0:
+        if seq.startswith(args.pattern) and pos == args.reference_start and int(tlen) >= 0 and reverse is False:
             tlen = str(int(tlen) - pattern_len)
             seq = seq[pattern_len:]
             qual = qual[pattern_len:]
             cigar = cigar_left_trimmer(cigar, pattern_len)
             pos = str(int(pos) + pattern_len)
             reverse = True
-        elif reverse:
+        elif reverse and int(tlen) == 0 - prev_tlen:
             tlen = str(int(tlen) + pattern_len)
             seq = seq[pattern_len:]
             qual = qual[pattern_len:]
             cigar = cigar_left_trimmer(cigar, pattern_len)
             pos = str(int(pos) - pattern_len)
             reverse = False
+        prev_tlen = pos
         line = "\t".join([qname, flag, rname, pos, mapq, cigar, rnext, pnext, tlen, seq, qual, bitwise_flags])
         outfile.write(line)
         outfile.write("\n")
