@@ -50,6 +50,6 @@ if __name__ == '__main__':
     group_required.add_argument('-i', '--input', type=str, help="input SAM file")
     group_required.add_argument('-o', '--output', type=str, help="output trimmed SAM file")
     group_required.add_argument('-p', '--pattern', type=str, help="sequence with high coverage")
-    group_required.add_argument('-s', '--reference_start', type=str, help="0-based leftmost coordinate")
+    group_required.add_argument('-s', '--reference_start', type=str, help="1-based leftmost coordinate")
     args = parser.parse_args()
     main()

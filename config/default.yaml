@@ -90,7 +90,7 @@ adapters: "resources/adapters/TruSeq2-PE.fa"
 poolsize: 10000000
 mosdepth_min_mapping_quality: 0
 sam_trimmer_pattern: "CGCG"
-sam_trimmer_reference_start: 2181
+sam_trimmer_reference_start: 2182
 bedtools_genomecov_options: "-d"
 samtools_view_options: "-b"   # -q 20 -F 1024
 bcftools_mpileup_annotate: "AD,INFO/AD,ADF,INFO/ADF,ADR,INFO/ADR,DP,SP,SCR,INFO/SCR"
