@@ -25,6 +25,7 @@ def main():
     pattern_len = len(args.pattern)
     outfile.write("".join(infile[:4])) # header
     reverse = False # flag
+    prev_tlen = None
     for line in infile[4:]:
         line = line.strip().split("\t")
         qname, flag, rname, pos, mapq, cigar, rnext, pnext, tlen, seq, qual = line[:11]
@@ -36,6 +37,7 @@ def main():
             cigar = cigar_left_trimmer(cigar, pattern_len)
             pos = str(int(pos) + pattern_len)
             reverse = True
+            prev_tlen = int(pos)
         elif reverse and int(tlen) == 0 - prev_tlen:
             tlen = str(int(tlen) + pattern_len)
             seq = seq[pattern_len:]
@@ -43,7 +45,6 @@ def main():
             cigar = cigar_left_trimmer(cigar, pattern_len)
             pos = str(int(pos) - pattern_len)
             reverse = False
-        prev_tlen = pos
         line = "\t".join([qname, flag, rname, pos, mapq, cigar, rnext, pnext, tlen, seq, qual, bitwise_flags])
         outfile.write(line)
         outfile.write("\n")
