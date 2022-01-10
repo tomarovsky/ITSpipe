@@ -47,13 +47,16 @@ rule all:
         expand(filtered_reads_dir_path / "{sample_id}/{sample_id}.trimmed_2.se.fastq.gz", sample_id=config["sample_id"]),
 
         # Bowtie2:
-        expand(raw_alignment_dir_path / "{sample_id}/{sample_id}.bam", sample_id=config["sample_id"]),
+        expand(raw_alignment_dir_path / "{sample_id}/{sample_id}.sam", sample_id=config["sample_id"]),
+
+        # BAM_trimmer:
+        expand(raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sam", sample_id=config["sample_id"]),
+
+        # Samtools BAM improvements:
+        expand(raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sort.bam", sample_id=config["sample_id"]),
 
         # Bamutil:
         expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam", sample_id=config["sample_id"]),
-
-        # BAM_trimmer:
-        expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.trim.bam", sample_id=config["sample_id"]),
 
         # Mosdepth:
         # expand(raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
@@ -87,7 +90,6 @@ include: "workflow/rules/Preprocessing/Indexes.smk"
 include: "workflow/rules/Alignment/Alignment.smk"
 include: "workflow/rules/Alignment/Coverage.smk"
 include: "workflow/rules/QCFiltering/Bamutil.smk"
-include: "workflow/rules/QCFiltering/BAM_trimmer.smk"
 include: "workflow/rules/Visualization/Coverage.smk"
 include: "workflow/rules/VariantCall/Bcftools.smk"
 include: "workflow/rules/VariantCall/Gatk.smk"

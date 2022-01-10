@@ -32,10 +32,8 @@ rule mosdepth:
 
 rule genomecov:
     input:
-        bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.bam",
-        # bai_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.bam.bai",
-        bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.trim.bam",
-        # bai_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
+        bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sort.bam",
+        bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam",
     output:
         coverage_raw=raw_coverage_dir_path / "{sample_id}.genomecov.tab.gz",
         coverage_clipped=clipped_coverage_dir_path / "{sample_id}.clipped.trim.genomecov.tab.gz"

@@ -29,7 +29,7 @@ sort_threads: 4
 fixmate_threads: 2
 markdup_threads: 2
 bamutil_clipoverlap_threads: 4
-bam_trimmer_threads: 1
+sam_trimmer_threads: 1
 mosdepth_threads: 4
 bedtools_genomecov_threads: 4
 index_threads: 1
@@ -51,7 +51,7 @@ per_thread_sort_mem: 10 # memory in gigabytes
 fixmate_mem_mb: 5000
 markdup_mem_mb: 5000
 bamutil_clipoverlap_mem_mb: 15000
-bam_trimmer_mem_mb: 10000
+sam_trimmer_mem_mb: 10000
 mosdepth_mem_mb: 20000
 bedtools_genomecov_mem_mb: 20000
 index_mem_mb: 5000
@@ -70,7 +70,7 @@ pisces_germline_mem_mb: 30000
 trimmomatic_time: "100:00:00"
 bowtie2_time: "100:00:00"
 bamutil_clipoverlap_time: "100:00:00"
-bam_trimmer_time: "10:00:00"
+sam_trimmer_time: "10:00:00"
 mosdepth_time: "100:00:00"
 bedtools_genomecov_time: "100:00:00"
 index_time: "10:00:00"
@@ -89,8 +89,8 @@ pisces_germline_time: "100:00:00"
 adapters: "resources/adapters/TruSeq2-PE.fa"
 poolsize: 10000000
 mosdepth_min_mapping_quality: 0
-bam_trimmer_pattern: "CGCG"
-bam_trimmer_reference_start: 2181
+sam_trimmer_pattern: "CGCG"
+sam_trimmer_reference_start: 2181
 bedtools_genomecov_options: "-d"
 samtools_view_options: "-b"   # -q 20 -F 1024
 bcftools_mpileup_annotate: "AD,INFO/AD,ADF,INFO/ADF,ADR,INFO/ADR,DP,SP,SCR,INFO/SCR"

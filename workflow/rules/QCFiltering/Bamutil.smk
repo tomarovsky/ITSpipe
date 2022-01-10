@@ -1,8 +1,8 @@
 rule bamutil_clipoverlap:
     input:
-        rules.bowtie2_map.output.bam
+        raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sort.bam"
     output:
-        bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam"
+        clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam"
     params:
         poolsize=config["poolsize"]
     log:
