@@ -32,13 +32,13 @@ def main():
         pos, tlen = int(pos), int(tlen)
         bitwise_flags = '\t'.join(line[11:])
         if seq.startswith(args.pattern) and pos == args.reference_start and tlen >= 0 and reverse is False:
+            prev_tlen = int(tlen)
             tlen = str(tlen - pattern_len)
             seq = seq[pattern_len:]
             qual = qual[pattern_len:]
             cigar = cigar_left_trimmer(cigar, pattern_len)
             pos = str(pos + pattern_len)
             reverse = True
-            prev_tlen = int(pos)
         elif reverse and tlen == 0 - prev_tlen:
             tlen = str(tlen + pattern_len)
             seq = seq[pattern_len:]
