@@ -22,6 +22,7 @@ def cigar_left_trimmer(cigar_line, pattern_len):
 def main():
     infile = open(args.input, 'r').readlines()
     outfile = open(args.output, 'a')
+    pattern = args.pattern
     pattern_len = len(args.pattern)
     outfile.write("".join(infile[:4])) # write header
     infile_without_header = infile[4:]
