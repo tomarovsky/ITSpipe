@@ -19,36 +19,39 @@ def cigar_left_trimmer(cigar_line, pattern_len):
             continue
     return trimmed_cigar
 
+
 def main():
     infile = open(args.input, 'r').readlines()
     outfile = open(args.output, 'a')
     pattern_len = len(args.pattern)
-    outfile.write("".join(infile[:4])) # header
-    reverse = False # flag
-    prev_tlen = None
-    for line in infile[4:]:
-        line = line.strip().split("\t")
-        qname, flag, rname, pos, mapq, cigar, rnext, pnext, tlen, seq, qual = line[:11]
-        pos, tlen = int(pos), int(tlen)
-        bitwise_flags = '\t'.join(line[11:])
-        if seq.startswith(args.pattern) and pos == args.reference_start and tlen >= 0 and reverse is False:
-            prev_tlen = int(tlen)
-            tlen = str(tlen - pattern_len)
-            seq = seq[pattern_len:]
-            qual = qual[pattern_len:]
-            cigar = cigar_left_trimmer(cigar, pattern_len)
-            pos = str(pos + pattern_len)
-            reverse = True
-        if reverse and tlen == 0 - prev_tlen:
-            tlen = str(tlen + pattern_len)
-            seq = seq[pattern_len:]
-            qual = qual[pattern_len:]
-            cigar = cigar_left_trimmer(cigar, pattern_len)
-            pos = str(pos - pattern_len)
-            reverse = False
-        line = "\t".join([qname, flag, rname, str(pos), mapq, cigar, rnext, pnext, str(tlen), seq, qual, bitwise_flags])
-        outfile.write(line)
-        outfile.write("\n")
+    outfile.write("".join(infile[:4])) # write header
+    infile_without_header = infile[4:]
+
+    for i in range(0, len(infile_without_header), 2):
+        forward = infile_without_header[i].strip().split("\t")
+        reverse = infile_without_header[i + 1].strip().split("\t")
+        f_qname, f_flag, f_rname, f_pos, f_mapq, f_cigar, f_rnext, f_pnext, f_tlen, f_seq, f_qual = forward[:11]
+        f_bitwise_flags = '\t'.join(forward[11:])
+        r_qname, r_flag, r_rname, r_pos, r_mapq, r_cigar, r_rnext, r_pnext, r_tlen, r_seq, r_qual = reverse[:11]
+        r_bitwise_flags = '\t'.join(reverse[11:])
+        if (f_pos == args.pos or r_pos == args.pos) and (f_seq.startswith(args.pattern) or r_seq.startswith(args.pattern)):
+            if int(f_tlen) > 0:
+                f_tlen = str(int(f_tlen) - pattern_len)
+                f_pos = str(int(f_pos) + pattern_len)
+                r_tlen = str(int(r_tlen) + pattern_len)
+                r_pos = str(int(r_pos) - pattern_len)
+            elif int(f_tlen) < 0:
+                f_tlen = str(int(f_tlen) + pattern_len)
+                f_pos = str(int(f_pos) - pattern_len)
+                r_tlen = str(int(r_tlen) - pattern_len)
+                r_pos = str(int(r_pos) + pattern_len)
+            f_seq, r_seq = f_seq[pattern_len:], r_seq[pattern_len:]
+            f_qual, r_qual = f_qual[pattern_len:], r_qual[pattern_len:]
+            f_cigar, r_cigar = cigar_left_trimmer(f_cigar, pattern_len), cigar_left_trimmer(r_cigar, pattern_len)
+        forward = "\t".join([f_qname, f_flag, f_rname, f_pos, f_mapq, f_cigar, f_rnext, f_pnext, f_tlen, f_seq, f_qual, f_bitwise_flags])
+        reverse = "\t".join([r_qname, r_flag, r_rname, r_pos, r_mapq, r_cigar, r_rnext, r_pnext, r_tlen, r_seq, r_qual, r_bitwise_flags])
+        outfile.write("%s\n" % forward)
+        outfile.write("%s\n" % reverse)
     outfile.close()
 
 
@@ -57,7 +60,7 @@ if __name__ == '__main__':
     group_required = parser.add_argument_group('Required options')
     group_required.add_argument('-i', '--input', type=str, help="input SAM file")
     group_required.add_argument('-o', '--output', type=str, help="output trimmed SAM file")
-    group_required.add_argument('-p', '--pattern', type=str, help="sequence with high coverage")
-    group_required.add_argument('-s', '--reference_start', type=int, help="1-based leftmost coordinate")
+    group_required.add_argument('--pattern', type=str, help="sequence with high coverage")
+    group_required.add_argument('--pos', type=int, help="1-based leftmost coordinate")
     args = parser.parse_args()
     main()
