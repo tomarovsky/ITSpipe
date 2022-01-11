@@ -40,6 +40,12 @@ def main():
             f_qual = f_qual[pattern_len:]
             f_pos = str(int(f_pos) + pattern_len)
             f_cigar = cigar_left_trimmer(f_cigar, pattern_len)
+        if r_pos == args.pos and r_seq.startswith(args.pattern):
+            r_tlen = str(int(f_tlen) - pattern_len)
+            r_seq = r_seq[pattern_len:]
+            r_qual = r_qual[pattern_len:]
+            r_pos = str(int(r_pos) + pattern_len)
+            r_cigar = cigar_left_trimmer(f_cigar, pattern_len)
 
         # if (f_pos == args.pos or r_pos == args.pos) and (f_seq.startswith(args.pattern) or r_seq.startswith(args.pattern)):
         #     if int(f_tlen) > 0: # f_* is a forward
