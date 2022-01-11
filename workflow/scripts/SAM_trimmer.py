@@ -34,10 +34,13 @@ def main():
         f_bitwise_flags = '\t'.join(forward[11:])
         r_qname, r_flag, r_rname, r_pos, r_mapq, r_cigar, r_rnext, r_pnext, r_tlen, r_seq, r_qual = reverse[:11]
         r_bitwise_flags = '\t'.join(reverse[11:])
-        if (f_pos == args.pos or r_pos == args.pos) and (f_seq.startswith(args.pattern) or r_seq.startswith(args.pattern)) and int(f_tlen) > 0:
-            # if int(f_tlen) > 0: # f_* is a forward
-            f_tlen = str(int(f_tlen) - pattern_len)
-            f_pos = str(int(f_pos) + pattern_len)
+        if (f_pos == args.pos or r_pos == args.pos) and (f_seq.startswith(args.pattern) or r_seq.startswith(args.pattern)):
+            if int(f_tlen) > 0: # f_* is a forward
+                f_tlen = str(int(f_tlen) - pattern_len)
+                f_pos = str(int(f_pos) + pattern_len)
+            elif int(f_tlen) < 0:
+                f_tlen = str(int(f_tlen) + pattern_len)
+                f_pos = str(int(f_pos) - pattern_len)
             #     r_tlen = str(int(r_tlen) + pattern_len)
             #     r_pos = str(int(r_pos) - pattern_len)
             # elif int(f_tlen) < 0: # f_* is a reverse
