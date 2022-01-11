@@ -38,52 +38,60 @@ def main():
         print("F", f_tlen, "|", f_pos, f_pnext, f_cigar, len(f_seq))
         print("R", r_tlen, "|", r_pos, r_pnext, r_cigar, len(r_seq))
         print("----")
-        if f_pos == args.pos and f_seq.startswith(pattern):
+        if f_pos == '2182' and f_seq.startswith(pattern):
             if int(f_tlen) > 0:
                 f_tlen = str(int(f_tlen) - pattern_len)
+                f_pos = str(int(f_pos) + pattern_len)
             elif int(f_tlen) < 0:
                 f_tlen = str(int(f_tlen) + pattern_len)
+                f_pos = str(int(f_pos) - pattern_len)
             else:
                 continue
             f_seq = f_seq[pattern_len:]
             f_qual = f_qual[pattern_len:]
-            f_pos = str(int(f_pos) + pattern_len)
             f_cigar = cigar_left_trimmer(f_cigar, pattern_len)
             if int(r_tlen) > 0:
                 r_tlen = str(int(r_tlen) - pattern_len)
+                r_pos = str(int(r_pos) + pattern_len)
             elif int(f_tlen) < 0:
                 r_tlen = str(int(r_tlen) + pattern_len)
+                r_pos = str(int(r_pos) - pattern_len)
             else:
                 continue
             r_seq = r_seq[pattern_len:]
             r_qual = r_qual[pattern_len:]
-            r_pos = str(int(r_pos) - pattern_len)
             r_cigar = cigar_left_trimmer(r_cigar, pattern_len)
+            r_pnext = f_pos
+            f_pnext = r_pos
             print("F:")
             print("F", f_tlen, "|", f_pos, f_pnext, f_cigar, len(f_seq))
             print("R", r_tlen, "|", r_pos, r_pnext, r_cigar, len(r_seq))
             print("--------------")
-        elif r_pos == args.pos and r_seq.startswith(pattern):
+        elif r_pos == '2182' and r_seq.startswith(pattern):
             if int(r_tlen) > 0:
-                r_tlen = str(int(r_tlen) + pattern_len)
-            elif int(f_tlen) < 0:
                 r_tlen = str(int(r_tlen) - pattern_len)
+                r_pos = str(int(r_pos) + pattern_len)
+            elif int(f_tlen) < 0:
+                r_tlen = str(int(r_tlen) + pattern_len)
+                r_pos = str(int(r_pos) - pattern_len)
             else:
                 continue
             r_seq = r_seq[pattern_len:]
             r_qual = r_qual[pattern_len:]
-            # r_pos = str(int(r_pos) - pattern_len)
             r_cigar = cigar_left_trimmer(r_cigar, pattern_len)
             if int(f_tlen) > 0:
-                f_tlen = str(int(f_tlen) + pattern_len)
-            elif int(f_tlen) < 0:
                 f_tlen = str(int(f_tlen) - pattern_len)
+                f_pos = str(int(f_pos) + pattern_len)
+            elif int(f_tlen) < 0:
+                f_tlen = str(int(f_tlen) + pattern_len)
+                f_pos = str(int(f_pos) - pattern_len)
             else:
                 continue
             f_seq = f_seq[pattern_len:]
             f_qual = f_qual[pattern_len:]
-            # f_pos = str(int(f_pos) + pattern_len)
             f_cigar = cigar_left_trimmer(f_cigar, pattern_len)
+            r_pnext = f_pos
+            f_pnext = r_pos
             print("R:")
             print("F", f_tlen, "|", f_pos, f_pnext, f_cigar, len(f_seq))
             print("R", r_tlen, "|", r_pos, r_pnext, r_cigar, len(r_seq))
