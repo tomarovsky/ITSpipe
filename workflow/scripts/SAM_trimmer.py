@@ -38,15 +38,13 @@ def main():
             if int(f_tlen) > 0: # f_* is a forward
                 f_tlen = str(int(f_tlen) - pattern_len)
                 f_pos = str(int(f_pos) + pattern_len)
-                r_tlen = str(int(r_tlen) - pattern_len)
-                r_pos = str(int(r_pos) - pattern_len) # -
+                r_tlen = str(int(r_tlen) + pattern_len)
+                r_pos = str(int(r_pos) + pattern_len)
             elif int(f_tlen) < 0: # f_* is a reverse
-                f_tlen = str(int(f_tlen) - pattern_len)
-                f_pos = str(int(f_pos) - pattern_len) # -
+                f_tlen = str(int(f_tlen) + pattern_len)
+                f_pos = str(int(f_pos) + pattern_len)
                 r_tlen = str(int(r_tlen) - pattern_len)
                 r_pos = str(int(r_pos) + pattern_len)
-            else:
-                continue
             f_seq, r_seq = f_seq[pattern_len:], r_seq[pattern_len:]
             f_qual, r_qual = f_qual[pattern_len:], r_qual[pattern_len:]
             f_cigar, r_cigar = cigar_left_trimmer(f_cigar, pattern_len), cigar_left_trimmer(r_cigar, pattern_len)
