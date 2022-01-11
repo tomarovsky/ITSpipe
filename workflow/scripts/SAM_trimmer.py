@@ -36,12 +36,12 @@ def main():
         if (f_pos == args.pos or r_pos == args.pos) and (f_seq.startswith(args.pattern) or r_seq.startswith(args.pattern)):
             if int(f_tlen) > 0: # f_* is a forward
                 f_tlen = str(int(f_tlen) - pattern_len)
-                f_pos = str(int(f_pos) + pattern_len)
+                f_pos = str(int(f_pos) - pattern_len)
                 r_tlen = str(int(r_tlen) - pattern_len)
                 r_pos = str(int(r_pos) + pattern_len)
             elif int(f_tlen) < 0: # f_* is a reverse
                 f_tlen = str(int(f_tlen) - pattern_len)
-                f_pos = str(int(f_pos) + pattern_len)
+                f_pos = str(int(f_pos) - pattern_len)
                 r_tlen = str(int(r_tlen) - pattern_len)
                 r_pos = str(int(r_pos) + pattern_len)
             f_seq, r_seq = f_seq[pattern_len:], r_seq[pattern_len:]
