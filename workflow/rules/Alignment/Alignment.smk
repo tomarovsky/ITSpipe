@@ -35,14 +35,14 @@ rule bowtie2_map:
         "--rg 'SM:{wildcards.sample_id}' --rg 'PL:Illumina' --rg 'PU:x' --rg 'LB:x' -S {output.sam} 2> {log.bowtie2} "
 
 
-rule sam_trimmer:
+rule SAM_trimmer:
     input:
         rules.bowtie2_map.output.sam
     output:
         raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sam"
     params:
         pattern=config["sam_trimmer_pattern"],
-        reference_start=config["sam_trimmer_reference_start"]
+        pos=config["sam_trimmer_pos"]
     log:
         std=log_dir_path / "{sample_id}/sam_trimmer.log",
         cluster_log=cluster_log_dir_path / "{sample_id}/sam_trimmer.cluster.log",
@@ -58,7 +58,7 @@ rule sam_trimmer:
     threads:
         config["sam_trimmer_threads"]
     shell:
-        "python3 workflow/scripts/SAM_trimmer.py -i {input} --pattern {params.pattern} --reference_start {params.reference_start} -o {output} > {log.std} 2>&1"
+        "python3 workflow/scripts/SAM_trimmer.py -i {input} --pattern {params.pattern} --pos {params.pos} -o {output} > {log.std} 2>&1"
 
 
 rule samtools_bam_improvements:
