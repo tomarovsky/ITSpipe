@@ -38,7 +38,7 @@ def main():
         print("F", f_tlen, "|", f_pos, f_pnext, f_cigar, len(f_seq))
         print("R", r_tlen, "|", r_pos, r_pnext, r_cigar, len(r_seq))
         print("----")
-        if f_pos == '2182' and f_seq.startswith(pattern):
+        if f_pos == args.pos and f_seq.startswith(pattern):
             if int(f_tlen) > 0:
                 f_tlen = str(int(f_tlen) - pattern_len)
             elif int(f_tlen) < 0:
@@ -63,7 +63,7 @@ def main():
             print("F", f_tlen, "|", f_pos, f_pnext, f_cigar, len(f_seq))
             print("R", r_tlen, "|", r_pos, r_pnext, r_cigar, len(r_seq))
             print("--------------")
-        elif r_pos == '2182' and r_seq.startswith(pattern):
+        elif r_pos == args.pos and r_seq.startswith(pattern):
             if int(r_tlen) > 0:
                 r_tlen = str(int(r_tlen) + pattern_len)
             elif int(f_tlen) < 0:
