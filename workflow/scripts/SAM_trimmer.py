@@ -40,10 +40,10 @@ def main():
             print("R", r_tlen, "|", r_pos, r_pnext, r_cigar, len(r_seq), r_mapq)
             print("----")
             if int(f_tlen) > 0:
-                f_tlen = str(int(f_tlen) - pattern_len)
+                # f_tlen = str(int(f_tlen) - pattern_len)
                 f_pos = str(int(f_pos) + pattern_len)
             elif int(f_tlen) < 0:
-                f_tlen = str(int(f_tlen) + pattern_len)
+                # f_tlen = str(int(f_tlen) + pattern_len)
                 f_pos = str(int(f_pos) - pattern_len)
             else:
                 continue
@@ -51,10 +51,10 @@ def main():
             f_qual = f_qual[pattern_len:]
             f_cigar = cigar_left_trimmer(f_cigar, pattern_len)
             if int(r_tlen) > 0:
-                r_tlen = str(int(r_tlen) - pattern_len)
+                # r_tlen = str(int(r_tlen) - pattern_len)
                 r_pos = str(int(r_pos) + pattern_len)
             elif int(r_tlen) < 0:
-                r_tlen = str(int(r_tlen) + pattern_len)
+                # r_tlen = str(int(r_tlen) + pattern_len)
                 r_pos = str(int(r_pos) - pattern_len)
             else:
                 continue
@@ -72,10 +72,10 @@ def main():
             print("R", r_tlen, "|", r_pos, r_pnext, r_cigar, len(r_seq), r_mapq)
             print("----")
             if int(r_tlen) > 0:
-                r_tlen = str(int(r_tlen) - pattern_len)
+                # r_tlen = str(int(r_tlen) - pattern_len)
                 r_pos = str(int(r_pos) + pattern_len)
             elif int(r_tlen) < 0:
-                r_tlen = str(int(r_tlen) + pattern_len)
+                # r_tlen = str(int(r_tlen) + pattern_len)
                 r_pos = str(int(r_pos) - pattern_len)
             else:
                 continue
@@ -83,10 +83,10 @@ def main():
             r_qual = r_qual[pattern_len:]
             r_cigar = cigar_left_trimmer(r_cigar, pattern_len)
             if int(f_tlen) > 0:
-                f_tlen = str(int(f_tlen) - pattern_len)
+                # f_tlen = str(int(f_tlen) - pattern_len)
                 f_pos = str(int(f_pos) + pattern_len)
             elif int(f_tlen) < 0:
-                f_tlen = str(int(f_tlen) + pattern_len)
+                # f_tlen = str(int(f_tlen) + pattern_len)
                 f_pos = str(int(f_pos) - pattern_len)
             else:
                 continue
