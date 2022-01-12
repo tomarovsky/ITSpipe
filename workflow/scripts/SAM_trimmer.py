@@ -61,8 +61,8 @@ def main():
             r_pnext = f_pos
             f_pnext = r_pos
 
-        forward = "\t".join([f_qname, f_flag, f_rname, f_pos, f_mapq, f_cigar, f_rnext, f_pnext, f_tlen, f_seq, f_qual, f_bitwise_flags])
-        reverse = "\t".join([r_qname, r_flag, r_rname, r_pos, r_mapq, r_cigar, r_rnext, r_pnext, r_tlen, r_seq, r_qual, r_bitwise_flags])
+        reverse = "\t".join([f_qname, f_flag, f_rname, f_pos, f_mapq, f_cigar, f_rnext, f_pnext, f_tlen, f_seq, f_qual, f_bitwise_flags])
+        forward = "\t".join([r_qname, r_flag, r_rname, r_pos, r_mapq, r_cigar, r_rnext, r_pnext, r_tlen, r_seq, r_qual, r_bitwise_flags])
         outfile.write("%s\n" % forward)
         outfile.write("%s\n" % reverse)
     outfile.close()
