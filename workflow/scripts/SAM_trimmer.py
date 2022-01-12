@@ -51,9 +51,9 @@ def main():
             f_cigar = cigar_left_trimmer(f_cigar, pattern_len)
             r_cigar = cigar_left_trimmer(r_cigar, pattern_len)
             f_tlen = str(int(f_tlen) + pattern_len)
-            r_tlen = str(int(r_tlen) - pattern_len)
-            f_pos = str(int(f_pos) + pattern_len)
-            r_pos = str(int(r_pos) + pattern_len)
+            r_tlen = str(int(r_tlen) + pattern_len)
+            f_pos = str(int(f_pos) - pattern_len)
+            r_pos = str(int(r_pos) - pattern_len)
             r_pnext = f_pos
             f_pnext = r_pos
 
