@@ -34,27 +34,27 @@ def main():
         r_qname, r_flag, r_rname, r_pos, r_mapq, r_cigar, r_rnext, r_pnext, r_tlen, r_seq, r_qual = reverse[:11]
         r_bitwise_flags = '\t'.join(reverse[11:])
 
-        if f_pos == args.pos and f_seq.startswith(args.pattern) and int(f_tlen) > 0:
+        # if f_pos == args.pos and f_seq.startswith(args.pattern) and int(f_tlen) > 0:
+        #     f_seq = f_seq[pattern_len:]
+        #     f_qual = f_qual[pattern_len:]
+        #     f_cigar = cigar_left_trimmer(f_cigar, pattern_len)
+        #     r_seq = r_seq[pattern_len:]
+        #     r_qual = r_qual[pattern_len:]
+        #     r_cigar = cigar_left_trimmer(r_cigar, pattern_len)
+        #     f_tlen = str(int(f_tlen) - pattern_len)  # +
+        #     r_tlen = str(int(r_tlen) + pattern_len)
+        #     f_pos = str(int(f_pos) + pattern_len)
+        #     r_pos = str(int(r_pos) - pattern_len)
+        #     r_pnext = f_pos
+        #     f_pnext = r_pos
+        if r_pos == args.pos and r_seq.startswith(args.pattern) and int(r_tlen) > 0:
             f_seq = f_seq[pattern_len:]
             f_qual = f_qual[pattern_len:]
             f_cigar = cigar_left_trimmer(f_cigar, pattern_len)
             r_seq = r_seq[pattern_len:]
             r_qual = r_qual[pattern_len:]
             r_cigar = cigar_left_trimmer(r_cigar, pattern_len)
-            f_tlen = str(int(f_tlen) - pattern_len)  # +
-            r_tlen = str(int(r_tlen) + pattern_len)
-            f_pos = str(int(f_pos) + pattern_len)
-            r_pos = str(int(r_pos) - pattern_len)
-            r_pnext = f_pos
-            f_pnext = r_pos
-        elif r_pos == args.pos and r_seq.startswith(args.pattern) and int(r_tlen) > 0:
-            f_seq = f_seq[pattern_len:]
-            f_qual = f_qual[pattern_len:]
-            f_cigar = cigar_left_trimmer(f_cigar, pattern_len)
-            r_seq = r_seq[pattern_len:]
-            r_qual = r_qual[pattern_len:]
-            r_cigar = cigar_left_trimmer(r_cigar, pattern_len)
-            f_tlen = str(int(f_tlen) + pattern_len)  # +
+            f_tlen = str(int(f_tlen) + pattern_len)
             r_tlen = str(int(r_tlen) - pattern_len)
             f_pos = str(int(f_pos) - pattern_len)
             r_pos = str(int(r_pos) + pattern_len)
