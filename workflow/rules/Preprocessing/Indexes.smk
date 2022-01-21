@@ -15,11 +15,11 @@ rule bowtie2_index:
     conda:
         "../../../%s" % config["conda_config"]
     resources:
-        cpus=config["bowtie2_threads"],
-        time=config["bowtie2_time"],
-        mem=config["bowtie2_mem_mb"]
+        cpus=config["index_threads"],
+        time=config["index_time"],
+        mem=config["index_mem_mb"],
     threads:
-        config["bowtie2_threads"]
+        config["index_threads"]
     shell:
         "bowtie2-build {input} {params.basename} > {log.std} 2>&1 || true"
 
@@ -87,10 +87,10 @@ rule picard_dict:
     conda:
         "../../../%s" % config["conda_config"]
     resources:
-        cpus=config["dict_threads"],
-        time=config["dict_time"],
-        mem=config["dict_mem_mb"],
+        cpus=config["index_threads"],
+        time=config["index_time"],
+        mem=config["index_mem_mb"],
     threads:
-        config["dict_threads"]
+        config["index_threads"]
     shell:
          "picard CreateSequenceDictionary R={input} O={output} > {log.std} 2>&1"
