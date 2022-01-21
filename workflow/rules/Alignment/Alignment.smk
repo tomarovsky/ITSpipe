@@ -88,7 +88,7 @@ rule samtools_bam_improvements:
         mem=config["per_thread_sort_mem"] * config["sort_threads"] * 1024 + config["view_mem_mb"],
         time=config["samtools_bam_improvements_time"]
     threads:
-        config["sort_threads"] + config["fixmate_threads"] + config["markdup_threads"]
+        config["sort_threads"] + config["view_threads"]
     shell:
         "samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} {input.sam} 2> {log.sort} | "
         "samtools view {params.view} -@ {params.view_threads} -o {output.bam} - 2> {log.view}; "
