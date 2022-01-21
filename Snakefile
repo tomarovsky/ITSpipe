@@ -53,6 +53,7 @@ rule all:
         expand(raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sam", sample_id=config["sample_id"]),
 
         # Samtools BAM improvements:
+        expand(raw_alignment_dir_path / "{sample_id}/{sample_id}.sort.bam", sample_id=config["sample_id"]),
         expand(raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sort.bam", sample_id=config["sample_id"]),
 
         # Bamutil:
@@ -63,7 +64,7 @@ rule all:
         # expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
 
         # Genomecov:
-        expand(raw_coverage_dir_path / "{sample_id}.trim.sort.genomecov.tab.gz", sample_id=config["sample_id"]),
+        expand(raw_coverage_dir_path / "{sample_id}.sort.genomecov.tab.gz", sample_id=config["sample_id"]),
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.genomecov.tab.gz", sample_id=config["sample_id"]),
 
         # Coverage visualization:

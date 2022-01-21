@@ -63,22 +63,20 @@ rule SAM_trimmer:
 
 rule samtools_bam_improvements:
     input:
-        sam=raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sam"
+        sam=raw_alignment_dir_path / "{sample_id}/{sample_id}.sam",
+        trim_sam=raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sam"
     output:
-        bam=raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sort.bam"
+        bam=raw_alignment_dir_path / "{sample_id}/{sample_id}.sort.bam",
+        trim_bam=raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sort.bam",
     params:
-        fixmate_threads=config["fixmate_threads"],
         sort_threads=config["sort_threads"],
-        markdup_threads=config["markdup_threads"],
         view_threads=config["view_threads"],
         per_thread_sort_mem="%sG" % config["per_thread_sort_mem"],
         view=config["samtools_view_options"],
         tmp_prefix=lambda wildcards, output: output["bam"][:-4],
     log:
-        fixmate=log_dir_path / "{sample_id}/fixmate.log",
-        sort=log_dir_path / "{sample_id}/sort.log",
-        view=log_dir_path / "{sample_id}/view.log",
-        markdup=log_dir_path / "{sample_id}/markdup.log",
+        sort=log_dir_path / "{sample_id}/samtools_bam_improvements.sort.log",
+        view=log_dir_path / "{sample_id}/samtools_bam_improvements.view.log",
         cluster_log=cluster_log_dir_path / "{sample_id}/samtools_bam_improvements.cluster.log",
         cluster_err=cluster_log_dir_path / "{sample_id}/samtools_bam_improvements.cluster.err"
     benchmark:
@@ -86,13 +84,13 @@ rule samtools_bam_improvements:
     conda:
         "../../../%s" % config["conda_config"]
     resources:
-        cpus=config["sort_threads"] + config["fixmate_threads"] + config["view_threads"] + 1,  # + config["markdup_threads"],
-        mem=config["per_thread_sort_mem"] * config["sort_threads"] * 1024 + config["fixmate_mem_mb"] + config["view_mem_mb"], # + config["markdup_mem_mb"],
-        time=config["bowtie2_time"]
+        cpus=config["sort_threads"] + config["view_threads"],
+        mem=config["per_thread_sort_mem"] * config["sort_threads"] * 1024 + config["view_mem_mb"],
+        time=config["samtools_bam_improvements_time"]
     threads:
         config["sort_threads"] + config["fixmate_threads"] + config["markdup_threads"]
     shell:
-        # "samtools fixmate -@ {params.fixmate_threads} -m - - 2> {log.fixmate} | "
         "samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} {input.sam} 2> {log.sort} | "
-        # "samtools markdup -@ {params.markdup_threads} - 2> {log.markdup} | "
         "samtools view {params.view} -@ {params.view_threads} -o {output.bam} - 2> {log.view}; "
+        "samtools sort -T {params.tmp_prefix} -@ {params.sort_threads} -m {params.per_thread_sort_mem} {input.trim_sam} 2> {log.sort} | "
+        "samtools view {params.view} -@ {params.view_threads} -o {output.trim_bam} - 2> {log.view}; "
