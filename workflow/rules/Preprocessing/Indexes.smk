@@ -26,10 +26,10 @@ rule bowtie2_index:
 
 rule samtools_bam_index:
     input:
-        bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.bam",
+        bam_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sort.bam",
         bam_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam"
     output:
-        bai_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.bam.bai",
+        bai_raw=raw_alignment_dir_path / "{sample_id}/{sample_id}.trim.sort.bam.bai",
         bai_clipped=clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai"
     log:
         std=log_dir_path / "{sample_id}/bam_index.log",
