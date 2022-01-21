@@ -12,8 +12,7 @@ def cigar_left_trimmer(cigar_line, pattern_len):
         trimmed_cigar += ''.join([str(lengths[0]), symbols[0]])
         del lengths[0]
         del symbols[0]
-    if lengths[0] < pattern_len and symbols[1] == 'D':
-        trimmed_cigar += ''.join([str(lengths[1]), symbols[1]])
+    elif lengths[0] < pattern_len and symbols[1] == 'D':
         del lengths[1]
         del symbols[1]
     for i in range(len(lengths)):
