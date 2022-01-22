@@ -1,7 +1,11 @@
 #!/usr/bin/env python3
 import re
 from argparse import ArgumentParser
-
+"""
+This is a script for trimming a high coverage area in a SAM file (restriction site).
+Only forwards that begin with the restriction site pattern are trimmed.
+The script is tested on alignments without soft-clipping.
+"""
 
 def cigar_left_trimmer(cigar_line, pattern_len):
     cigar_matches = [{'type':m[1], 'length':int(m[0])} for m in re.findall(r'(\d+)([A-Z]{1})', cigar_line)]
