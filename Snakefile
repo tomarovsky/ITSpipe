@@ -59,10 +59,6 @@ rule all:
         # Bamutil:
         expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam", sample_id=config["sample_id"]),
 
-        # Mosdepth:
-        # expand(raw_coverage_dir_path / "{sample_id}.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
-        # expand(clipped_coverage_dir_path / "{sample_id}.clipped.coverage.per-base.bed.gz", sample_id=config["sample_id"]),
-
         # Genomecov:
         expand(raw_coverage_dir_path / "{sample_id}.sort.genomecov.tab.gz", sample_id=config["sample_id"]),
         expand(clipped_coverage_dir_path / "{sample_id}.clipped.genomecov.tab.gz", sample_id=config["sample_id"]),
