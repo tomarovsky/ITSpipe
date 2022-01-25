@@ -1,0 +1,8 @@
+# Python bytecode-compiled files folder
+__pycache__/
+
+# VS Code workspace settings
+.vscode/
+
+# PyCharm workspace settings
+.idea/
