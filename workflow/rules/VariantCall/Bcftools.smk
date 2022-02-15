@@ -1,10 +1,11 @@
-rule bcftools_mpileup:
+rule bcftools_varcall:
     input:
         reference=reference,
         samples=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam", sample_id=config["sample_id"]),
         indexes=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam.bai", sample_id=config["sample_id"])
     output:
-        varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz"
+        mpileup=varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz",
+        call=varcall_bcftools_mpileup_dir_path / "{reference_basename}.vcf.gz"
     params:
         adjustMQ=50,
         annotate_mpileup=config["bcftools_mpileup_annotate"],
@@ -29,13 +30,13 @@ rule bcftools_mpileup:
         config["bcftools_mpileup_threads"]
     shell:
         "bcftools mpileup --threads {threads} -d {params.max_depth} -q {params.min_MQ} -Q {params.min_BQ} "
-        "--adjust-MQ {params.adjustMQ} --annotate {params.annotate_mpileup} -Ou -f {input.reference} {input.samples} 2> {log.mpileup}| "
-        "bcftools call -Oz -mv --annotate {params.annotate_call} > {output} 2> {log.call}"
+        "--adjust-MQ {params.adjustMQ} --annotate {params.annotate_mpileup} -Oz -f {input.reference} {input.samples} 2> {log.mpileup} | "
+        "tee {output.mpileup} | bcftools call -Oz -mv --annotate {params.annotate_call} > {output.call} 2> {log.call}"
 
 
 rule bcftools_filter:
     input:
-        rules.bcftools_mpileup.output
+        rules.bcftools_mpileup.output.mpileup
     output:
         varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz"
     params:

@@ -69,6 +69,7 @@ rule all:
 
         # Variant calling:
         # Bcftools:
+        expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.vcf.gz", reference_basename = reference_basename),
         expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
         expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz", reference_basename = reference_basename),
         # GATK:
