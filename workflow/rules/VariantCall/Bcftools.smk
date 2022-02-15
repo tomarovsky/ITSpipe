@@ -1,4 +1,4 @@
-rule bcftools_varcall:
+rule bcftools_mpileup:
     input:
         reference=reference,
         samples=expand(clipped_alignment_dir_path / "{sample_id}/{sample_id}.clipped.bam", sample_id=config["sample_id"]),
