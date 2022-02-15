@@ -16,7 +16,7 @@ raw_alignment_dir_path = output_dir_path / config["raw_alignment_dir"]
 raw_coverage_dir_path = output_dir_path / config["raw_coverage_dir"]
 clipped_alignment_dir_path = output_dir_path / config["clipped_alignment_dir"]
 clipped_coverage_dir_path = output_dir_path / config["clipped_coverage_dir"]
-varcall_bcftools_mpileup_dir_path = output_dir_path / config["varcall_bcftools_mpileup_dir"]
+varcall_bcftools_dir_path = output_dir_path / config["varcall_bcftools_dir"]
 varcall_gatk_dir_path = output_dir_path / config["varcall_gatk_dir"]
 varcall_pisces_dir_path = output_dir_path / config["varcall_pisces_dir"]
 
@@ -69,9 +69,9 @@ rule all:
 
         # Variant calling:
         # Bcftools:
-        expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.vcf.gz", reference_basename = reference_basename),
-        expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
-        expand(varcall_bcftools_mpileup_dir_path / "{reference_basename}.mpileup.filt.vcf.gz", reference_basename = reference_basename),
+        expand(varcall_bcftools_dir_path / "{reference_basename}.vcf.gz", reference_basename = reference_basename),
+        expand(varcall_bcftools_dir_path / "{reference_basename}.mpileup.vcf.gz", reference_basename = reference_basename),
+        expand(varcall_bcftools_dir_path / "{reference_basename}.mpileup.filt.vcf.gz", reference_basename = reference_basename),
         # GATK:
         expand(varcall_gatk_dir_path / "{sample_id}/{sample_id}.mutect2.vcf.gz", sample_id=config["sample_id"]),
         varcall_gatk_dir_path / gatk_merged_vcf_filename,
