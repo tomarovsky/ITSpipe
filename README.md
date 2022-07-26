@@ -2,6 +2,8 @@
   
 Pipeline for the analysis of ITS sequences from the ribosomal cluster.
 
+![SAM trimmer scheme](./SAM_trimmer_scheme.png)
+
 The pipeline includes:
 - FASTQ filtering using Trimmomatic  
 - Read alignments using Bowtie2
